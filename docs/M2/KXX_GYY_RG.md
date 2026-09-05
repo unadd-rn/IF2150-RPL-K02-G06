@@ -7,24 +7,23 @@ REQUIREMENT GATHERING
 </h1>
 <br>
 
-## *Nama Perangkat Lunak*
+## *Food Waste Stop*
 
-### Untuk: *[Nama Asisten]*
+### Untuk: *Aurelia Jennifer Gunawan*
 
 Dipersiapkan oleh:
-
 | Informasi | Keterangan |
 | --- | --- |
-| Kelas | *\[Kelas\]* |
-| Kelompok | *\[Nomor Kelompok\]* |
+| Kelas | *K02* |
+| Kelompok | *G06*  |
 
 | NIM | Nama |
-| --- | --- |
-| *\[NIM 1\]* | *\[Nama Anggota 1\]* |
-| *\[NIM 2\]* | *\[Nama Anggota 2\]* |
-| *\[NIM 3\]* | *\[Nama Anggota 3\]* |
-| *\[NIM 4\]* | *\[Nama Anggota 4\]* |
-| *\[NIM 5\]* | *\[Nama Anggota 5\]* |
+|---|---|
+| *13525122* | *Nadia Aulia Syafarani* |
+| *13525041* | *Renata Puspanegara Ninagan* |
+| *13525119* | *Ghina Emelia Yantes* |
+| *13525017* | *Cendra Asih Chairunnisa* |
+| *13525089* | *Sherin Felicia Danessa* |
 
 ---
 
@@ -50,13 +49,10 @@ Abstraksikan sistem solusi menurut sudut pandang pengguna yang telah ditentukan.
 
 ## 1.2 Deskripsi Pengguna Perangkat Lunak
 
-Buatlah daftar seluruh aktor (pengguna) yang akan berinteraksi langsung dengan sistem solusi yang kalian kembangkan. Berikan penjelasan singkat mengenai peran dan karakteristik dari masing-masing aktor tersebut.
-
 | Aktor | Deskripsi |
 | :--- | :--- |
-| *Kasir* | *Pengguna ini bertindak sebagai pihak yang bertanggung jawab untuk memproses transaksi harian dan melayani pembayaran pelanggan. Karakteristik dari pengguna ini adalah mengutamakan kecepatan dan keakuratan saat bertransaksi.* |
-| ... | ... |
-
+| *Pembeli* | *Pengguna ini bertindak sebagai pembeli yang mencari makanan sisa toko yang sudah tidak memenuhi standar jual normal namun masih layak dikonsumsi, dengan keuntungan, harga yang lebih murah. Karakteristik pengguna ini mengutamakan kemudahan melihat pilihan makanan yang tersedia lengkap dengan deskripsi, harga, dan informasi toko, serta kemudahan dalam melakukan pemesanan dan pembayaran. Pembeli memiliki quest log in harian dan bisa mendapatkan diskon apabila sudah mencapai jumlah memenuhi* |
+| *Penjual* | *Pengguna ini bertindak sebagai pihak toko yang pada jam tutup (atau mendekati) memiliki makanan tidak terjual dan tidak dapat dijual kembali esok/kemudian hari karena tidak memenuhi standar jual toko, namun makanan tersebut masih layak dikonsumsi. Dengan menjual makanan tersebut dengan harga diskon, toko dapat mengurangi kerugian. Karakteristik pengguna ini mengutamakan kemudahan dalam mengelola profil toko serta memasukkan, memperbarui, dan menghapus informasi makanan yang dijual.* |
 ---
 
 # BAB 2: Deskripsi Kebutuhan Perangkat Lunak
@@ -67,19 +63,27 @@ Definisikan apa yang ingin dicapai oleh pengguna saat menggunakan sistem ini dal
 
 | ID | Aktor | Kebutuhan / Aktivitas | Tujuan / Nilai |
 | :--- | :--- | :--- | :--- |
-| US-01 | *Kasir* | *Memindai barcode barang* | *Proses pembayaran berjalan cepat dan akurat* |
-| US-02 | *[Nama Aktor]* | *[Kebutuhan pengguna]* | *[Tujuan yang dicapai pengguna]* |
-| ... | ... | ... | ... |
+| US-01 | *Pembeli* | *Mendaftar dan mengisi profil akun (nama, nomor kontak, dan alamat)* | *Sistem memiliki informasi yang dibutuhkan untuk proses pengiriman makanan* |
+| US-02 | *Pembeli* | *Melihat daftar makanan yang dijual beserta deskripsinya (nama dan bahan utama, nama dan alamat toko, jam buka toko, kuantitas tersedia, tanggal dijual, dan estimasi tanggal kadaluarsa)* | *Informasi makanan mudah dibaca dan dipahami* |
+| US-03 | *Pembeli* | *Memilih makanan beserta kuantitas dan melakukan pemesanan dengan pembayaran QRIS* | *Makanan yang dipesan dapat dikirim ke alamat sesuai profil akun* |
+| US-04 | *Pembeli* | *Mendapat reward dari log-in harian* | *Promo tambahan dari quest log in harian di website. Tujuan gamifikasi seru dan mudah dilakukan meskipun harian* |
+| US-05 | *Penjual* | *Memasukkan profil toko (nama dan alamat toko, nomor telepon toko, dan deskripsi spesialisasi makanan seperti lauk, roti, atau camilan)* | *Toko dapat dikenali pembeli dan penjual bisa memantau total pendapatan dari makanan terjual* |
+| US-06 | *Penjual* | *Menambahkan makanan yang dijual beserta deskripsinya (nama dan bahan utama, jam ketersediaan, kuantitas, tanggal dijual, tanggal kadaluarsa, dan keterangan tambahan opsional)* | *Kemudahan mempublikasikan informasi makanan* |
+| US-07 | *Penjual* | *Mengedit deskripsi makanan yang sudah diunggah* | *Kemudahan memperbarui informasi makanan apabila terjadi perubahan* |
+| US-08 | *Penjual* | *Menerima notifikasi saat makanan dibeli dan dibayar, dengan saldo bertambah otomatis serta kuantitas makanan berkurang (stok habis jika mencapai nol)* | *Transaksi dan pengelolaan stok berjalan otomatis tanpa perlu diproses manual* |
 
 ## 2.2 Deskripsi Aktivitas
 
 Buatlah daftar seluruh aktivitas yang terdapat dalam sistem solusi, lengkap dengan ID dan penjelasan. Telusuri hubungan aktivitas tersebut dengan *user story* yang sudah dituliskan sebelumnya. Bisa dibuat dalam bentuk tabel.
 
-| ID | Aktivitas | Penjelasan | ID User Story |
-| :--- | :--- | :--- | :--- |
-| A01 | *Melakukan Pembayaran* | *Pelanggan melakukan pembayaran secara digital.* | *US-01* |
-| A02 | *Menerima Pembayaran* | *Toko menerima pembayaran secara real-time.* | *US-02* |
-| ... | ... | ... | ... |
+kriteria seperti kantin, rentang harga, atau kategori makanan. | US-02 |
+| B03 | Melihat detail informasi makanan | Pembeli membuka satu listing untuk melihat foto, berat/porsi, kondisi, dan harga diskon secara rinci. | US-02 |
+| B04 | Memeriksa ketersediaan stok | Pembeli memastikan stok listing yang diminati masih tersedia sebelum melanjutkan ke proses berikutnya. | US-02 |
+| B05 | Memilih makanan untuk dibeli | Pembeli menandai listing yang diminati dan melanjutkan ke proses pemesanan. | US-03 |
+| B06 | Mengonfirmasi pesanan dan harga | Sistem menampilkan ringkasan pesanan beserta harga diskon untuk dikonfirmasi pembeli sebelum pembayaran. | US-03 |
+| B07 | Melakukan pembayaran | Pembeli menyelesaikan pembayaran sesuai harga diskon yang telah dikonfirmasi. | US-03 |
+| B08 | Mengambil makanan di kantin | Pembeli menunjukkan bukti pemesanan dan mengambil makanan langsung di kantin, sesuai batasan sistem yang tidak menyediakan layanan pengantaran. | US-03 |
+
 
 ## 2.3 Pemetaan Kebutuhan
 
@@ -93,12 +97,21 @@ Lengkapi juga dengan penjelasannya dan apakah keperluan tersebut perlu didukung 
 
 | ID Kebutuhan | ID Aktivitas | Jenis Kebutuhan | Deskripsi Kebutuhan | P/L |
 | :--- | :--- | :--- | :--- | :--- |
-| *R01* | *A01* | *User* | *Pengguna dapat memilih metode pembayaran dan melakukan pembayaran secara digital.* | *Ya* |
-| *R02* | *A01* | *Business* | *Transaksi digital sesuai dengan ketentuan UU ITE yang berlaku.* | *Tidak* |
-| *R03* | *A01* | *System* | *Sistem harus mengintegrasikan API Payment Gateway dengan prinsip ACID (Atomicity, Consistency, Isolation, Durability), jika terjadi kegagalan jaringan saat saldo terpotong, sistem harus secara otomatis membatalkan transaksi atau meneruskan dana (reliable).* | *Ya* |
-| *R04* | *A01* | *System* | *Kata sandi (password) atau PIN pengguna saat otorisasi pembayaran harus di-hash menggunakan algoritma SHA-256 dan tidak disimpan dalam bentuk plain-text.* | *Ya* |
-| *R05* | *A02* | *Business* | *Toko harus memiliki rekening bank aktif dan valid untuk menerima pencairan dana dari sistem.* | *Tidak* |
-| ... | ... | ... | ... | ... |
+| *R01* | *PL01, BL01* | *System* | *Sistem dapat diakses baik di desktop maupun mobile tanpa mengunduh aplikasi tambahan* | *Ya* |
+| *R02* | *PL03, BL03* | *System* | *Sistem dapat memverifikasi kredensial yang dimasukkan pengguna dan memberi pesan error saat kredensial tidak sesuai* | *Ya* |
+| *R03* | *B07* | *System* | *Sistem harus mengintegrasikan API Payment Gateway dengan prinsip ACID (Atomicity, Consistency, Isolation, Durability), jika terjadi kegagalan jaringan saat saldo terpotong, sistem harus secara otomatis membatalkan transaksi atau meneruskan dana (reliable).* | *Ya* |
+| *R04* | *PL04, BL04* | *System* | *Kata sandi (password) atau PIN pengguna saat otorisasi pembayaran harus di-hash dan tidak disimpan dalam bentuk plain-text.* | *Ya* |
+| *R05* | *PL05, BL05* | *System* | *Sistem menyimpan status login pengguna agar tidak perlu login berulang tiap halaman* | *Ya* |
+| *R06* | *A03* | *System* | *Sistem harus membatasi ukuran maksimal foto sampai 10 MB dan jenis file yang dikirimkan hanya berupa JPG/PNG* | *Ya* |
+| *R07* | *A06* | *System* | *Sistem menyimpan listing ke database dan mengupdate listing secara real-time di halaman pengguna* | *Ya* |
+| *R08* | *B02* | *System* | *Sistem mengimplementasikan fitur filtering yang memungkinkan pengguna mencari barang dengan kata kunci tertentu* | *Ya* |
+| *R09* | *A09, B04* | *System* | *Sistem mengecek ketersediaan stok sebelum memproses pesanan, dan menampilkan pesan error jika stok tiba-tiba habis* | *Ya* |
+| *R10* | *A09, A10, B04* | *System* | *Sistem dapat menghapus barang apabila stoknya sudah mencapai 0* | *Ya* |
+| *R11* | *B05, B06* | *System* | *Sistem dapat mengkalkulasikan total harga barang yang dibeli* | *Ya* |
+| *R12* | *B06* | *System* | *Sistem menampilkan halaman pembayaran (menampilkan QRIS dunmy) beserta tombol "Simulasikan Pembayaran Berhasil"* | *Ya* |
+| *R13* | *A09, B07* | *System* | *Setelah pembayaran berhasil, sistem otomatis mengurangi jumlah stok makanan di database sesuai jumlah yang dibeli* | *Ya* |
+| *R14* | *B08* | *System* | *Sistem memberikan kode unik pembayaran sebagai bukti pembelian* | *Ya* |
+| *R15* | *BL04, PL04* | *Legal* | *Registrasi menggunakan data pribadi sehingga harus mematuhi UU Perlindungan Data yang berlaku* | *Ya* |
 
 ## 2.4 Kebutuhan Fungsional (KF)
 
