@@ -49,6 +49,7 @@
 | :--- | :--- | :--- | :--- | :--- | :--- | 
 | *5-09-2026* | *Nadia Aulia Syafarani* | *Memasukkan bab 1.2-2.2 dan mengerjakan bab 2.3* | *3* | *Done* | *-* | 
 | *9-09-2026* | *Nadia Aulia Syafarani* | *Merevisi bab 2.3* | *3* | *Done* | *-* | 
+| *9-09-2026* | *Renata Puspanegara Ninagan* | *Mengerjakan tabel bab 2.5* | *2* | *Done* | *-* |
 
 
 **Catatan/Evaluasi Milestone 1:**
