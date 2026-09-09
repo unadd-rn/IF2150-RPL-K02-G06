@@ -44,6 +44,10 @@
 | *2-09-2026* | *Cendra Asih Chairunnisa* | *Mengerjakan tabel subbab 3.1 dan 3.2* | *2* | *Done* | *Kesulitan menyesuaikan dan menyamakan fitur* | 
 | *2-09-2026* | *Sherin Felicia Danessa* | *Merevisi isi subbab 1.2 dan format 2.2* | *1,5* | *Ongoing* | *Terlalu lama mencari reference untuk aplikasi Surplus* | 
 
+**Catatan/Evaluasi Milestone 1:**
+* *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
+---
+
 ### Milestone 2
 **Periode:** 2 September 2026 - 9 September 2026
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
@@ -59,7 +63,7 @@
 | *9-09-2026* | *Ghina Emelia Yantes* | *Merevisi tabel bab 2.3* | *1* | *Done* | *Terlalu rinci* | 
 
 
-**Catatan/Evaluasi Milestone 1:**
+**Catatan/Evaluasi Milestone 2:**
 * *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
 
 ---
