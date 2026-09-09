@@ -23,6 +23,7 @@
 
 ### Daftar Isi
 * [Milestone 1](#milestone-1)
+* [Milestone 2](#milestone-2)
 * Notes: Copy bagian Daftar Isi seperti Milestone 1 untuk Milestone berikutnya, contoh ``* [Milestone 2](#milestone-2)``. Ketika Daftar isi diklik maka akan langsung diarahkan ke bagian bawah sesuai dengan Milestone tujuan.
 
 
@@ -49,10 +50,12 @@
 | :--- | :--- | :--- | :--- | :--- | :--- | 
 | *5-09-2026* | *Nadia Aulia Syafarani* | *Memasukkan bab 1.2-2.2 dan mengerjakan bab 2.3* | *3* | *Done* | *-* | 
 | *6-09-2026* | *Sherin Felicia Danessa* | *Mengerjakan tabel bab 2.4* | *2* | *Done* | *-* |
+| *6-09-2026* | *Cendra Asih Chairunnisa* | *Mengerjakan tabel bab 1.1 dan 2.2* | *4* | *Masih perlu revisi* | *-* |
 | *6-09-2026* | *Ghina Emelia Yantes* | *Mengerjakan tabel pemetaan kebutuhan 2.3* | *3* | *Masih dalam penyesuaian* | *Masih ada beberapa detail yang perlu didiskusikan lagi* | 
 | *9-09-2026* | *Nadia Aulia Syafarani* | *Merevisi bab 2.3* | *3* | *Done* | *-* | 
 | *9-09-2026* | *Renata Puspanegara Ninagan* | *Mengerjakan tabel bab 2.5* | *2* | *Done* | *-* |
 | *9-09-2026* | *Sherin Felicia Danessa* | *Merevisi tabel bab 2.5* | *3* | *otw* | *-* |
+| *9-09-2026* | *Cendra Asih Chairunnisa* | *Merevisi tabel bab 1.1 dan 2.2* | *2* | *Done* | *Ada beberapa penyesuaian dan detail yang berlebihan* |
 | *9-09-2026* | *Ghina Emelia Yantes* | *Merevisi tabel bab 2.3* | *1* | *Done* | *Terlalu rinci* | 
 
 
