@@ -76,8 +76,6 @@ Identifikasi seluruh use case yang mencakup Kebutuhan Fungsional pada BAB 2. Sat
 
 | ID UC | Nama Use Case | Deskripsi Singkat | Aktor Terlibat | ID KF Terkait |
 | :--- | :--- | :--- | :--- | :--- |
-| *UC01* | *Melakukan Pembayaran Digital* | *Pelanggan memilih metode pembayaran dan menyelesaikan transaksi.* | *Pelanggan* | *KF01, KF02* |
-| *UC02* | *Memverifikasi Status Pembayaran* | *Kasir mengecek status transaksi pelanggan sebelum menyerahkan barang.* | *Kasir* | *KF03* |
 | *UC01* | *Menambahkan listing makanan surplus* | *Penjual mengisi form makanan surplus dan divalidasi sistem sebelum dikirim* | *Penjual* | *KF01* |
 | *UC02* | *Melihat listing makanan surplus* | *Pembeli dapat melihat lisiting makanan surplus* | *Pembeli* | *KF02* |
 | *UC03* | *Melihat detail makanan surplus* | *Pembeli dapat mengklik salah satu makanan dalam listing dan melihat detailnya* | *Pembeli* | *KF02* |
