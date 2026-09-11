@@ -76,9 +76,14 @@ Identifikasi seluruh use case yang mencakup Kebutuhan Fungsional pada BAB 2. Sat
 
 | ID UC | Nama Use Case | Deskripsi Singkat | Aktor Terlibat | ID KF Terkait |
 | :--- | :--- | :--- | :--- | :--- |
-| *UC01* | *Melakukan Pembayaran Digital* | *Pelanggan memilih metode pembayaran dan menyelesaikan transaksi.* | *Pelanggan* | *KF01, KF02* |
-| *UC02* | *Memverifikasi Status Pembayaran* | *Kasir mengecek status transaksi pelanggan sebelum menyerahkan barang.* | *Kasir* | *KF03* |
-| *...* | *...* | *...* | *...* | *...* |
+| *UC01* | *Menambahkan listing makanan surplus* | *Penjual mengisi form makanan surplus dan divalidasi sistem sebelum dikirim* | *Penjual* | *KF01* |
+| *UC02* | *Melihat listing makanan surplus* | *Pembeli dapat melihat lisiting makanan surplus* | *Pembeli* | *KF02* |
+| *UC03* | *Melihat detail makanan surplus* | *Pembeli dapat mengklik salah satu makanan dalam listing dan melihat detailnya* | *Pembeli* | *KF02* |
+| *UC04* | *Menyaring listing makanan surplus* | *Pembeli memilih ketentuan makanan surplus tertentu dan sistem menyaring makanan surplus apa yang ditampilkan sesuai ketentuan* | *Pembeli* | *KF03* |
+| *UC05* | *Melakukan pembayaran* | *Pembeli melakukan pembayaran dengan ditampilkan QRIS dummy* | *Pembeli* | *KF04* |
+| *UC06* | *Mengedit listing* | *Penjual dapat mengubah  dan menyimpan perubahan isi detail pada listing* | *Penjual* | *KF05* |
+| *UC07* | *Login ke sistem* | *Pengguna dapat masuk dan melakukan login ke sistem dengan mengisi kredensial mereka* | *Penjual, Pembeli* | *KF06* |
+| *UC08* | *Mengklaim reward login* | *Pembeli yang sudah mengumpulkan cukup banyak poin login dapat mengklaim reward login* | *Pembeli* | *KF06* |
 
 ## 3.3 Use Case Diagram
 Buatlah **satu** use case diagram yang mencakup seluruh aktor dan use case. Sertakan relasi *include*/*extend* apabila ada use case yang saling bergantung.
