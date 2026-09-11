@@ -46,11 +46,15 @@ Bagian ini boleh disalin dari 1.1 Deskripsi Umum Sistem pada dokumen *Requiremen
 # BAB 2: Kebutuhan Fungsional (KF)
 Salin ulang **seluruh Kebutuhan Fungsional (KF)** yang telah didefinisikan pada dokumen *Requirement Gathering*. Tabel ini menjadi acuan *traceability*, dimana setiap Use Case pada BAB 3 wajib ditelusuri ke satu atau lebih ID KF di tabel ini, dan sebaliknya setiap KF idealnya tercakup oleh minimal satu Use Case. Pastikan juga sudah menggunakan **format EARS** dalam penulisan KF.
 
-| ID KF | Kebutuhan | Penjelasan |
+| ID KF | ID Kebutuhan | Penjelasan |
 | :--- | :--- | :--- |
-| *KF01* | *Menampilkan pilihan metode pembayaran* | *Perangkat lunak dapat menampilkan pilihan antarmuka metode pembayaran (transfer bank, e-wallet, kartu kredit) setelah pengguna melakukan checkout.* |
-| *KF02* | *Mengirim permintaan otorisasi pembayaran* | *Perangkat lunak dapat mengirimkan permintaan otorisasi transaksi ke API Payment Gateway beserta nominal tagihan dan ID Pesanan.* |
-| *...* | *...* | *...* |
+| *KF01* | *R01* | *Selama penjual mengisi form makanan surplus, jika pengguna menekan tombol simpan, perangkat lunak akan memvalidasi kelengkapan data (nama, stok, harga) dan kesesuaian input (format foto JPG/PNG maks. 10 MB, stok/harga non-negatif). Jika seluruh data valid, perangkat lunak menyimpan data tersebut ke dalam database, tapi jika data tidak valid, perangkat lunak menampilkan pesan error.* |
+| *KF02* | *R03* | *Saat pembeli membuka website, perangkat lunak akan menampilkan daftar makanan surplus dari berbagai penjual beserta foto, porsi, kondisi, dan harga.* |
+| *KF03* | *R04* | *Ketika pengguna memasukkan ketentuan penyaringan yang diinginkan, perangkat lunak akan menyaring listing yang ada sesuai ketentuan tersebut, lalu menampilkan hasil penyaringan kepada pengguna.* |
+| *KF04* | *R05* | *Saat pengguna melanjutkan ke tahap pembayaran, perangkat lunak akan menampilkan halaman pembaya
+| *KF05* | *R07* | *Ketika pengguna melakukan perubahanran berisi kode QRIS dummy sebagai simulasi metode pembayaran.* | pada listing (stok, harga, deskripsi) melalui fitur edit dan menyimpannya, perangkat lunak akan menyimpan perubahan tersebut ke dalam database.* |
+| *KF06* | *R10* | *Ketika pengguna melakukan login untuk pertama kalinya pada hari tersebut, perangkat lunak akan mendeteksi login harian, memberikan poin quest secara otomatis, dan menyimpan progres reward yang dimiliki pengguna.* |
+| *KF07* | *R14* | *Jika terjadi kesalahan pada sistem, maka perangkat lunak akan menampilkan pesan error yang informasional kepada pengguna, contohnya "Email atau password salah" apabila kredensial yang dimasukkan tidak sesuai.* |
 
 <sub> ***Catatan***: *Jika ada KF dari ML2 yang berubah/bertambah/dihapus setelah asistensi, pastikan tabel ini konsisten dengan versi KF terbaru sebelum dikumpulkan.*
 <sub>
@@ -64,16 +68,28 @@ Daftarkan seluruh aktor yang terlibat dalam use case yang akan dimodelkan. Aktor
 
 | Aktor | Deskripsi |
 | :--- | :--- |
-| *Penjual* | *Pengguna yang mengelola listing makanan surplus, meliputi menambahkan, mengurangkan, mengedit, dan memantau pendapatan penjualan* |
-| *Pembeli* | *Pengguna yang melihat, mencari, memilih, dan membeli listing makanan surplus* |
+| *Pelanggan* | *Pengguna yang melakukan transaksi pembelian dan pembayaran melalui sistem.* |
+| *Kasir* | *Pengguna internal toko yang memverifikasi status pembayaran pelanggan sebelum menyerahkan barang.* |
+| *...* | *...* |
 
 ## 3.2 Identifikasi Use Case
 Identifikasi seluruh use case yang mencakup Kebutuhan Fungsional pada BAB 2. Satu use case boleh mencakup lebih dari satu KF, dan sebaliknya satu KF boleh muncul di lebih dari satu use case bila memang relevan.
 
 | ID UC | Nama Use Case | Deskripsi Singkat | Aktor Terlibat | ID KF Terkait |
 | :--- | :--- | :--- | :--- | :--- |
-| *UC01* | *Melakukan Pembayaran Digital* | *Pelanggan memilih metode pembayaran dan menyelesaikan transaksi.* | *Pelanggan* | *KF01, KF02* |
-| *UC02* | *Memverifikasi Status Pembayaran* | *Kasir mengecek status transaksi pelanggan sebelum menyerahkan barang.* | *Kasir* | *KF03* |
+| *UC01* | *Pembeli Masuk* | *Pembeli masuk web aplikasi Food Stop Waste* | *Pembeli* | *KF06, KF07* |
+| *UC01* | *Login Harian* | *Pembeli membuka dan login harian untuk mendapatkan poin* | *Pembeli* | *KF06* |
+| *UC01* | *Melihat Listing Makanan* | *Pembeli melihat daftar makanan surplus dari berbagai penjual beserta foto, porsi, kondisi, dan harga.* | *Pembeli* | *KF02* |
+| *UC01* | *Mencari Nama Makanan* | *Pembeli memasukkan nama spesifik di pencarian, dengan perangkat lunak menyaring listing yang ada sesuai ketentuan tersebut, lalu menampilkan hasil penyaringan kepada pengguna.* | *Pembeli* | *KF03* |
+| *UC01* | *Menyaring Daftar Makanan* | *Pembeli memasukkan ketentuan penyaringan yang diinginkan, perangkat lunak akan menyaring listing yang ada sesuai ketentuan tersebut, lalu menampilkan hasil penyaringan kepada pengguna.* | *Pembeli* | *KF03* |
+| *UC01* | *Melihat Spesifik Makanan Surplus* | *Pembeli melihat detail satu makanan surplus* | *Pembeli* | *?* |
+| *UC01* | *Memilih Makanan Surplus untuk Dibeli* | *Pembeli memilih satu atau lebih makanan surplus dan memasukkan jumlah yang ingin dibeli* | *Pembeli* | *?* |
+| *UC01* | *Mengecek Ringkasan Pembelian* | *Sistem menampilkan ringkasan pembayaran sebelum masuk halaman pembayaran* | *Pembeli* | *KF01, KF02* |
+| *UC01* | *Melakukan Pembayaran Digital* | *Pembeli membayar melalui QRIS (dummy) dan menyelesaikan transaksi.* | *Pembeli* | *KF01, KF02* |
+| *UC01* | *Penjual Masuk* | *Penjual masuk web aplikasi Food Stop Waste* | *Penjual* | *KF07* |
+
+
+
 | *...* | *...* | *...* | *...* | *...* |
 
 ## 3.3 Use Case Diagram
