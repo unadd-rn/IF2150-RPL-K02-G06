@@ -64,11 +64,8 @@ Daftarkan seluruh aktor yang terlibat dalam use case yang akan dimodelkan. Aktor
 
 | Aktor | Deskripsi |
 | :--- | :--- |
-| *Pelanggan* | *Pengguna yang melakukan transaksi pembelian dan pembayaran melalui sistem.* |
-| *Kasir* | *Pengguna internal toko yang memverifikasi status pembayaran pelanggan sebelum menyerahkan barang.* |
-| *...* | *...* |
-
-
+| *Penjual* | *Pengguna yang mengelola listing makanan surplus, meliputi menambahkan, mengurangkan, mengedit, dan memantau pendapatan penjualan* |
+| *Pembeli* | *Pengguna yang melihat, mencari, memilih, dan membeli listing makanan surplus* |
 
 ## 3.2 Identifikasi Use Case
 Identifikasi seluruh use case yang mencakup Kebutuhan Fungsional pada BAB 2. Satu use case boleh mencakup lebih dari satu KF, dan sebaliknya satu KF boleh muncul di lebih dari satu use case bila memang relevan.
