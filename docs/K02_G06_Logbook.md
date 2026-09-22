@@ -86,5 +86,18 @@
 * *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
 
 ---
+### Milestone 4
+**Periode:** 16 September 2026 - 23 September 2026
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- | 
+| *22-09-2026* | *Ghina Emelia Yantes* | *Mengerjakan bab 4.2.7, 4.2.8, dan 4.2.9* | *3* | *Done* | *-* | 
+| *...* | *...* | *...* | *...* | *...* | *-* | 
+
+
+**Catatan/Evaluasi Milestone 3:**
+* *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
+
+---
+
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
