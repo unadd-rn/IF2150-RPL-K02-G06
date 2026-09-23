@@ -91,7 +91,8 @@
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
 | *22-09-2026* | *Ghina Emelia Yantes* | *Mengerjakan bab 4.2.7, 4.2.8, dan 4.2.9* | *3* | *Done* | *-* | 
-| *...* | *...* | *...* | *...* | *...* | *-* | 
+| *20-09-2026* | *Nadia Aulia Syafarani* | *Memasukkan bab 1-3 dan mengerjakan 4.2.4-4.2.6* | *3* | *Done* | *-* | 
+| *22-09-2026* | *Nadia Aulia Syafarani* | *Mengerjakan diagram 4.2.4-4.2.6* | *3* | *Done* | *-* | 
 
 
 **Catatan/Evaluasi Milestone 3:**
