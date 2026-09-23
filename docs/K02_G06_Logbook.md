@@ -97,6 +97,7 @@
 | *23-09-2026* | *Renata Puspanegara Ninagan* | *Mengerjakan diagram keseluruhan 4.3* | *0.08* | *Done* | *-* |
 | *23-09-2026* | *Ghina Emelia Yantes* | *Merevisi bab 4.2.7, 4.2.8, dan 4.2.9* | *1* | *Done* | *-* | 
 | *23-09-2026* | *Sherin Felicia Danessa* | *Merevisi bab 5* | *0.05* | *Done* | *-* | 
+| *23-09-2026* | *Cendra Asih Chairunnisa* | *Mengerjakan diagram UC 1, UC 2, dan UC 3* | *1* | *Done* | *-* | 
 
 **Catatan/Evaluasi Milestone 3:**
 * *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
