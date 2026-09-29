@@ -40,9 +40,13 @@ Dipersiapkan oleh:
 # BAB 1: Pendahuluan
 
 ## 1.1 Tujuan Penulisan Dokumen
+Dokumen SKPL ini dibuat untuk menjelaskan apa itu web aplikasi Food Waste Stop untuk memenuhi Tugas Besar RPL. Dokumen SKPL digunakan untuk para asisten dan/atau dosen RPL.
+
 Tuliskan dengan ringkas tujuan dokumen SKPL ini dibuat dan siapa saja yang akan menggunakan dokumen ini.
 
 ## 1.2 Lingkup Masalah
+Food Waste Stop merupakan web aplikasi untuk kegiatan jual-beli makanan surplus. Food Waste Stop berfokus menjadi solusi permasalahan sampah makanan industri. Selain itu, Food Waste Stop juga mengurangi kerugian ekonomi industri.
+
 Tuliskan dengan ringkas nama aplikasi dan deskripsi singkatnya. Bagian ini maksimal berisi satu paragraf, dapat diringkas dari BAB 1 *Analisis Permasalahan* pada dokumen *Topic Brainstorming*.
 
 ## 1.3 Definisi, Istilah, dan Singkatan
@@ -75,6 +79,7 @@ Tabel 1.4. Aturan Penomoran
 | *...* | *...* |
 
 ## 1.5 Referensi
+
 Dokumentasi P/L yang dirujuk oleh dokumen ini. Referensi dapat berupa buku, panduan, ataupun dokumentasi lain yang dipakai dalam pengembangan P/L ini.
 
 ## 1.6 Deskripsi Umum Dokumen (Ikhtisar)
