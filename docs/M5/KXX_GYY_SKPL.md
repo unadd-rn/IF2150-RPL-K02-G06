@@ -71,18 +71,29 @@ Tabel 1.4. Aturan Penomoran
 
 | Hal/Bagian | Penomoran | Keterangan |
 | :--- | :--- | :--- |
-| *Kebutuhan Fungsional* | *KFXX* | |
-| *Kebutuhan Non-Fungsional* | *KNFXX* | |
-| *Aktor* | *AXX* | |
-| *Use Case* | *UCXX* | |
-| *Kelas* | *CXX* | |
+| *Kebutuhan Fungsional* | *KFXX* | *Layanan atau fungsi yang harus disediakan sistem, yaitu apa yang dapat dilakukan sistem terhadap masukan dan bagaimana sistem berperilaku pada situasi tertentu* |
+| *Kebutuhan Non-Fungsional* | *KNFXX* | *Batasan atau kualitas yang harus dipenuhi sitem, seperti performa, keamanan, keandalan, dan kemudahan penggunaan* |
+| *Aktor* | *AXX* | *Pihak di luar sistem (pengguna, perangkat, atau sistem lain) yang berinteraksi dengan sistem* |
+| *Use Case* | *UCXX* | *Rangkaian interaksi antara aktor dan sistem untuk mencapai suatu tujuan tertentu* |
+| *Kelas* | *CXX* | *Representasi objek dalam sistem yang memiliki atribut dan metode, digunakan dalam perancangan struktur sistem* |
 | *...* | *...* |
 
 ## 1.5 Referensi
+PowerPoint Rekayasa Perangkat Lunak Minggu 1 "Disiplin-Bukti-Konteks"
+PowerPoint Rekayasa Perangkat Lunak Minggu 2 "Efisiensi Kebutuhan" & "Perumusan Kebutuhan"
+PowerPoint Rekayasa Perangkat Lunak Minggu 3 "Skenario dan Keterlacakan" & "Diagram Use Case"
+PowerPoint Rekayasa Perangkat Lunak Minggu 4 "Objek, Tanggung Jawab, dan Kolaborasi" & "Stereotipe, Gaya Kendali, dan Lapisan"
+PowerPoint Rekayasa Perangkat Lunak Minggu 5 "SKPL"
+PowerPoint Asistensi Rekayasa Perangkat Lunak  "Class Diagram"
 
 Dokumentasi P/L yang dirujuk oleh dokumen ini. Referensi dapat berupa buku, panduan, ataupun dokumentasi lain yang dipakai dalam pengembangan P/L ini.
 
 ## 1.6 Deskripsi Umum Dokumen (Ikhtisar)
+BAB 2 membahas deskripsi P/L
+Bab 3 membahas deskripsi Kebutuhan P/L
+Bab 4 menampilkan pemodelan Use Case
+Bab 5 menampilkan pemodelan Kelas
+
 Tuliskan sistematika pembahasan dokumen SKPL ini secara runut (misalnya: BAB 2 membahas deskripsi umum P/L, BAB 3 membahas kebutuhan fungsional dan non-fungsional, dst).
 
 ---
