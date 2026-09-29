@@ -103,6 +103,13 @@
 * *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
 
 ---
+### Milestone 5
+**Periode:** 23 September 2026 - 30 September 2026
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- | 
+| *27-09-2026* | *Cendra Asih Chairunnisa* | *Mengerjakan Bab 1* | *3* | *Done* | *-* | 
+| *29-09-2026* | *Cendra Asih Chairunnisa* | *Menyelesaikan Bab 1* | *3* | *Done* | *-* | 
+
 
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``

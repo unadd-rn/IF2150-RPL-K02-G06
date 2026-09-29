@@ -42,16 +42,10 @@ Dipersiapkan oleh:
 ## 1.1 Tujuan Penulisan Dokumen
 Dokumen SKPL ini dibuat untuk menjelaskan apa itu web aplikasi Food Waste Stop untuk memenuhi Tugas Besar RPL. Dokumen SKPL digunakan untuk para asisten dan/atau dosen RPL.
 
-Tuliskan dengan ringkas tujuan dokumen SKPL ini dibuat dan siapa saja yang akan menggunakan dokumen ini.
-
 ## 1.2 Lingkup Masalah
 Food Waste Stop merupakan web aplikasi untuk kegiatan jual-beli makanan surplus. Food Waste Stop berfokus menjadi solusi permasalahan sampah makanan industri. Selain itu, Food Waste Stop juga mengurangi kerugian ekonomi industri.
 
-Tuliskan dengan ringkas nama aplikasi dan deskripsi singkatnya. Bagian ini maksimal berisi satu paragraf, dapat diringkas dari BAB 1 *Analisis Permasalahan* pada dokumen *Topic Brainstorming*.
-
 ## 1.3 Definisi, Istilah, dan Singkatan
-Semua definisi dan singkatan yang digunakan dalam dokumen ini beserta penjelasannya.
-
 Tabel 1.3. Definisi Istilah dan Singkatan
 
 | Singkatan, Akronim, atau Istilah | Penjelasan |
@@ -62,11 +56,8 @@ Tabel 1.3. Definisi Istilah dan Singkatan
 | *KNF* | *Singkatan dari Kebutuhan Non-Fungsional.* |
 | *UC* | *Singkatan dari Use Case.* |
 | *EARS* | *Easy Approach to Requirements Syntax, yaitu pola penulisan kebutuhan agar konsisten dan mudah diuji.* |
-| *...* | *...* |
 
 ## 1.4 Aturan Penomoran
-Tuliskan aturan penomoran (ID) yang digunakan dalam dokumen ini. Gunakan pola ID yang **sama** dengan yang sudah dipakai pada dokumen-dokumen sebelumnya, jangan membuat pola baru di dokumen ini.
-
 Tabel 1.4. Aturan Penomoran
 
 | Hal/Bagian | Penomoran | Keterangan |
@@ -86,17 +77,11 @@ PowerPoint Rekayasa Perangkat Lunak Minggu 4 "Objek, Tanggung Jawab, dan Kolabor
 PowerPoint Rekayasa Perangkat Lunak Minggu 5 "SKPL"
 PowerPoint Asistensi Rekayasa Perangkat Lunak  "Class Diagram"
 
-Dokumentasi P/L yang dirujuk oleh dokumen ini. Referensi dapat berupa buku, panduan, ataupun dokumentasi lain yang dipakai dalam pengembangan P/L ini.
-
 ## 1.6 Deskripsi Umum Dokumen (Ikhtisar)
 BAB 2 membahas deskripsi P/L
 Bab 3 membahas deskripsi Kebutuhan P/L
 Bab 4 menampilkan pemodelan Use Case
 Bab 5 menampilkan pemodelan Kelas
-
-Tuliskan sistematika pembahasan dokumen SKPL ini secara runut (misalnya: BAB 2 membahas deskripsi umum P/L, BAB 3 membahas kebutuhan fungsional dan non-fungsional, dst).
-
----
 
 # BAB 2: Deskripsi Perangkat Lunak
 
