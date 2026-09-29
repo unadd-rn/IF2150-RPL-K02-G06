@@ -138,7 +138,7 @@ Food Waste Stop merupakan sistem web aplikasi yang menjadi wadah transaksi makan
 ## 2.2 Deskripsi Umum Perangkat Lunak
 Diisi dengan deskripsi umum perangkat lunak untuk mendukung proses bisnis yang telah diuraikan pada sub-bab sebelumnya. Uraian harus menunjukkan lingkup perangkat lunak, mencakup keterkaitan perangkat lunak dengan sistem lain di luar (misalnya *Payment Gateway* atau layanan pihak ketiga lain yang dipakai).
 
-*Contoh narasi:* "*[Nama P/L]* merupakan aplikasi *[deskripsi singkat]* yang berinteraksi dengan *Payment Gateway (dummy)* untuk memproses otorisasi pembayaran. Sistem menerima input dari *Pelanggan* melalui antarmuka aplikasi dan mengirimkan permintaan transaksi ke *Payment Gateway* setiap kali pelanggan melakukan checkout."
+Food Waste Stop adalah aplikasi berbasis web (*web application*) yang memberikan fasilitas transaksi jual beli makanan surplus yang masih layak dikonsumsi untuk mengurangi limbah makanan indrustri dan kerugian ekonomi penjual. Aplikasi ini memiliki layanan simulasi *Payment Gateway* dalam bentuk QRIS *dummy* untuk memproses dan mengonfirmasi pembayaran secara daring. Sistem akan menampilkan simulasi pembayaran setelah menerima input dari pengguna pada sisi pembeli dalam bentuk pencarian, penyaringan, lalu pemilihan serta pemesanan makanan surplus. Di sisi lain, penjual mengelola listing makanan surplus melalui antarmuka web dari penambahan makanan baru, pembaruan stok dan harga diskon, sampai pengeditan dan penghapusan listing. Selain dari fungsi transaksi yang merupakan inti dari sistem ini, perangkat lunak mengintegrasikan gamifikasi berupa *quest login harian* yang secara otomatis mencatat *steak* pengguna dan memberikan poin reward yang dapat ditukarkan untuk kupon potongan harga transaksi.
 
 ## 2.3 Pengguna dan Kebutuhan Pengguna Perangkat Lunak
 | :--- | :--- |
@@ -147,21 +147,23 @@ Diisi dengan deskripsi umum perangkat lunak untuk mendukung proses bisnis yang t
 
 ## 2.4 Batasan Perangkat Lunak
 Batasan yang harus dituliskan, di antaranya:
-1. *P/L harus memakai file data/API dari sistem lain (sebutkan, misal Payment Gateway dummy).*
-2. *P/L harus memakai format data yang sama dengan sistem lain.*
-3. *P/L harus berfungsi pada platform tertentu (misal: web browser modern, atau desktop Windows dan Linux).*
-4. *...*
+1. *Perangkat lunak harus berinteraksi dengan API simulasi **Payment Gateway** (QRIS **dummy**) untuk menampilkan kode pembayaran dan mengonfirmasi status transaksi.*
+2. *Berkas gambar makanan yang diunggah oleh penjual ke dalam sistem harus dalam format PNG atau JPG dan berukuran maksimal 10 MB.*
+3. *Perangkat lunak tidak menyediakan layanan pengantaran, sehingga pengambilan makanan yang telah dibeli dilakukan secara mandiri oleh pembeli di lokasi toko penjual.*
+4. *Perangkat lunak tidak melakukan pengujian kualitas makanan secara langsung, sehingga kelayakan makanan surplus yang dimasukkan ke dalam listing menjadi tanggung jawab penjual.*
+5. *Poin yang didapatkan dari **quest login harian** hanya dapat ditukarkan dalam bentuk potongan harga pembelian dalam aplikasi dan tidak bisa dicairkan dalam bentuk uang tunai.*
+6. *Perangkat lunak harus berfungsi pada seluruh **web broswer** modern yang terhubung pada jaringan internet.*
 
 ## 2.5 Lingkungan Operasi Perangkat Lunak
 Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroperasi. Bagian ini digunakan untuk memastikan pengguna memiliki spesifikasi yang cukup untuk menjalankan P/L. Misalnya mencakup komponen server, client, OS, DBMS, tetapi tidak menutupi kemungkinan komponen lain.
 
 | Komponen | Spesifikasi |
 | :--- | :--- |
-| *Server* | *[contoh: Node.js v20, dijalankan pada layanan cloud]* |
-| *Client* | *[contoh: Web Browser modern (Chrome, Firefox terbaru)]* |
-| *DBMS* | *[contoh: PostgreSQL 15]* |
-| *OS* | *[contoh: Cross-platform (Windows/Linux/MacOS) melalui browser]* |
-| *...* | *...* |
+| *Server (Front-End)* | *Vercel (hosting Next.js), deploy otomatis dari repositori GitHub* |
+| *Client* | *Web browser modern (Chrome, Firefox, Edge, Safari versi terbaru) di desktop maupun mobile; mendukung PWA* |
+| *Front-End* | *Next.js (React), Node.js v20 untuk proses build* |
+| *DBMS* | *PostgreSQL 15 (managed database dari penyedia PaaS)* |
+| *Jaringan* | *Koneksi internet stabil; HTTPS (TLS) untuk semua komunikasi client-server* |
 
 ---
 
