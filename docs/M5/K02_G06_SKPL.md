@@ -290,28 +290,246 @@ Salin ulang seluruh kelas yang telah diidentifikasi dari BAB 4.1 dokumen *Class 
 | *C06* | *Transaksi* | *Menyimpan catatan pemesanan makanan surplus yang dilakukan oleh pembeli, mencakup informasi kuantitas, total harga, tanggal pesanan, dan status pembayaran* | *UC05* |
 | *C07* | *RewardLogin* | *Mengelola poin quest harian yang didapatkan dari aktivitas login harian serta melacak status klaim reward* | *UC07, UC08* |
 
-
 ## 5.2 Diagram Kelas per Use Case
-Salin ulang diagram kelas untuk setiap use case dari BAB 4.2 dokumen *Class Diagram*, lengkap dengan tabel atribut dan metode/operasinya.
 
 ### 5.2.1 Use Case UC01
 
-**Nama Use Case:** *Memesan Produk*
+**Nama Use Case:** *Menambahkan listing makanan surplus*
+
+#### Identifikasi Kelas
+
+| ID Kelas | Nama Kelas | Deskripsi Kelas |
+| :--- | :--- | :--- |
+| *C01* | *Penjual* | *Mengisi form makanan surplus.* |
+| *C02* | *ListingMakanan* | *Menyimpan data makanan.* |
+
+#### Diagram Kelas
 
 <p align="center">
-<img alt="Contoh Class Diagram" src="./assets/diagram/contoh-class-diagram.webp" width="70%">
+<img  width="70%" alt="Screenshot 2026-09-23 154410" src="https://github.com/user-attachments/assets/2ef8d96a-f00c-4d9f-aaa2-cf2c930a2546" />
 </p>
 <p align="center">
-<i>Gambar 3. Contoh Diagram Kelas Use Case UC01</i>
+<i>Gambar 1. Diagram Kelas Use Case UC01</i>
 </p>
+<br>
 
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
-| *C02* | *Pesanan* | *idPesanan, total, status* | *buatPesanan(), hitungTotal()* |
-| *C03* | *Keranjang* | *daftarItem* | *tambahItem(), checkout()* |
-| *...* | *...* | *...* | *...* |
+| *C01* | *Penjual* | *idPenjual, toko* | *tambahMakanan()* |
+| *C02* | *ListingMakanan* | *idListing, namaMakanan, harga, stok, deskripsi, foto* | *tambahListing()* |
 
-> Lanjutkan pola **5.2.x** untuk setiap use case pada 4.2.
+### 5.2.2 Use Case UC02
+
+**Nama Use Case:** *Melihat listing makanan surplus*
+
+#### Identifikasi Kelas
+
+| ID Kelas | Nama Kelas | Deskripsi Kelas |
+| :--- | :--- | :--- |
+| *C01* | *Pembeli* | *Melihat listing makanan yang tersedia.* |
+| *C02* | *ListingMakanan* | *Menampilkan data makanan.* |
+
+#### Diagram Kelas
+
+<p align="center">
+<img  width="70%" alt="Screenshot 2026-09-23 153837" src="https://github.com/user-attachments/assets/55388c64-1004-49ae-bd90-a14679db1610" />
+</p>
+<p align="center">
+<i>Gambar 2. Diagram Kelas Use Case UC02</i>
+</p>
+<br>
+
+| ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
+| :--- | :--- | :--- | :--- |
+| *C01* | *Pembeli* | *idPembeli, nama* | *tampilkanListingAll()* |
+| *C02* | *ListingMakanan* | *idListing, namaMakanan, harga, stok, deskripsi, foto* | *ambilListingAll()* |
+
+### 5.2.3 Use Case UC03
+
+**Nama Use Case:** *Melihat detail makanan surplus*
+
+#### Identifikasi Kelas
+
+| ID Kelas | Nama Kelas | Deskripsi Kelas |
+| :--- | :--- | :--- |
+| *C01* | *Pembeli* | *Melihat detail makanan yang tersedia di listing makananan tersedia.* |
+| *C02* | *ListingMakanan* | *Menampilkan detail deskripsi satu makanan.* |
+
+#### Diagram Kelas
+
+<p align="center">
+<img width="767" height="128" alt="Screenshot 2026-09-23 153837" src="https://github.com/user-attachments/assets/55388c64-1004-49ae-bd90-a14679db1610" />
+</p>
+<p align="center">
+<i>Gambar 3. Diagram Kelas Use Case UC32</i>
+</p>
+<br>
+
+| ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
+| :--- | :--- | :--- | :--- |
+| *C01* | *Pembeli* | *idPembeli, nama* | *lihatDeskripsiMakanan()* |
+| *C02* | *ListingMakanan* | *idListing, namaMakanan, harga, stok, deskripsi, foto* | *deskripsiMakanan()* |
+
+### 5.2.4 Use Case UC04
+
+**Nama Use Case:** *Menyaring listing makanan surplus*
+
+#### Identifikasi Kelas
+
+| ID Kelas | Nama Kelas | Deskripsi Kelas |
+| :--- | :--- | :--- |
+| *C02* | *Pembeli* | *Mengirimkan batasan pencarian* |
+| *C03* | *listingMakanan* | *Menyaring dan menampilkan hasil listing yang sudah disaring* |
+
+#### Diagram Kelas
+
+<p align="center">
+<img width="442" height="62" alt="UC04 drawio" src="https://github.com/user-attachments/assets/c81885b1-4dce-48e8-a525-275a3b588436" />
+</p>
+<p align="center">
+<i>Gambar 4. Diagram Kelas Use Case UC04</i>
+</p>
+<br>
+
+| ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
+| :--- | :--- | :--- | :--- |
+| *C02* | *Pembeli* | *idPembeli, nama* | *cariListing(), saringListing()* |
+| *C03* | *ListingMakanan* | *idListing, namaMakanan, harga, stok, deskripsi, foto* | *saringKataKunci(), saringRentangHarga()* |
+
+### 5.2.5 Use Case UC05
+
+**Nama Use Case:** *Melakukan pembayaran*
+
+#### Identifikasi Kelas
+
+| ID Kelas | Nama Kelas | Deskripsi Kelas |
+| :--- | :--- | :--- |
+| *C02* | *Pembeli* | *Menyimpan data akun pelanggan yang membuat pesanan.* |
+| *C03* | *listingMakanan* | *Mengurangi pesanan yang dipilih dari sistem* |
+| *C04* | *MetodePembayaran* | *Menampilkan QRIS dummy sebagai simulasi pembayaran* |
+| *C05* | *Transaksi* | *Menghitung total dan menyimpan data transaksi yang dilakukan* |
+
+#### Diagram Kelas
+
+<p align="center">
+<img width="552" height="182" alt="UC05 drawio" src="https://github.com/user-attachments/assets/1cd6ac17-0491-497d-a2af-1fa566b64859" />
+</p>
+<p align="center">
+<i>Gambar 5. Diagram Kelas Use Case UC05</i>
+</p>
+<br>
+
+| ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
+| :--- | :--- | :--- | :--- |
+| *C02* | *Pembeli* | *idPembeli, nama* | *checkout(), bayar()* |
+| *C03* | *ListingMakanan* | *idListing, stok* | *kurangiStok()* |
+| *C04* | *MetodePembayaran* | *kodeQRIS* | *tampilkanQRIS()* |
+| *C05* | *Transaksi* | *idTransaksi, totalHarga, tanggal, status* | *hitungTotal(), perbaruiStatus()* |
+
+### 5.2.6 Use Case UC06
+
+**Nama Use Case:** *Mengedit listing*
+
+#### Identifikasi Kelas
+
+| ID Kelas | Nama Kelas | Deskripsi Kelas |
+| :--- | :--- | :--- |
+| *C01* | *Penjual* | *Mengakses halaman edit dan mengubah detail listing* |
+| *C03* | *ListingMakanan* | *Memvalidasi input data baru dan menyimpan perubahan ke database* |
+
+#### Diagram Kelas
+
+<p align="center">
+<img width="442" height="62" alt="UC06 drawio" src="https://github.com/user-attachments/assets/55d23821-5464-4f32-8434-744e9c5ed909" />
+</p>
+<p align="center">
+<i>Gambar 6. Diagram Kelas Use Case UC06</learni>
+</p>
+<br>
+
+| ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
+| :--- | :--- | :--- | :--- |
+| *C01* | *Penjual* | *idPenjual, toko* | *editListing(), simpanPerubahan()* |
+| *C03* | *ListingMakanan* | *idListing, namaMakanan, harga, stok, deskripsi, foto* | *validasiInput(), updateDatabase()* |
+
+### 5.2.7 Use Case UC07
+
+**Nama Use Case:** *Login ke sistem*
+
+#### Identifikasi Kelas
+
+| ID Kelas | Nama Kelas | Deskripsi Kelas |
+| :--- | :--- | :--- |
+| *C01* | *Pengguna* | *Menyimpan kredensial akun dan memvalidasi proses login* |
+| *C02* | *Penjual* | *Peran khusus Pengguna yang login sebagai penjual* |
+| *C03* | *Pembeli* | *Peran khusus Pengguna yang login sebagai pembeli* |
+
+#### Diagram Kelas
+
+<p align="center">
+
+<img alt="Class Diagram UC07" src="https://github.com/user-attachments/assets/1f3c3f81-6fb7-4aaa-abc6-f5e63a01b18f" width="70%">
+</p>
+<p align="center">
+<i>Gambar 7. Diagram Kelas Use Case UC07</i>
+</p>
+<br>
+
+| ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
+| :--- | :--- | :--- | :--- |
+| *C01* | *Pengguna* | *idPengguna, email, password* | *login(), validasiKredensial()* |
+
+### 5.2.8 Use Case UC08
+
+**Nama Use Case:** *Mengklaim reward login*
+
+#### Identifikasi Kelas
+
+| ID Kelas | Nama Kelas | Deskripsi Kelas |
+| :--- | :--- | :--- |
+| *C03* | *Pembeli* | *Melakukan klaim reward atas poin yang telah terkumpul* |
+| *C07* | *RewardLogin* | *Menyimpan progres poin, memvalidasi kecukupan poin, dan memproses klaim reward* |
+
+#### Diagram Kelas
+
+<p align="center">
+<img alt="Class Diagram UC08" src="https://github.com/user-attachments/assets/5455478d-1709-4103-ac06-36be777558bc" width="70%">
+</p>
+<p align="center">
+<i>Gambar 8. Diagram Kelas Use Case UC08</i>
+</p>
+<br>
+
+| ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
+| :--- | :--- | :--- | :--- |
+| *C03* | *Pembeli* | *idPembeli, nama* | *klaimReward()* |
+| *C07* | *RewardLogin* | *idReward, poinTerkumpul, statusKlaim* | *validasiPoin(), prosesKlaim(), konfirmasiKlaim()* |
+
+### 5.2.9 Use Case UC09
+
+**Nama Use Case:** *Menghapus listing*
+
+#### Identifikasi Kelas
+
+| ID Kelas | Nama Kelas | Deskripsi Kelas |
+| :--- | :--- | :--- |
+| *C02* | *Penjual* | *Memilih listing miliknya dan mengonfirmasi penghapusan* |
+| *C04* | *ListingMakanan* | *Direpresentasikan sebagai data listing yang dihapus dari database* |
+
+#### Diagram Kelas
+
+<p align="center">
+<img alt="Class Diagram UC09" src="https://github.com/user-attachments/assets/aaec2ce5-cdaa-4b48-9a27-cbffe40ae2cf" width="70%">
+</p>
+<p align="center">
+<i>Gambar 9. Diagram Kelas Use Case UC09</i>
+</p>
+<br>
+
+| ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
+| :--- | :--- | :--- | :--- |
+| *C02* | *Penjual* | *idPenjual, toko* | *hapusListing()* |
+| *C04* | *ListingMakanan* | *idListing, namaMakanan* | *konfirmasiHapus(), hapusDariDatabase()* |
 
 ## 5.3 Diagram Kelas Keseluruhan
 Gabungkan seluruh kelas dan hubungan antarkelas dari BAB 4.3 dokumen *Class Diagram* menjadi satu diagram kelas keseluruhan. Pastikan tidak ada kelas yang terduplikasi atau tertinggal.
@@ -331,7 +549,7 @@ Gabungkan seluruh kelas dan hubungan antarkelas dari BAB 4.3 dokumen *Class Diag
 | *C03* | *Pembeli* | *idPembeli, nama* | *tampilkanListingAll(), lihatDeskripsiMakanan(), cariListing(), saringListing(), checkout(), bayar(), klaimReward()* |
 | *C04* | *ListingMakanan* | *idListing, namaMakanan, harga, stok, deskripsi, foto* | *tambahListing(), ambilListingAll(), deskripsiMakanan(), saringKataKunci(), saringRentangHarga(), kurangiStok(), validasiInput(), updateDatabase(), konfirmasiHapus(), hapusDariDatabase()* |
 | *C05* | *MetodePembayaran* | *kodeQRIS* | *tampilkanQRIS()* |
-| *C06* | *idTransaksi, totalHarga, tanggal, status* | *hitungTotal(), perbaruiStatus()* |
+| *C06* | *Transaksi* | *idTransaksi, totalHarga, tanggal, status* | *hitungTotal(), perbaruiStatus()* |
 | *C07* | *RewardLogin* | *idReward, poinTerkumpul, statusKlaim* | *validasiPoin(), prosesKlaim(), konfirmasiKlaim()* |
 
 ---
