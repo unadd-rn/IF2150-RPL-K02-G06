@@ -271,7 +271,183 @@ Salin ulang skenario **setiap** use case (skenario normal dan alternatif) dari B
 | 2 | *Penjual berupaya keluar dari halaman sebelum menyimpan* | *Sistem menampilkan dialog konfirmasi berisi peringatan bahwa deskripsi yang belum tersimpan akan hilang, disertai opsi untuk tetap berada di halaman atau melanjutkan keluar. * |
 | 3 | *Penjual memilih salah satu opsi pada dialog konfirmasi* | *Sistem menerima respons penjual. Jika penjual memilih untuk tetap mengedit, sistem menutup dialog konfirmasi berisi peringatan dan mengembalikan penjual ke halaman penambahan makanan sebelumnya. Jika penjual memilih untuk keluar, sistem membatalkan proses penambahan makanan dan mengarahkan penjual ke halaman utama (profil toko)* |
 
-<sub>*Lanjutkan pola 4.4.x ini untuk setiap ID UC pada 4.2, sampai seluruh use case memiliki skenarionya masing-masing.*<sub>
+
+### 4.4.2 Skenario UC02
+
+**Nama Use Case:** *Melihat listing makanan surplus*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pembeli melihat listing makanan surplus* | *Sistem mengecek ketersediaan listing makanan surplus, menyembuyikan makanan surplus yang terdeteksi deskripsi sudah melewati kedauluwarsa dan stok habis. Sistem mendapat tidak ada listing yang tersedia* |
+| 2 | *(tidak ada aksi lanjutan)* | *Sitem menampilkan listing makanan surplus yang tersedia* |
+
+<br>
+
+**Skenario Alternatif 1: Listing makanan surplus tidak tersedia**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pembeli melihat listing makanan surplus* | *Sistem mengecek ketersediaan listing makanan surplus, menyembuyikan makanan surplus yang terdeteksi deskripsi sudah melewati kedauluwarsa dan stok habis. Sistem mendapat tidak ada listing yang tersedia* |
+| 2 | *(tidak ada aksi lanjutan)* | *Sitem menampilkan pesan bahwa saat ini tidak ada makanan surplus yang tersedia* |
+
+<br>
+
+**Skenario Alternatif 2: Kegagalan memuat listing (error teknis)**
+| 1 | *Pembeli melihat listing makanan surplus* | *Sistem gagal mengambil data* |
+| 2 | *(tidak ada aksi lanjutan)* | *Sitem menampilkan pesan error dan opsi untung memuat ulang* |
+
+### 4.4.3 Skenario UC03
+
+**Nama Use Case:** *Melihat detail makanan surplus*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pembeli membuka halaman listing* | *Sistem menampilkan seluruh listing* |
+| 2 | *Pembeli memencet salah satu opsi pada listing makanan surplus* | *Sistem menampilkan pop-up berisi detail makanan surplus yang dipilih* |
+
+
+<br>
+
+**Skenario Alternatif 1: Listing yang dipilih tiba-tiba dihapus**
+
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pembeli membuka halaman listing* | *Sistem menampilkan seluruh listing* |
+| 2 | *Pembeli memencet salah satu opsi pada listing makanan surplus yang sudah dihapus* | *Sistem menampilkan pesan error yang mengatakan bahwa listing tersebut sudah tidak ada* |
+
+### 4.4.4 Skenario UC04
+
+**Nama Use Case:** *Menyaring listing makanan surplus*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pembeli memasukkan kata kunci yang ingin dicari ke search bar* | *Sistem hanya menampilkan listing yang mengandung kata kunci tersebut* |
+| 2 | *Pembeli mengklik drop-down untuk memilih rentang harga* | *Sistem menampilkan beberapa rentang harga yang dapat dipilih* |
+| 3 | *Pembeli mengklik salah satu rentang harga* | *Sistem hanya menampilkan listing dengan rentang harga yang dipilih* |
+
+<br>
+
+**Skenario Alternatif 1: Kata kunci yang dicari tidak ada**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pembeli memasukkan kata kunci yang tidak ada ke search bar* | *Sistem menampilkan halaman kosong dengan pesan error yang mengatakan bahwa tidak ada makanan surplus dengan kata kunci tersebut* |
+
+**Skenario Alternatif 2: Rentang harga yang dicari tidak ada**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pembeli mengklik drop-down untuk memilih rentang harga* | *Sistem menampilkan beberapa rentang harga yang dapat dipilih* |
+| 2 | *Pembeli mengklik salah satu rentang harga yang sedang tidak ada dalam sistem* | *Sistem menampilkan halaman kosong dengan pesan error yang mengatakan bahwa tidak ada makanan surplus dalam rentang harga tersebut* |
+
+### 4.4.5 Skenario UC05
+
+**Nama Use Case:** *Melakukan pembayaran*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pembeli memilih menu checkout setelah memilih listing* | *Sistem menampilkan halaman pembayaran berisi kode QRIS dummy sebagai simulasi metode pembayaran serta tombol untuk melanjutkan simulasi* |
+| 2 | *Pembeli melakukan "pembayaran" dengan mengetuk tombol untuk melanjutkan simulasi pembayaran* | *Sistem menampilkan halaman konfirmasi bahwa pembayaran telah berhasil dilakukan* | 
+
+<br>
+
+**Skenario Alternatif 1: Penjual membatalkan pembayaran**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pembeli menutup atau keluar dari halaman pembayaran sebelum mengetuk tombol untuk melanjutkan simulasi pembayaran* | *Sistem membatalkan transaksi dan mengembalikan pembeli ke halaman sebelumnya* |
+
+
+
+### 4.4.6 Skenario UC06
+
+**Nama Use Case:** *Mengedit listing*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Penjual membuka halaman edit pada salah satu listing miliknya* | *Sistem menampilkan form edit berisi detail listing (stok, harga, deskripsi) yang dapat diubah* |
+| 2 | *Penjual mengubah isi detail listing dan menekan tombol simpan* | *Sistem menyimpan perubahan tersebut ke dalam database dan menampilkan listing dengan detail yang telah diperbarui* |
+
+<br>
+
+**Skenario Alternatif 1: Input tidak valid**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Penjual mengubah stock atau harga menjadi nilai negatif atai  mengunggah foto dengan format atau ukuran selain PNG atau JPG atau lebih dari 10 MB* | *Sistem menampilkan pesan error dan tidak menyimpan perubahan yang dilakukan* |
+
+
+### 4.4.7 Skenario UC07
+ 
+**Nama Use Case:** *Login ke sistem*
+ 
+**Skenario Normal**
+ 
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pengguna membuka halaman login, memasukkan email dan password, lalu menekan tombol masuk* | *Sistem memvalidasi kredensial yang dimasukkan. Jika valid, sistem memeriksa apakah ini login pertama pengguna pada hari tersebut; jika ya, sistem memberikan poin quest login harian secara otomatis dan menyimpan progres reward pengguna* |
+| 2 | *(tidak ada aksi lanjutan)* | *Sistem mengarahkan pengguna ke halaman utama sesuai perannya (Penjual atau Pembeli)* |
+ 
+<br>
+
+**Skenario Alternatif 1: Kredensial Tidak Valid**
+ 
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pengguna memasukkan email atau password yang salah, lalu menekan tombol masuk* | *Sistem mendeteksi kredensial tidak sesuai, menampilkan pesan error "Email atau password salah", dan meminta pengguna memasukkan ulang kredensial* |
+ 
+### 4.4.8 Skenario UC08
+ 
+**Nama Use Case:** *Mengklaim reward login*
+ 
+**Skenario Normal**
+ 
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pembeli membuka halaman reward/progres poin* | *Sistem menampilkan jumlah poin quest login yang telah terkumpul beserta status apakah reward sudah dapat diklaim* |
+| 2 | *Pembeli menekan tombol klaim reward* | *Sistem memvalidasi bahwa poin telah mencukupi, mengurangi poin yang terpakai, memberikan reward kepada pembeli, dan menampilkan notifikasi bahwa reward berhasil diklaim* |
+ 
+<br>
+
+**Skenario Alternatif 1: Poin Belum Mencukupi**
+ 
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pembeli membuka halaman reward saat poin yang terkumpul belum mencukupi* | *Sistem menampilkan status bahwa poin belum mencukupi untuk mengklaim reward beserta jumlah poin yang masih dibutuhkan, dan menonaktifkan tombol klaim* |
+
+### 4.4.9 Skenario UC09
+ 
+**Nama Use Case:** *Menghapus listing*
+ 
+**Skenario Normal**
+ 
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Penjual memilih listing yang ingin dihapus* | *Sistem menampilkan opsi untuk menghapus pilihan listing* |
+| 2 | *Penjual menekan tombol hapus* | *Sistem memberikan konfirmasi untuk menghapus* |
+| 3 | *Penjual menekan tombol konfirmasi* | *Sistem menghapus listing dari database* |
+ 
+<br>
+
+**Skenario Alternatif 1: Penjual batal menghapus**
+ 
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Penjual memilih listing yang ingin dihapus* | *Sistem menampilkan opsi untuk menghapus pilihan listing* |
+| 2 | *Penjual menekan tombol hapus* | *Sistem memberikan konfirmasi untuk menghapus* |
+| 3 | *Penjual menekan tombol batal* | *Sistem tidak menghapus listing dari database* |
+---
 
 ---
 
