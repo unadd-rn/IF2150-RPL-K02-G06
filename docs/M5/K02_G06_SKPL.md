@@ -30,10 +30,7 @@ Dipersiapkan oleh:
 
 | Revisi | Deskripsi |
 | :--- | :--- |
-| *A* | *Deskripsikan perubahan yang dilakukan dari dokumen sebelumnya pada dokumen ini. Jika tidak terdapat perubahan, harap kosongkan tabel.* |
-| *B* |  |
-| *C* |  |
-| ... |  |
+| *A* | *Memperbaiki tabel diagram kelas keseluruhan.* |
 
 <br>
 
@@ -130,7 +127,7 @@ Food Waste Stop merupakan sistem web aplikasi yang menjadi wadah transaksi makan
 <img alt="Swimlane Diagram untuk Reward dari Login Streak" src="https://github.com/user-attachments/assets/3febbd8d-a276-4754-9200-cd2bee1feacd" width="70%"> 
 </p>
 <p align="center">
-<i>Gambar 4. Swimlane Diagram untuk Reward dari Login Streak</i>
+<i>Gambar 5. Swimlane Diagram untuk Reward dari Login Streak</i>
 </p>
 
 <br>
@@ -235,7 +232,7 @@ Salin ulang Use Case Diagram dari BAB 3.3 dokumen *Use Case & Scenario Use Case*
 <img width="100%" alt="Untitled Diagram drawio (4)" src="https://github.com/user-attachments/assets/2cdc32f2-0599-476a-870b-4bc1425b7360" />
 </p>
 <p align="center">
-<i>Gambar 1. Use Case Diagram</i>
+<i>Gambar 6. Use Case Diagram</i>
 </p>
 <br>
 
@@ -489,7 +486,7 @@ Salin ulang seluruh kelas yang telah diidentifikasi dari BAB 4.1 dokumen *Class 
 <img  width="70%" alt="Screenshot 2026-09-23 154410" src="https://github.com/user-attachments/assets/2ef8d96a-f00c-4d9f-aaa2-cf2c930a2546" />
 </p>
 <p align="center">
-<i>Gambar 1. Diagram Kelas Use Case UC01</i>
+<i>Gambar 7. Diagram Kelas Use Case UC01</i>
 </p>
 <br>
 
@@ -515,7 +512,7 @@ Salin ulang seluruh kelas yang telah diidentifikasi dari BAB 4.1 dokumen *Class 
 <img  width="70%" alt="Screenshot 2026-09-23 153837" src="https://github.com/user-attachments/assets/55388c64-1004-49ae-bd90-a14679db1610" />
 </p>
 <p align="center">
-<i>Gambar 2. Diagram Kelas Use Case UC02</i>
+<i>Gambar 8. Diagram Kelas Use Case UC02</i>
 </p>
 <br>
 
@@ -541,7 +538,7 @@ Salin ulang seluruh kelas yang telah diidentifikasi dari BAB 4.1 dokumen *Class 
 <img width="767" height="128" alt="Screenshot 2026-09-23 153837" src="https://github.com/user-attachments/assets/55388c64-1004-49ae-bd90-a14679db1610" />
 </p>
 <p align="center">
-<i>Gambar 3. Diagram Kelas Use Case UC32</i>
+<i>Gambar 9. Diagram Kelas Use Case UC32</i>
 </p>
 <br>
 
@@ -567,7 +564,7 @@ Salin ulang seluruh kelas yang telah diidentifikasi dari BAB 4.1 dokumen *Class 
 <img width="442" height="62" alt="UC04 drawio" src="https://github.com/user-attachments/assets/c81885b1-4dce-48e8-a525-275a3b588436" />
 </p>
 <p align="center">
-<i>Gambar 4. Diagram Kelas Use Case UC04</i>
+<i>Gambar 10. Diagram Kelas Use Case UC04</i>
 </p>
 <br>
 
@@ -595,7 +592,7 @@ Salin ulang seluruh kelas yang telah diidentifikasi dari BAB 4.1 dokumen *Class 
 <img width="552" height="182" alt="UC05 drawio" src="https://github.com/user-attachments/assets/1cd6ac17-0491-497d-a2af-1fa566b64859" />
 </p>
 <p align="center">
-<i>Gambar 5. Diagram Kelas Use Case UC05</i>
+<i>Gambar 11. Diagram Kelas Use Case UC05</i>
 </p>
 <br>
 
@@ -623,7 +620,7 @@ Salin ulang seluruh kelas yang telah diidentifikasi dari BAB 4.1 dokumen *Class 
 <img width="442" height="62" alt="UC06 drawio" src="https://github.com/user-attachments/assets/55d23821-5464-4f32-8434-744e9c5ed909" />
 </p>
 <p align="center">
-<i>Gambar 6. Diagram Kelas Use Case UC06</learni>
+<i>Gambar 11. Diagram Kelas Use Case UC06</learni>
 </p>
 <br>
 
@@ -651,7 +648,7 @@ Salin ulang seluruh kelas yang telah diidentifikasi dari BAB 4.1 dokumen *Class 
 <img alt="Class Diagram UC07" src="https://github.com/user-attachments/assets/1f3c3f81-6fb7-4aaa-abc6-f5e63a01b18f" width="70%">
 </p>
 <p align="center">
-<i>Gambar 7. Diagram Kelas Use Case UC07</i>
+<i>Gambar 12. Diagram Kelas Use Case UC07</i>
 </p>
 <br>
 
@@ -676,7 +673,7 @@ Salin ulang seluruh kelas yang telah diidentifikasi dari BAB 4.1 dokumen *Class 
 <img alt="Class Diagram UC08" src="https://github.com/user-attachments/assets/5455478d-1709-4103-ac06-36be777558bc" width="70%">
 </p>
 <p align="center">
-<i>Gambar 8. Diagram Kelas Use Case UC08</i>
+<i>Gambar 13. Diagram Kelas Use Case UC08</i>
 </p>
 <br>
 
@@ -702,7 +699,7 @@ Salin ulang seluruh kelas yang telah diidentifikasi dari BAB 4.1 dokumen *Class 
 <img alt="Class Diagram UC09" src="https://github.com/user-attachments/assets/aaec2ce5-cdaa-4b48-9a27-cbffe40ae2cf" width="70%">
 </p>
 <p align="center">
-<i>Gambar 9. Diagram Kelas Use Case UC09</i>
+<i>Gambar 14. Diagram Kelas Use Case UC09</i>
 </p>
 <br>
 
@@ -718,7 +715,7 @@ Gabungkan seluruh kelas dan hubungan antarkelas dari BAB 4.3 dokumen *Class Diag
 <img width="697" height="422" alt="diagram keseluruhan drawio" src="https://github.com/user-attachments/assets/9238241f-4b42-4550-9ae0-a46835934346" />
 </p>
 <p align="center">
-<i>Gambar 10. Diagram Kelas Keseluruhan</i>
+<i>Gambar 15. Diagram Kelas Keseluruhan</i>
 </p>
 <br>
 
