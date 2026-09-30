@@ -1,3 +1,4 @@
+
 # Form Asistensi
 
 ## Tugas Besar IF2150 - Rekayasa Perangkat Lunak
@@ -37,7 +38,7 @@
 
 <!-- ![](./assets/foto-asistensi.jpg) -->
 <p align="center">
-  <img src="./assets/foto-asistensi.jpg" width="100%">
+  <img width="1280" height="720" alt="Asistensi Offline cihuyy" src="https://github.com/user-attachments/assets/08a0db25-8531-4047-a092-fe6723a6314d" />
 </p>
 
 <p align="center">
