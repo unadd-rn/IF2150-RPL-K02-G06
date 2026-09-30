@@ -37,9 +37,13 @@ Dipersiapkan oleh:
 # BAB 1: Pendahuluan
 
 ## 1.1 Tujuan Penulisan Dokumen
-Dokumen SKPL ini dibuat untuk menjelaskan apa itu web aplikasi Food Waste Stop untuk memenuhi Tugas Besar RPL. Dokumen SKPL digunakan untuk para asisten dan/atau dosen RPL.
+Dokumen Spesifikasi Kebutuhan Perangkat Lunak (SKPL) ini disusun untuk menjelaskan aplikasi web Food Waste Stop sebagai bagian dari pemenuhan Tugas Besar mata kuliah Rekayasa Perangkat Lunak (RPL). Food Waste Stop adalah aplikasi marketplace berbasis web yang mempertemukan penjual, seperti restoran dan usaha makanan, yang memiliki makanan berlebih atau tidak terjual dengan pembeli yang dapat membelinya dengan harga lebih murah. Dokumen ini memuat gambaran umum sistem serta kebutuhan fungsional dan non-fungsional yang harus dipenuhi oleh aplikasi.
+
+Dokumen SKPL ini ditujukan bagi asisten dan/atau dosen mata kuliah RPL sebagai bahan evaluasi dan penilaian atas analisis yang dilakakukan selama Tugas Besar. Selain itu, dokumen ini juga menjadi acuan untuk anggota dalam tahap perancangan, implementasi, dan pengujian aplikasi.
 
 ## 1.2 Lingkup Masalah
+Industri makanan sering menghasilkan makanan surplus yang masih layak konsumsi tetapi tidak terjual. Makanan tersebut umumnya dibuang sehingga menambah sampah makanan dan menimbulkan kerugian ekonomi bagi pelaku industri. Selain itu, belum tersedia wadah yang memudahkan penjualan makanan surplus kepada konsumen dengan harga terjangkau.
+
 Food Waste Stop merupakan web aplikasi untuk kegiatan jual-beli makanan surplus. Food Waste Stop berfokus menjadi solusi permasalahan sampah makanan industri. Selain itu, Food Waste Stop juga mengurangi kerugian ekonomi industri.
 
 ## 1.3 Definisi, Istilah, dan Singkatan
@@ -64,21 +68,21 @@ Tabel 1.4. Aturan Penomoran
 | *Aktor* | *AXX* | *Pihak di luar sistem (pengguna, perangkat, atau sistem lain) yang berinteraksi dengan sistem* |
 | *Use Case* | *UCXX* | *Rangkaian interaksi antara aktor dan sistem untuk mencapai suatu tujuan tertentu* |
 | *Kelas* | *CXX* | *Representasi objek dalam sistem yang memiliki atribut dan metode, digunakan dalam perancangan struktur sistem* |
-| *...* | *...* |
 
 ## 1.5 Referensi
-PowerPoint Rekayasa Perangkat Lunak Minggu 1 "Disiplin-Bukti-Konteks"
-PowerPoint Rekayasa Perangkat Lunak Minggu 2 "Efisiensi Kebutuhan" & "Perumusan Kebutuhan"
-PowerPoint Rekayasa Perangkat Lunak Minggu 3 "Skenario dan Keterlacakan" & "Diagram Use Case"
-PowerPoint Rekayasa Perangkat Lunak Minggu 4 "Objek, Tanggung Jawab, dan Kolaborasi" & "Stereotipe, Gaya Kendali, dan Lapisan"
-PowerPoint Rekayasa Perangkat Lunak Minggu 5 "SKPL"
-PowerPoint Asistensi Rekayasa Perangkat Lunak  "Class Diagram"
+PowerPoint Rekayasa Perangkat Lunak Minggu 1 "Disiplin-Bukti-Konteks" <br>
+PowerPoint Rekayasa Perangkat Lunak Minggu 2 "Efisiensi Kebutuhan" & "Perumusan Kebutuhan" <br>
+PowerPoint Rekayasa Perangkat Lunak Minggu 3 "Skenario dan Keterlacakan" & "Diagram Use Case" <br>
+PowerPoint Rekayasa Perangkat Lunak Minggu 4 "Objek, Tanggung Jawab, dan Kolaborasi" & "Stereotipe, Gaya Kendali, dan Lapisan" <br>
+PowerPoint Rekayasa Perangkat Lunak Minggu 5 "SKPL" <br>
+PowerPoint Asistensi Rekayasa Perangkat Lunak  "Class Diagram" <br>
 
 ## 1.6 Deskripsi Umum Dokumen (Ikhtisar)
-BAB 2 membahas deskripsi P/L
-Bab 3 membahas deskripsi Kebutuhan P/L
-Bab 4 menampilkan pemodelan Use Case
-Bab 5 menampilkan pemodelan Kelas
+Bab 1 membahas pendahuluan. Pendahuluan berisi penjelasan singkat mengenai web aplikasi Food Waste Stop. <br>
+BAB 2 membahas deskripsi P/L. Deskripsi meliputi deskripsi umum serta batasannya<br>
+Bab 3 membahas deskripsi Kebutuhan P/L. Deskripsi meliputi Kebutuhan Funsional dan Non Fungsional<br>
+Bab 4 menampilkan pemodelan Use Case <br>
+Bab 5 menampilkan pemodelan Kelas <br>
 
 # BAB 2: Deskripsi Perangkat Lunak
 
