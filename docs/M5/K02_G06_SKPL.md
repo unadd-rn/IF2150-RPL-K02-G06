@@ -141,6 +141,7 @@ Diisi dengan deskripsi umum perangkat lunak untuk mendukung proses bisnis yang t
 Food Waste Stop adalah aplikasi berbasis web (*web application*) yang memberikan fasilitas transaksi jual beli makanan surplus yang masih layak dikonsumsi untuk mengurangi limbah makanan indrustri dan kerugian ekonomi penjual. Aplikasi ini memiliki layanan simulasi *Payment Gateway* dalam bentuk QRIS *dummy* untuk memproses dan mengonfirmasi pembayaran secara daring. Sistem akan menampilkan simulasi pembayaran setelah menerima input dari pengguna pada sisi pembeli dalam bentuk pencarian, penyaringan, lalu pemilihan serta pemesanan makanan surplus. Di sisi lain, penjual mengelola listing makanan surplus melalui antarmuka web dari penambahan makanan baru, pembaruan stok dan harga diskon, sampai pengeditan dan penghapusan listing. Selain dari fungsi transaksi yang merupakan inti dari sistem ini, perangkat lunak mengintegrasikan gamifikasi berupa *quest login harian* yang secara otomatis mencatat *steak* pengguna dan memberikan poin reward yang dapat ditukarkan untuk kupon potongan harga transaksi.
 
 ## 2.3 Pengguna dan Kebutuhan Pengguna Perangkat Lunak
+| Aktor | Deskripsi |
 | :--- | :--- |
 | *Penjual* | *Pengguna yang mengelola listing makanan surplus, meliputi menambahkan, mengurangkan, mengedit, dan memantau pendapatan penjualan* |
 | *Pembeli* | *Pengguna yang melihat, mencari, memilih, dan membeli listing makanan surplus* |
