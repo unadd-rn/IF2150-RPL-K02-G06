@@ -143,8 +143,8 @@ Food Waste Stop adalah aplikasi berbasis web (*web application*) yang memberikan
 ## 2.3 Pengguna dan Kebutuhan Pengguna Perangkat Lunak
 | Aktor | Deskripsi |
 | :--- | :--- |
-| *Penjual* | *Pengguna yang mengelola listing makanan surplus, meliputi menambahkan, mengurangkan, mengedit, dan memantau pendapatan penjualan* |
-| *Pembeli* | *Pengguna yang melihat, mencari, memilih, dan membeli listing makanan surplus* |
+| *Penjual* | *Pengguna yang mengelola listing makanan surplus, meliputi mendaftarkan toko, menambahkan makanan surplus baru (foto sto, porsi, harga, dan deskripsi), mengurangkan atau mengedit data listing, dan memantau pesanan dan pendapatan penjualan* |
+| *Pembeli* | *Pengguna yang melihat, mencari, menyaring daftar listing, melihat detail makanan surplus, melakukan pemesanan dan pembayaran melalui simulasi pembayaran, dan melakukan **login** harian untuk mendapatkan poin.* |
 
 ## 2.4 Batasan Perangkat Lunak
 Batasan yang harus dituliskan, di antaranya:
