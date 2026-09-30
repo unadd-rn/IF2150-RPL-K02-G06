@@ -26,10 +26,9 @@
 
 | Catatan |
 | --- |
-| 1. *\[Berikan catatan hasil asistensi\]*  |
-| 2. ... |
-| 3. ... |
-| 4. ... |
+| 1. Website tidak perlu dideploy, boleh lokal  |
+| 2. OS harus masuk |
+| 3. Bab 1 diperjelas |
 
 **Notes for this section:**  
 *Catatan dapat dituliskan dalam bentuk paragraf atau poin-poin, disesuaikan saja.* 
