@@ -160,11 +160,12 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 
 | Komponen | Spesifikasi |
 | :--- | :--- |
-| *Server (Front-End)* | *Vercel (hosting Next.js), deploy otomatis dari repositori GitHub* |
+| *Server* | *Server lokal* |
 | *Client* | *Web browser modern (Chrome, Firefox, Edge, Safari versi terbaru) di desktop maupun mobile; mendukung PWA* |
 | *Front-End* | *Next.js (React), Node.js v20 untuk proses build* |
+| *Back-End* | *Fast API* |
 | *DBMS* | *PostgreSQL 15 (managed database dari penyedia PaaS)* |
-| *Jaringan* | *Koneksi internet stabil; HTTPS (TLS) untuk semua komunikasi client-server* |
+| *OS* | *Windows/Linux/macOS/Android/iOS melalui browser* |
 
 ---
 
