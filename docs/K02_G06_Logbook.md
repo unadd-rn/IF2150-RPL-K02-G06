@@ -110,8 +110,11 @@
 | *27-09-2026* | *Cendra Asih Chairunnisa* | *Mengerjakan Bab 1* | *3* | *Done* | *-* | 
 | *29-09-2026* | *Cendra Asih Chairunnisa* | *Menyelesaikan Bab 1* | *3* | *Done* | *-* | 
 | *29-09-2026* | *Sherin Felicia Danessa* | *Mengerjakan Bab 2* | *2* | *Done* | *kurang memahami scope lingkungan operasi perangkat lunak* | 
+| *29-09-2026* | *Nadia Aulia Syafarani* | *Menyelesaikan Bab 4* | *1.5* | *Done* | *-* |
+| *29-09-2026* | *Renata Puspanegara Ninagan* | *Menyelesaikan bab 5* | *0.5* | *Done* | *-* |
 | *30-09-2026* | *Sherin Felicia Danessa* | *Menyelesaikan Bab 2* | *0.5* | *Done* | *-* | 
-| *30-09-2026* | *Ghina Emelia Yantes | *Menyelesaikan Bab 3* | *1.5* | *Done* | *-* | 
+| *30-09-2026* | *Ghina Emelia Yantes* | *Menyelesaikan Bab 3* | *1.5* | *Done* | *-* | 
+| *30-09-2026* | *Nadia Aulia Syafarani* | *Merevisi bab 2* | *1.5* | *Done* | *-* | 
 
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
