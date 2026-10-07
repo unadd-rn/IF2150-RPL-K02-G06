@@ -30,17 +30,18 @@ Dipersiapkan oleh:
 
 # BAB 1: Style/Pattern Arsitektur Acuan
 
-#### 1.1 Style/Pattern yang Dipilih dan Peran Komponen
+### 1.1 Style/Pattern yang Dipilih dan Peran Komponen
 Style yang digunakan yaitu client-server, yang menentukan bagaimana sistem dijalankan, yaitu dengan client meminta layanan dari server yang kemudian memproses pelayanan. Kemudian, pattern yang digunakan adalah MVC yang mengatur isi di dalamnya, yaitu View darri sisi client, sedangkan Controller dan Model di sisi server.
 
 Peran komponen yang pertama View dari sisi client yang menampilkan data kepada pengguna dan menerima aksi pengguna. Kemudian ada Controller dari sisi server yang menerima permintaan dari View dan mengakses data di Model agar dapat diproses dan dikembalikan hasilnya ke View. Lalu, ada Model yang berisi aturan cara kerja dan data untuk diproses. Kemudian ada tambahan Database untuk menyimpan seluruh data yang ada.
 
-#### 1.2 Alasan Pemilihan
+### 1.2 Alasan Pemilihan
 Alasan pemilihan style/pattern tersebut yaitu:
 1. Memastikan alur pengguna yang berbeda sesuai peran (pembeli atau penjual) terpisah tampilannya (view) tapi dapat menggunakan logika yang sama (controller dan model)
 2. Pengguna yang menggunakan perangkat terpisah tapi data harus sama, maka perlu server untuk mengaturnya (client-server)
+3. Penggunaan server lebih aman terutama untuk KNF yang mewajibkan enkripsi password dan disesuaikan juga dengan KF yang memerlukan logika terpusat di server
 
-#### 1.3 Lingkungan Operasi
+### 1.3 Lingkungan Operasi
 
 Tabel 1.1. Lingkungan Operasi Perangkat Lunak
 | Komponen | Spesifikasi |
