@@ -59,6 +59,7 @@
 | Tool AI | Tujuan Penggunaan | Contoh Prompt Utama | Modifikasi & Validasi Manusia |
 | :--- | :--- | :--- | :--- |
 | *Claude* | *Menyusun kerangka bab 1* | *Tolong bantu membuat kerangka program dengan style campuran client-server dan MCV dengan View berada di sisi client dan Controller dan Model di sisi server* | *AI memberikan kerangka bab 1 dan disesuaikan lagi dengan struktur yang dimiliki* |
+| *Claude* | *Tabel 2.1* | *Tolong bantu jelaskan hubungan UC dengan komponen/model/subsistem* | *AI memberikan penjelasan hubungan UC dan kolom komponen/model/subsistem, beserta contoh* |
 
 ---
 ### Pernyataan Integritas dan Persetujuan
