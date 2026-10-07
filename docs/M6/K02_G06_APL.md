@@ -38,7 +38,7 @@ Peran komponen yang pertama View dari sisi client yang menampilkan data kepada p
 <p align="center">
   <img width="522" height="482" alt="Untitled Diagram drawio (1)" src="https://github.com/user-attachments/assets/c05b7e88-bbfc-4aca-8004-37839e45328c" />
   <br>
-  <i>Gambar 1. Contoh Arsitektur MVC</i>
+  <i>Gambar 1. Arsitektur MVC</i>
 </p>
 
 ### 1.2 Alasan Pemilihan
