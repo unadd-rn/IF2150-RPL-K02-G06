@@ -27,37 +27,32 @@ Dipersiapkan oleh:
 ---
 
 <br>
-<br>
 
 # BAB 1: Style/Pattern Arsitektur Acuan
 
-Pada bagian ini, tentukan *architectural style* atau *pattern* yang menjadi acuan untuk aplikasi yang Anda kembangkan. Misalnya *layered architecture*, *client-server*, *repository*, *pipe and filter architecture*, atau MVC (*Model-View-Controller*).
+#### 1.1 Style/Pattern yang Dipilih dan Peran Komponen
+Style yang digunakan yaitu client-server, yang menentukan bagaimana sistem dijalankan, yaitu dengan client meminta layanan dari server yang kemudian memproses pelayanan. Kemudian, pattern yang digunakan adalah MVC yang mengatur isi di dalamnya, yaitu View darri sisi client, sedangkan Controller dan Model di sisi server.
 
-<p align="center">
-<img alt="Contoh Arsitektur MVC" src="./assets/diagram/contoh-arsitektur-mvc.webp" width="70%">
-</p>
-<p align="center">
-<i>Gambar 1. Contoh Arsitektur MVC</i>
-</p>
+Peran komponen yang pertama View dari sisi client yang menampilkan data kepada pengguna dan menerima aksi pengguna. Kemudian ada Controller dari sisi server yang menerima permintaan dari View dan mengakses data di Model agar dapat diproses dan dikembalikan hasilnya ke View. Lalu, ada Model yang berisi aturan cara kerja dan data untuk diproses. Kemudian ada tambahan Database untuk menyimpan seluruh data yang ada.
 
-Isi bab ini dengan hal-hal berikut:
-1. **Style/pattern yang dipilih** beserta penjelasan singkat peran setiap bagiannya. Untuk MVC, jelaskan peran *Model*, *View*, dan *Controller*.
-2. **Alasan pemilihan** berdasarkan karakteristik P/L Anda, misalnya jenis pengguna, alur proses bisnis, serta KF dan KNF pada dokumen SKPL.
-3. **Gambar style/pattern yang diterapkan pada P/L Anda.** Jangan hanya menyalin Gambar 1. Isi setiap bagian pattern dengan komponen milik P/L Anda. Misalnya, kotak *Controller* berisi daftar *controller* yang ada di aplikasi dan kotak *Model* berisi daftar *model* yang ada di aplikasi.
+#### 1.2 Alasan Pemilihan
+Alasan pemilihan style/pattern tersebut yaitu:
+1. Memastikan alur pengguna yang berbeda sesuai peran (pembeli atau penjual) terpisah tampilannya (view) tapi dapat menggunakan logika yang sama (controller dan model)
+2. Pengguna yang menggunakan perangkat terpisah tapi data harus sama, maka perlu server untuk mengaturnya (client-server)
 
-Selain *style/pattern*, tuliskan juga lingkungan operasi P/L. Tabel berikut **disalin dari subbab 2.5 *Lingkungan Operasi Perangkat Lunak* pada dokumen SKPL** tanpa perubahan. Setelah tabel, jelaskan kaitan teknologi yang dipakai dengan *style/pattern* yang dipilih. Contohnya, Django (Python) secara bawaan mengikuti pola MVT (*Model-View-Template*), yaitu varian dari MVC.
+#### 1.3 Lingkungan Operasi
 
 Tabel 1.1. Lingkungan Operasi Perangkat Lunak
-
 | Komponen | Spesifikasi |
 | :--- | :--- |
-| *Server* | *[contoh: Node.js v20 dengan Next.js, dijalankan secara lokal (localhost)]* |
-| *Client* | *[contoh: Web Browser modern (Chrome, Firefox terbaru)]* |
-| *DBMS* | *[contoh: PostgreSQL 15 pada Supabase sebagai basis data terpusat]* |
-| *OS* | *[contoh: Cross-platform (Windows/Linux/MacOS) melalui browser]* |
-| *...* | *...* |
+| *Server* | *Server lokal* |
+| *Client* | *Web browser modern (Chrome, Firefox, Edge, Safari versi terbaru) di desktop maupun mobile* |
+| *Front-End* | *Next.js (React), Node.js v20 untuk proses build* |
+| *Back-End* | *Fast API* |
+| *DBMS* | *PostgreSQL 15* |
+| *OS* | *Windows/Linux/macOS/Android/iOS melalui browser* |
 
-<sub><b><i>Catatan</i></b>: <i>Style/pattern yang dipilih di bab ini menjadi acuan untuk BAB 2 (pengelompokan komponen) dan BAB 3 (model arsitektur). Contoh pada dokumen ini memakai MVC secara konsisten dari BAB 1 sampai BAB 3. Kelompok boleh memakai pattern lain selama alasannya dijelaskan dan BAB 2 serta BAB 3 disesuaikan. Tabel 1.1 harus sama persis dengan subbab 2.5 dokumen SKPL; jangan menambah atau mengubah isinya karena SKPL sudah final.</i></sub>
+Next.js menjalankan View di sisi client. FastAPI menjalankan Controller dan Model di sisi server. PostgreSQL menjadi bagian database yang diakses oleh Model. Kemudian. frontend dan backend saling berkomunikasi dengan logika terpisah sesuai dengan style client-server.
 
 ---
 
