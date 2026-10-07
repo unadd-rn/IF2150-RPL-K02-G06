@@ -116,5 +116,12 @@
 | *30-09-2026* | *Ghina Emelia Yantes* | *Menyelesaikan Bab 3* | *1.5* | *Done* | *-* | 
 | *30-09-2026* | *Nadia Aulia Syafarani* | *Merevisi bab 2* | *1.5* | *Done* | *-* | 
 
+---
+### Milestone 6
+**Periode:** 30 September 2026 - 7 Oktober 2026
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- | 
+| *07-10-2026* | *Nadia Aulia Syafarani* | *Menyelesaikan Bab 1* | *0.5* | *Done* | *-* |
+
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
