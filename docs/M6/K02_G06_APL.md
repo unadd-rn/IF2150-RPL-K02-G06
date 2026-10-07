@@ -90,8 +90,7 @@ Tabel 2.1. Identifikasi Komponen/Modul/Subsistem
 Aplikasi dibuat dengan arsitektur client-server karena arsitektur ini sangat cocok untuk aplikasi e-commerce yang sifatnya memisahkan tugas antara aplikasi di HP pengguna (client) dan sistem pusat data yang mengelola semua proses bisnis (server).
 
 <p align="center">
-<img width="1052" height="662" alt="Untitled Diagram drawio (1)" src="https://github.com/user-attachments/assets/b2b37d90-43a2-40ab-956e-a160f79e1ebf" />
-
+<img width="1052" height="662" alt="Untitled Diagram drawio (2)" src="https://github.com/user-attachments/assets/e115d579-4f88-49de-913b-5d40c2c35a95" />
 </p>
 <p align="center">
 <i>Gambar 2. Logical View</i>
