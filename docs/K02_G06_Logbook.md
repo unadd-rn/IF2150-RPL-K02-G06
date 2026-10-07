@@ -129,5 +129,6 @@
 | *07-10-2026* | *Cendra Asih Chairunnisa* | *Menyelesaikan Bab 2 tabel 2.1: jenis Controller, Pendukung, dan Integrasi Eksternal* | *0.5* | *Done* | *-* |
 | *07-10-2026* | *Ghina Emelia Yantes* | *Menyelesaikan Bab 2 tabel 2.1: jenis View, Model, dan Penyimpanan Data* | *1* | *Done* | *-* |
 | *07-10-2026* | *Renata Puspanegara Ninagan* | *Menyelesaikan Bab 3* | *0.5* | *Done* | *-* |
+| *07-10-2026* | *Sherin Felicia Danessa* | *Menyelesaikan Bab 1.1* | *0.5* | *Done* | *-* |
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
