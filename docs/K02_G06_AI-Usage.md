@@ -55,6 +55,11 @@
 | :--- | :--- | :--- | :--- |
 | *Claude* | *Memperbaiki kebahasaan* | *[Isi paragraf teks yang sudah ditulis dan masih belum rapi] Berikan saran perubahan tanpa mengubah teks* | *AI memberikan beberapa rekomendasi perbaikan kebahasaan dan diberikan dan kami memilih beberapa bagian yang bisa digunakan* |
 
+### Milestone 6
+| Tool AI | Tujuan Penggunaan | Contoh Prompt Utama | Modifikasi & Validasi Manusia |
+| :--- | :--- | :--- | :--- |
+| *Claude* | *Menyusun kerangka bab 1* | *Tolong bantu membuat kerangka program dengan style campuran client-server dan MCV dengan View berada di sisi client dan Controller dan Model di sisi server* | *AI memberikan kerangka bab 1 dan disesuaikan lagi dengan struktur yang dimiliki* |
+
 ---
 ### Pernyataan Integritas dan Persetujuan
 
