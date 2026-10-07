@@ -7,26 +7,23 @@ ARSITEKTUR PERANGKAT LUNAK (APL)
 </h1>
 <br>
 
-## *Nama Perangkat Lunak*
+## *Food Waste Stop*
 
-### Untuk: *[Nama Asisten]*
+### Untuk: *Aurelia Jennifer Gunawan*
 
 Dipersiapkan oleh:
-
 | Informasi | Keterangan |
 | --- | --- |
-| Kelas | *\[Kelas\]* |
-| Kelompok | *\[Nomor Kelompok\]*  |
-| Nama Kelompok | *\[Nama Kelompok\]*  |
+| Kelas | *K02* |
+| Kelompok | *G06*  |
 
-| NIM       | Nama               |
-| --------- | ------------------ |
-| *[NIM 1]* | *[Nama Anggota 1]* |
-| *[NIM 2]* | *[Nama Anggota 2]* |
-| *[NIM 3]* | *[Nama Anggota 3]* |
-| *[NIM 4]* | *[Nama Anggota 4]* |
-| *[NIM 5]* | *[Nama Anggota 5]* |
-
+| NIM | Nama |
+|---|---|
+| *13525122* | *Nadia Aulia Syafarani* |
+| *13525041* | *Renata Puspanegara Ninagan* |
+| *13525119* | *Ghina Emelia Yantes* |
+| *13525017* | *Cendra Asih Chairunnisa* |
+| *13525089* | *Sherin Felicia Danessa* |
 ---
 
 <br>
