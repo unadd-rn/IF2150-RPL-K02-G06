@@ -87,10 +87,11 @@ Tabel 2.1. Identifikasi Komponen/Modul/Subsistem
 
 ## 3.1 Logical View
 
-Tuliskan secara singkat mengenai model arsitektur perangkat lunak yang Anda pilih dan sertakan alasan mengapa model arsitektur tersebut cocok untuk aplikasi Anda.
+Aplikasi dibuat dengan arsitektur client-server karena arsitektur ini sangat cocok untuk aplikasi e-commerce yang sifatnya memisahkan tugas antara aplikasi di HP pengguna (client) dan sistem pusat data yang mengelola semua proses bisnis (server).
 
 <p align="center">
-<img width="1052" height="662" alt="Untitled Diagram drawio" src="https://github.com/user-attachments/assets/7951c8c0-acc1-403c-a5a4-cd90b5578518" />
+<img width="1052" height="662" alt="Untitled Diagram drawio (1)" src="https://github.com/user-attachments/assets/b2b37d90-43a2-40ab-956e-a160f79e1ebf" />
+
 </p>
 <p align="center">
 <i>Gambar 2. Logical View</i>
