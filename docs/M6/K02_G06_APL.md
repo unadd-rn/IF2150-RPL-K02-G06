@@ -63,13 +63,23 @@ Tabel 2.1. Identifikasi Komponen/Modul/Subsistem
 
 | Nama Komponen/Modul/Subsistem | Jenis                 | Penjelasan |
 | :---------------------------- | :-------------------- | :--------- |
+| *LoginView*              | *View*          | *Menampilkan form login untuk Penjual dan Pembeli, mengenkripsi password dengan SHA-256 sebelum dikirim (KNF02), meneruskan kredensial ke AuthController, lalu mengarahkan pengguna ke halaman sesuai perannya.* |
+| *KatalogView*              | *View*          | *Menampilkan daftar listing, detail satu listing, serta kolom pencarian dan penyaringan harga kepada Pembeli, dan meneruskan aksinya ke KatalogController.* |
+| *ListingView*              | *View*          | *Menampilkan form tambah dan edit listing serta tombol hapus listing kepada Penjual, dan meneruskan aksinya ke ListingController.* |
+| *PembayaranView*              | *View*          | *Menampilkan ringkasan pesanan dan kode QRIS dummy kepada Pembeli, serta menerima aksi bayar atau batal untuk diteruskan ke PembayaranController.* |
+| *RewardView*              | *View*          | *Menampilkan progres poin login dan tombol klaim reward kepada Pembeli, lalu meneruskan aksi klaim ke RewardController.* |
 | *AuthController*              | *Controller*          | *Memproses permintaan login Penjual dan Pembeli (UC07): meneruskan kredensial ke Validasi, mencocokkan password terenkripsi SHA-256 dengan data Pengguna, lalu memerintahkan RewardLogin menambah poin jika ini login pertama pengguna pada hari tersebut. Hasilnya dikembalikan ke View sesuai peran pengguna.* |
 | *KatalogController*           | *Controller*          | *Memproses permintaan Pembeli untuk melihat listing (UC02), melihat detail satu listing (UC03), serta mencari dengan kata kunci dan menyaring berdasarkan rentang harga (UC04). Listing yang stoknya habis atau sudah kedaluwarsa tidak dikirim ke View.* |
 | *ListingController*           | *Controller*          | *Memproses permintaan Penjual untuk menambahkan (UC01), mengedit (UC06), dan menghapus (UC09) listing makanan surplus. Input diteruskan ke Validasi sebelum ListingMakanan disimpan, diubah, atau dihapus dari database.* |
 | *PembayaranController*        | *Controller*          | *Memproses checkout dan pembayaran Pembeli (UC05): membuat Transaksi, menghitung total harga, meminta kode QRIS dummy melalui PaymentGatewayAdapter, lalu memperbarui status Transaksi dan mengurangi stok ListingMakanan setelah pembayaran dikonfirmasi. Jika pembeli keluar sebelum membayar, transaksi dibatalkan. Seluruh proses dijalankan dalam satu transaksi database agar memenuhi prinsip ACID (KNF01).* |
 | *RewardController*            | *Controller*          | *Memproses permintaan Pembeli untuk melihat progres poin dan mengklaim reward login (UC08). RewardController memeriksa kecukupan poin melalui RewardLogin, mengurangi poin yang terpakai, dan mengembalikan status klaim ke View.* |
+| *Pengguna*              | *Model*          | *Merepresentasikan data akun Penjual dan Pembeli (email, password terenkripsi SHA-256, dan peran) serta metode untuk mengakses dan mengubahnya.* |
+| *ListingMakanan*              | *Model*          | *Merepresentasikan data listing makanan surplus (nama, foto, harga, stok, dan batas kedaluwarsa) milik Penjual serta metode untuk mengakses dan mengubahnya.* |
+| *Transaksi*              | *Model*          | *Merepresentasikan data transaksi pembelian Pembeli (listing yang dibeli, total harga, dan status pembayaran) serta metode untuk mengakses dan mengubahnya.* |
+| *RewardLogin*              | *Model*          | *Merepresentasikan poin login Pembeli, tanggal login terakhir, dan status klaim reward serta metode untuk menambah dan mengurangi poin.* |
 | *Validasi*                    | *Pendukung*           | *Memvalidasi input sebelum diproses controller. Untuk listing (dipakai ListingController), dicek kelengkapan field wajib (nama, foto, harga), stok dan harga tidak bernilai negatif, serta foto berformat PNG/JPG dengan ukuran maksimal 10 MB. Untuk login (dipakai AuthController), dicek format email dan password yang tidak kosong. Jika input tidak valid, pesan error dikembalikan ke controller.* |
 | *PaymentGatewayAdapter*       | *Integrasi Eksternal* | *Mengirim permintaan pembayaran dari PembayaranController ke Payment Gateway QRIS dummy, menerima kode QRIS untuk ditampilkan, lalu meneruskan status konfirmasi pembayaran (berhasil atau batal) kembali ke PembayaranController.* |
+| *Database*              | *Penyimpanan Data*          | *Menyimpan seluruh data Model secara persisten pada PostgreSQL 15 dan menjalankan transaksi database yang memenuhi prinsip ACID.* |
 
 ---
 
