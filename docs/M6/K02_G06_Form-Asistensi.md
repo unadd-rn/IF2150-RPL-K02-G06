@@ -4,7 +4,7 @@
 
 | Informasi | Keterangan |
 | --- | --- |
-| **Hari** | *\[Rabu\]* |
+| **Hari** | *\[Jumat\]* |
 | **Tanggal** | *\[02/10/2026\]* |
 | **Kelas** | *\[K02\]* |
 | **Nomor Kelompok** | *\[G06\]*  |
