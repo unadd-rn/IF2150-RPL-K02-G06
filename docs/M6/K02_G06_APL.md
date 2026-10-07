@@ -35,8 +35,9 @@ Style yang digunakan yaitu client-server, yang menentukan bagaimana sistem dijal
 
 Peran komponen yang pertama View dari sisi client yang menampilkan data kepada pengguna dan menerima aksi pengguna. Kemudian ada Controller dari sisi server yang menerima permintaan dari View dan mengakses data di Model agar dapat diproses dan dikembalikan hasilnya ke View. Lalu, ada Model yang berisi aturan cara kerja dan data untuk diproses. Kemudian ada tambahan Database untuk menyimpan seluruh data yang ada.
 
-<img width="522" height="482" alt="Untitled Diagram drawio (1)" src="https://github.com/user-attachments/assets/c05b7e88-bbfc-4aca-8004-37839e45328c" />
-*Gambar 1. Arsitektur MVC*
+<p align="center">
+  <img width="522" height="482" alt="Untitled Diagram drawio (1)" src="https://github.com/user-attachments/assets/c05b7e88-bbfc-4aca-8004-37839e45328c" />
+</p>
 
 ### 1.2 Alasan Pemilihan
 Alasan pemilihan style/pattern tersebut yaitu:
