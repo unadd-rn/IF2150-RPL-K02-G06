@@ -65,24 +65,15 @@ Setiap komponen memiliki tanggung jawab tertentu dalam mendukung fungsionalitas 
 
 Tabel 2.1. Identifikasi Komponen/Modul/Subsistem
 
-| Nama Komponen/Modul/Subsistem | Jenis                 | Penjelasan                                                                                                           |
-| :---------------------------- | :-------------------- | :------------------------------------------------------------------------------------------------------------------- |
-| *KatalogView*                 | *View*                | *Menampilkan daftar produk dan meneruskan aksi pelanggan (misalnya "Tambah ke Keranjang") ke KatalogController.*     |
-| *KeranjangView*               | *View*                | *Menampilkan isi keranjang pelanggan beserta tombol checkout.*                                                       |
-| *CheckoutView*                | *View*                | *Menampilkan ringkasan pesanan dan pilihan metode pembayaran kepada pelanggan.*                                      |
-| *RiwayatPesananView*          | *View*                | *Menampilkan daftar pesanan yang pernah dibuat pelanggan beserta statusnya.*                                         |
-| *KatalogController*           | *Controller*          | *Memproses permintaan daftar produk dan penambahan produk ke keranjang.*                                             |
-| *KeranjangController*         | *Controller*          | *Memproses perubahan isi keranjang dan membuat pesanan baru saat checkout.*                                          |
-| *PembayaranController*        | *Controller*          | *Memproses pemilihan metode pembayaran dan meneruskan permintaan otorisasi ke PaymentGatewayAdapter.*                |
-| *PesananController*           | *Controller*          | *Memproses permintaan riwayat pesanan milik pelanggan.*                                                              |
-| *Produk*                      | *Model*               | *Merepresentasikan data produk beserta stoknya serta metode untuk mengakses dan mengubahnya.*                        |
-| *Keranjang*                   | *Model*               | *Merepresentasikan item yang dipilih pelanggan sebelum checkout serta metode untuk mengakses dan mengubahnya.*       |
-| *Pesanan*                     | *Model*               | *Merepresentasikan data pesanan beserta status pembayarannya serta metode untuk mengakses dan mengubahnya.*          |
-| *Pelanggan*                   | *Model*               | *Merepresentasikan data akun pelanggan serta metode untuk mengakses dan mengubahnya.*                                |
-| *Validasi*                    | *Pendukung*           | *Memvalidasi input pelanggan sebelum diproses oleh controller.*                                                      |
-| *PaymentGatewayAdapter*       | *Integrasi Eksternal* | *Mengirim permintaan otorisasi ke payment gateway (dummy) dan meneruskan status pembayaran ke PembayaranController.* |
-| *Database*                    | *Penyimpanan Data*    | *Menyimpan seluruh data model secara persisten, baik lokal (misalnya SQLite) maupun terpusat (misalnya Supabase).*   |
-| *...*                         | *...*                 | *...*                                                                                                                |
+| Nama Komponen/Modul/Subsistem | Jenis                 | Penjelasan |
+| :---------------------------- | :-------------------- | :--------- |
+| *AuthController*              | *Controller*          | *Memproses permintaan login Penjual dan Pembeli (UC07): meneruskan kredensial ke Validasi, mencocokkan password terenkripsi SHA-256 dengan data Pengguna, lalu memerintahkan RewardLogin menambah poin jika ini login pertama pengguna pada hari tersebut. Hasilnya dikembalikan ke View sesuai peran pengguna.* |
+| *KatalogController*           | *Controller*          | *Memproses permintaan Pembeli untuk melihat listing (UC02), melihat detail satu listing (UC03), serta mencari dengan kata kunci dan menyaring berdasarkan rentang harga (UC04). Listing yang stoknya habis atau sudah kedaluwarsa tidak dikirim ke View.* |
+| *ListingController*           | *Controller*          | *Memproses permintaan Penjual untuk menambahkan (UC01), mengedit (UC06), dan menghapus (UC09) listing makanan surplus. Input diteruskan ke Validasi sebelum ListingMakanan disimpan, diubah, atau dihapus dari database.* |
+| *PembayaranController*        | *Controller*          | *Memproses checkout dan pembayaran Pembeli (UC05): membuat Transaksi, menghitung total harga, meminta kode QRIS dummy melalui PaymentGatewayAdapter, lalu memperbarui status Transaksi dan mengurangi stok ListingMakanan setelah pembayaran dikonfirmasi. Jika pembeli keluar sebelum membayar, transaksi dibatalkan. Seluruh proses dijalankan dalam satu transaksi database agar memenuhi prinsip ACID (KNF01).* |
+| *RewardController*            | *Controller*          | *Memproses permintaan Pembeli untuk melihat progres poin dan mengklaim reward login (UC08). RewardController memeriksa kecukupan poin melalui RewardLogin, mengurangi poin yang terpakai, dan mengembalikan status klaim ke View.* |
+| *Validasi*                    | *Pendukung*           | *Memvalidasi input sebelum diproses controller. Untuk listing (dipakai ListingController), dicek kelengkapan field wajib (nama, foto, harga), stok dan harga tidak bernilai negatif, serta foto berformat PNG/JPG dengan ukuran maksimal 10 MB. Untuk login (dipakai AuthController), dicek format email dan password yang tidak kosong. Jika input tidak valid, pesan error dikembalikan ke controller.* |
+| *PaymentGatewayAdapter*       | *Integrasi Eksternal* | *Mengirim permintaan pembayaran dari PembayaranController ke Payment Gateway QRIS dummy, menerima kode QRIS untuk ditampilkan, lalu meneruskan status konfirmasi pembayaran (berhasil atau batal) kembali ke PembayaranController.* |
 
 Ketentuan pengisian Tabel 2.1:
 1. Kolom **Jenis** mengikuti pengelompokan pada *style/pattern* di BAB 1. Untuk MVC, jenisnya adalah *Model*, *View*, dan *Controller*. Jenis lain boleh ditambahkan, misalnya *Pendukung* untuk komponen bantu yang dipakai bersama, atau *Integrasi Eksternal* untuk penghubung ke sistem di luar P/L yang disebutkan pada subbab 2.2 dokumen SKPL. Kolom ini juga boleh diisi dengan *Subsistem*, *Modul*, atau *Komponen* apabila komponen dikelompokkan berdasarkan fungsinya. Tuliskan subsistem terlebih dahulu, lalu komponen penyusunnya di baris-baris berikutnya.
