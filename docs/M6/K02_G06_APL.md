@@ -71,6 +71,8 @@ Tabel 2.1. Identifikasi Komponen/Modul/Subsistem
 | *Validasi*                    | *Pendukung*           | *Memvalidasi input sebelum diproses controller. Untuk listing (dipakai ListingController), dicek kelengkapan field wajib (nama, foto, harga), stok dan harga tidak bernilai negatif, serta foto berformat PNG/JPG dengan ukuran maksimal 10 MB. Untuk login (dipakai AuthController), dicek format email dan password yang tidak kosong. Jika input tidak valid, pesan error dikembalikan ke controller.* |
 | *PaymentGatewayAdapter*       | *Integrasi Eksternal* | *Mengirim permintaan pembayaran dari PembayaranController ke Payment Gateway QRIS dummy, menerima kode QRIS untuk ditampilkan, lalu meneruskan status konfirmasi pembayaran (berhasil atau batal) kembali ke PembayaranController.* |
 
+---
+
 # BAB 3: Model Arsitektur Perangkat Lunak
 
 *Architectural View* adalah bagaimana cara kita melihat/mendeskripsikan arsitektur sebuah sistem dari sudut pandang tertentu. Dalam perancangan arsitektur aplikasi, dibutuhkan *Architectural View* yang dapat mempermudah pemahaman dari proses aplikasi yang akan dikembangkan. Tujuan dari *Architectural View* adalah menjadi bahan komunikasi, pemisahan masalah, mempermudah analisis, dan pemandu saat eksekusi pengembangan sistem tersebut.
