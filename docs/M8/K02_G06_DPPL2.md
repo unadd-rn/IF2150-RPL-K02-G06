@@ -31,7 +31,7 @@ Dipersiapkan oleh:
 
 | Revisi | Deskripsi |
 | :--- | :--- |
-| *A* | *Deskripsikan perubahan yang dilakukan dari dokumen sebelumnya pada dokumen ini. Jika tidak terdapat perubahan, harap kosongkan tabel.* |
+| *A* | *Nama operasi hapusListing di M7 subbab 3.9.3 sequence diagram diubah menjadi hapusMakanan* |
 | *B* |  |
 | *C* |  |
 | ... |  |
@@ -320,6 +320,58 @@ Tabel 5.1.1. Query Operasi [Nama Operasi]
 ## 5.2 Kelas [Nama Kelas Berikutnya]
 
 *[Ulangi pola 5.1: nama dan ID kelas, tabel operasi, tabel atribut, serta subbab algoritma/query untuk operasi penting jika diperlukan.]*
+
+
+BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+## 5.7 Kelas ListingView
+
+**Nama Kelas:** *ListingView*  
+**ID Kelas:** *C07*
+
+Tabel 5.7.1. Operasi Kelas ListingView
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| *[Signature operasi, termasuk parameter dan tipe kembalian]* | *[Visibility]* | *[Tanggung jawab operasi]* |
+| *tammpilkanMenuListing(id: number) : * | *public* | *Menampilkan listing seluruh makanan tersedia di FWS* |
+| *tampilkanKonfirmasiHapus(idPenjual: number, namaMakanan: string)* | *public* | *Menampilkan menu konfirmasi hapus untuk Penjual di listing Penjual* |
+| *hapusMakanan(idPenjual: number, namaMakanan: string)* | *public* | *Menghapus makanan listing Penjual* |
+
+Tabel 5.7.2. Atribut Kelas ListingView
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| *[Nama atribut]* | *[Visibility]* | *[Tipe sesuai bahasa pemrograman yang digunakan]* |
+| *idPembeli* | *public* | *number* |
+| *idPenjual* | *public* | *number* |
+| *namaMakanan* | *public* | *string* |
+
+### 5.1.1 Algoritma/Query
+
+Bagian ini diisi untuk kerangka algoritma proses yang dianggap cukup penting. Algoritma dapat dituliskan sebagai *pseudocode*. Implementasi *skeleton code* juga dapat digunakan untuk kelas yang sudah terdefinisi pada bahasa pemrograman tertentu.
+
+**Nama Kelas:** *[Nama kelas]*  
+**Nama Operasi:** *[Signature operasi]*  
+**ID Algoritma:** *[Algo-001]*
+
+```text
+[Tuliskan pseudocode algoritma operasi di sini.]
+```
+
+Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
+
+Tabel 5.1.1. Query Operasi [Nama Operasi]
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *[Q-001]* | *[Tuliskan query]* | *[Fungsi query]* |
+| *...* | *...* | *...* |
+
+
+### 5.1.2 Algoritma/Query
+
+*[Ulangi pola 5.1.1 untuk operasi penting berikutnya pada kelas yang sama, jika ada.]*
 
 <br>
 
