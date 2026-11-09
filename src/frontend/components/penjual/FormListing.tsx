@@ -24,7 +24,7 @@ interface FormListingProps {
         initialData?.batas_kedaluwarsa ? initialData.batas_kedaluwarsa.slice(0, 16) : ""
     );
     
-    const fotoPath = initialData?.foto || null;
+    const [fotoPath, setFotoPath] = useState<string | null>(initialData?.foto ?? null);
     const [fotoPreview, setFotoPreview] = useState<string | null>(urlFoto(initialData?.foto));
     const [fileFoto, setFileFoto] = useState<File | null>(null);
 
@@ -45,23 +45,14 @@ interface FormListingProps {
         return () => window.removeEventListener("beforeunload", handleBeforeUnload);
     }, [isDirty]);
 
-    useEffect(() => {
-        return () => {
-            if (fotoPreview?.startsWith("blob:")) URL.revokeObjectURL(fotoPreview);
-        };
-    }, [fotoPreview]);
-
     // Validasi Input (Kelas Validasi)
     const validasiListing = (): string[] => {
         const errs: string[] = [];
         if (!namaMakanan.trim()) errs.push("Nama makanan wajib diisi.");
-        if (!deskripsi.trim()) errs.push("Deskripsi wajib diisi.");
-        if (deskripsi.length > 3000) errs.push("Deskripsi maksimal 3000 karakter.");
         if (!porsi.trim()) errs.push("Informasi porsi wajib diisi.");
         if (!kondisi.trim()) errs.push("Kondisi makanan wajib diisi.");
         if (harga === "" || Number(harga) < 0) errs.push("Harga harus bernilai non-negatif.");
         if (stok === "" || Number(stok) < 0) errs.push("Stok harus bernilai non-negatif.");
-        if (!fotoPath && !fileFoto) errs.push("Foto makanan wajib diunggah.");
         if (!batasKedaluwarsa) {
         errs.push("Batas kedaluwarsa wajib diisi.");
         } else {
@@ -109,15 +100,12 @@ interface FormListingProps {
         if (fileFoto) {
             finalFotoPath = await uploadFotoListing(fileFoto);
         }
-        if (!finalFotoPath) {
-            throw new Error("Foto makanan wajib diunggah.");
-        }
 
         const payload: DataListingPayload = {
-            nama_makanan: namaMakanan.trim(),
-            deskripsi: deskripsi.trim(),
-            porsi: porsi.trim(),
-            kondisi: kondisi.trim(),
+            nama_makanan: namaMakanan,
+            deskripsi: deskripsi || null,
+            porsi,
+            kondisi,
             harga: Number(harga),
             stok: Number(stok),
             batas_kedaluwarsa: new Date(batasKedaluwarsa).toISOString(),
@@ -176,17 +164,13 @@ interface FormListingProps {
 
             {/* Deskripsi */}
             <div>
-            <label className="block text-sm font-medium text-gray-700">
-                Deskripsi * <span className="text-gray-500">({deskripsi.length}/3000)</span>
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Deskripsi</label>
             <textarea
                 value={deskripsi}
                 onChange={(e) => { setDeskripsi(e.target.value); setIsDirty(true); }}
                 rows={3}
-                maxLength={3000}
                 className="mt-1 w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                 placeholder="Deskripsi kondisi makanan atau detail porsi..."
-                required
             />
             </div>
 
@@ -259,11 +243,10 @@ interface FormListingProps {
 
             {/* Upload Foto */}
             <div>
-            <label className="block text-sm font-medium text-gray-700">Foto Listing * (PNG/JPG, Maks 10MB)</label>
+            <label className="block text-sm font-medium text-gray-700">Foto Listing (PNG/JPG, Maks 10MB)</label>
             <input
                 type="file"
                 accept="image/png, image/jpeg, image/jpg"
-                required={!fotoPath && !fileFoto}
                 onChange={handleFotoChange}
                 className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:rounded-md file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100"
             />

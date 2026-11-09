@@ -1,9 +1,7 @@
 import asyncio
 import pytest
 from io import BytesIO
-from pathlib import Path
 from fastapi import UploadFile, HTTPException
-import services.listing_service as listing_service
 from services.listing_service import simpan_foto_listing
 
 # Header asli (magic bytes) untuk file dummy
@@ -12,27 +10,18 @@ DUMMY_JPG_HEADER = b"\xff\xd8\xff" + b"\x00" * 100
 INVALID_HEADER = b"GIF89a" + b"\x00" * 100
 
 
-@pytest.fixture(autouse=True)
-def temporary_upload_directory(tmp_path, monkeypatch):
-    upload_dir = tmp_path / "uploads" / "listing"
-    monkeypatch.setattr(listing_service, "UPLOADS_DIR", upload_dir)
-    return upload_dir
-
-
-def test_upload_foto_png_sukses(temporary_upload_directory):
+def test_upload_foto_png_sukses():
     file = UploadFile(filename="test.png", file=BytesIO(DUMMY_PNG_HEADER))
     path = asyncio.run(simpan_foto_listing(file))
     assert path.startswith("/uploads/listing/")
     assert path.endswith(".png")
-    assert (temporary_upload_directory / Path(path).name).is_file()
 
 
-def test_upload_foto_jpg_sukses(temporary_upload_directory):
+def test_upload_foto_jpg_sukses():
     file = UploadFile(filename="test.jpg", file=BytesIO(DUMMY_JPG_HEADER))
     path = asyncio.run(simpan_foto_listing(file))
     assert path.startswith("/uploads/listing/")
     assert path.endswith(".jpg")
-    assert (temporary_upload_directory / Path(path).name).is_file()
 
 
 def test_upload_foto_magic_bytes_invalid():

@@ -1,6 +1,7 @@
 import re
 from typing import Any, Dict, List
 from datetime import datetime
+from typing import List, Dict, Any
 
 from .schemas.listing_schema import DataListing
 
@@ -29,18 +30,12 @@ class Validasi:
         # Validasi Field Wajib & String Kosong
         for field, label in [
             ("nama_makanan", "Nama makanan"),
-            ("deskripsi", "Deskripsi"),
             ("porsi", "Porsi"),
             ("kondisi", "Kondisi makanan"),
-            ("foto", "Foto makanan"),
         ]:
             val = payload.get(field)
             if not val or not str(val).strip():
                 daftar_error.append(f"{label} wajib diisi")
-
-        deskripsi = payload.get("deskripsi")
-        if deskripsi and len(str(deskripsi)) > 3000:
-            daftar_error.append("Deskripsi maksimal 3000 karakter")
 
         # Validasi Harga
         harga = payload.get("harga")
@@ -68,9 +63,7 @@ class Validasi:
                     daftar_error.append("Format batas kedaluwarsa tidak valid")
                     batas_kedaluwarsa = None
 
-            if isinstance(batas_kedaluwarsa, datetime):
-                waktu_sekarang = datetime.now(batas_kedaluwarsa.tzinfo)
-                if batas_kedaluwarsa <= waktu_sekarang:
-                    daftar_error.append("Batas kedaluwarsa harus lebih dari waktu sekarang")
+            if isinstance(batas_kedaluwarsa, datetime) and batas_kedaluwarsa <= datetime.now():
+                daftar_error.append("Batas kedaluwarsa harus lebih dari waktu sekarang")
 
         return daftar_error

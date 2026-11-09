@@ -18,13 +18,13 @@ export default function PageEditListing({ params }: { params: Promise<{ id: stri
         .then((data: ListingKatalog) => {
             setInitialData({
             nama_makanan: data.nama_makanan,
-            deskripsi: data.deskripsi ?? "",
+            deskripsi: data.deskripsi,
             porsi: data.porsi,
             kondisi: data.kondisi,
             harga: data.harga,
             stok: data.stok,
             batas_kedaluwarsa: data.batas_kedaluwarsa,
-            foto: data.foto ?? "",
+            foto: data.foto,
             });
         })
         .catch((err) => {

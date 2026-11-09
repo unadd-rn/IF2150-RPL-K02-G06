@@ -1,216 +1,135 @@
-import sqlite3
-from dataclasses import asdict
-from datetime import datetime
+import uuid
+import shutil
 from pathlib import Path
-from typing import Iterator
+from typing import Dict, Any, List
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, status
 
-from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
-
-from ..models import ListingMakanan
-from ..routers.auth import require_roles
 from ..schemas.listing_schema import DataListing
-from ..services.listing_service import UPLOADS_DIR, simpan_foto_listing
-from ..validation import Validasi
 
-router = APIRouter(prefix="/api/listing", tags=["Listing Penjual"])
+router = APIRouter(
+    prefix="/api/listing",
+    tags=["Listing Penjual"]
+)
 
-
-def get_conn() -> Iterator[sqlite3.Connection]:
-    from ..main import get_db_connection
-
-    conn = get_db_connection()
-    try:
-        yield conn
-    finally:
-        conn.close()
+# Menentukan lokasi direktori uploads/listing relatif dari folder backend
+BASE_DIR = Path(__file__).resolve().parent.parent
+UPLOADS_DIR = BASE_DIR / "uploads" / "listing"
+UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
 
 
-def _listing_from_row(row: sqlite3.Row) -> ListingMakanan:
-    data = dict(row)
-    data["aktif"] = bool(data["aktif"])
-    return ListingMakanan(**data)
+# Mock Dependency Auth Sementara (Menunggu P1)
+def get_current_penjual():
+    return {
+        "idPengguna": 1,
+        "nama": "Penjual Dummy",
+        "email": "penjual@example.com",
+        "peran": "penjual"
+    }
 
 
-def _listing_response(listing: ListingMakanan) -> dict:
-    result = asdict(listing)
-    batas_kedaluwarsa = datetime.fromisoformat(listing.batas_kedaluwarsa)
-    waktu_sekarang = datetime.now(batas_kedaluwarsa.tzinfo)
-    result["tersedia"] = listing.is_tersedia(waktu_sekarang)
-    return result
+# Storage sementara di memori server (sebelum full SQLite DB)
+DB_LISTINGS: List[Dict[str, Any]] = [
+    {
+        "id_listing": 1,
+        "id_penjual": 1,
+        "nama_makanan": "Nasi Goreng Dummy",
+        "deskripsi": "Masih hangat dan layak makan",
+        "porsi": "1 Porsi",
+        "kondisi": "Baik",
+        "harga": 15000,
+        "stok": 5,
+        "batas_kedaluwarsa": "2026-12-31T23:59:59",
+        "foto": None,
+        "aktif": True,
+    }
+]
 
 
-def _validasi(data: DataListing) -> None:
-    errors = Validasi.validasiListing(data)
-    if errors:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=", ".join(errors))
-
-
-def _validasi_foto(foto: str) -> None:
-    prefix = "/uploads/listing/"
-    filename = foto[len(prefix):] if foto.startswith(prefix) else ""
-    if not filename or Path(filename).name != filename or not (UPLOADS_DIR / filename).is_file():
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Foto harus diunggah melalui endpoint upload listing",
-        )
-
-
+# PENTING: "/penjual" harus didefinisikan SEBELUM "/{id_listing}"
 @router.get("/penjual")
-def get_daftar_listing_penjual(
-    current_user: dict = Depends(require_roles(["PENJUAL"])),
-    conn: sqlite3.Connection = Depends(get_conn),
-):
-    rows = conn.execute(
-        """
-        SELECT id_listing, id_penjual, nama_makanan, porsi, kondisi, harga, stok,
-               batas_kedaluwarsa, deskripsi, foto, aktif
-        FROM listing_makanan
-        WHERE id_penjual = ? AND aktif = 1
-        ORDER BY id_listing DESC
-        """,
-        (current_user["id_pengguna"],),
-    ).fetchall()
-    return [_listing_response(_listing_from_row(row)) for row in rows]
+def get_daftar_listing_penjual(current_user: dict = Depends(get_current_penjual)):
+    """UC01 / UC06 / UC09: Ambil semua listing milik penjual aktif yang masih aktif"""
+    user_id = current_user["idPengguna"]
+    # Hanya kembalikan listing milik penjual ini yang belum di-soft delete (aktif == True)
+    return [item for item in DB_LISTINGS if item["id_penjual"] == user_id and item.get("aktif", True)]
 
 
 @router.get("/{id_listing}")
-def get_detail_listing(
-    id_listing: int,
-    current_user: dict = Depends(require_roles(["PENJUAL"])),
-    conn: sqlite3.Connection = Depends(get_conn),
-):
-    row = conn.execute(
-        """
-        SELECT id_listing, id_penjual, nama_makanan, porsi, kondisi, harga, stok,
-               batas_kedaluwarsa, deskripsi, foto, aktif
-        FROM listing_makanan
-        WHERE id_listing = ? AND id_penjual = ? AND aktif = 1
-        """,
-        (id_listing, current_user["id_pengguna"]),
-    ).fetchone()
-    if row is None:
-        raise HTTPException(status_code=404, detail="Listing tidak ditemukan")
-    return _listing_response(_listing_from_row(row))
+def get_detail_listing(id_listing: int, current_user: dict = Depends(get_current_penjual)):
+    """UC06: Ambil detail satu listing untuk halaman edit"""
+    for item in DB_LISTINGS:
+        if item["id_listing"] == id_listing:
+            return item
+    raise HTTPException(status_code=404, detail="Listing tidak ditemukan")
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
-def tambah_listing(
-    data: DataListing,
-    current_user: dict = Depends(require_roles(["PENJUAL"])),
-    conn: sqlite3.Connection = Depends(get_conn),
-):
-    _validasi(data)
-    _validasi_foto(data.foto)
-    values = data.model_dump(mode="json")
-    batas_kedaluwarsa = data.batas_kedaluwarsa
-    if batas_kedaluwarsa.tzinfo is not None:
-        batas_kedaluwarsa = batas_kedaluwarsa.astimezone().replace(tzinfo=None)
-    values["batas_kedaluwarsa"] = batas_kedaluwarsa.isoformat(timespec="seconds")
-
-    cursor = conn.execute(
-        """
-        INSERT INTO listing_makanan
-            (id_penjual, nama_makanan, deskripsi, porsi, kondisi, foto, harga, stok,
-             batas_kedaluwarsa, aktif)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
-        """,
-        (
-            current_user["id_pengguna"],
-            values["nama_makanan"],
-            values["deskripsi"],
-            values["porsi"],
-            values["kondisi"],
-            values["foto"],
-            values["harga"],
-            values["stok"],
-            values["batas_kedaluwarsa"],
-        ),
-    )
-    conn.commit()
-    row = conn.execute(
-        """
-        SELECT id_listing, id_penjual, nama_makanan, porsi, kondisi, harga, stok,
-               batas_kedaluwarsa, deskripsi, foto, aktif
-        FROM listing_makanan WHERE id_listing = ?
-        """,
-        (cursor.lastrowid,),
-    ).fetchone()
-    return _listing_response(_listing_from_row(row))
+def tambah_listing(data: DataListing, current_user: dict = Depends(get_current_penjual)):
+    """UC01: Tambah listing baru dan simpan ke DB"""
+    new_id = len(DB_LISTINGS) + 1
+    new_item = {
+        **data.model_dump(mode="json"),
+        "id_listing": new_id,
+        "id_penjual": current_user["idPengguna"],
+        "aktif": True
+    }
+    DB_LISTINGS.append(new_item)
+    return new_item
 
 
 @router.put("/{id_listing}")
 def ubah_listing(
     id_listing: int,
     data: DataListing,
-    current_user: dict = Depends(require_roles(["PENJUAL"])),
-    conn: sqlite3.Connection = Depends(get_conn),
+    current_user: dict = Depends(get_current_penjual),
 ):
-    _validasi(data)
-    _validasi_foto(data.foto)
-    batas_kedaluwarsa = data.batas_kedaluwarsa
-    if batas_kedaluwarsa.tzinfo is not None:
-        batas_kedaluwarsa = batas_kedaluwarsa.astimezone().replace(tzinfo=None)
-
-    cursor = conn.execute(
-        """
-        UPDATE listing_makanan
-        SET nama_makanan = ?, deskripsi = ?, porsi = ?, kondisi = ?, foto = ?,
-            harga = ?, stok = ?, batas_kedaluwarsa = ?
-        WHERE id_listing = ? AND id_penjual = ? AND aktif = 1
-        """,
-        (
-            data.nama_makanan,
-            data.deskripsi,
-            data.porsi,
-            data.kondisi,
-            data.foto,
-            data.harga,
-            data.stok,
-            batas_kedaluwarsa.isoformat(timespec="seconds"),
-            id_listing,
-            current_user["id_pengguna"],
-        ),
-    )
-    if cursor.rowcount == 0:
-        raise HTTPException(status_code=404, detail="Listing tidak ditemukan")
-    conn.commit()
-    row = conn.execute(
-        """
-        SELECT id_listing, id_penjual, nama_makanan, porsi, kondisi, harga, stok,
-               batas_kedaluwarsa, deskripsi, foto, aktif
-        FROM listing_makanan WHERE id_listing = ?
-        """,
-        (id_listing,),
-    ).fetchone()
-    return _listing_response(_listing_from_row(row))
+    """UC06: Ubah listing yang sudah ada"""
+    for index, item in enumerate(DB_LISTINGS):
+        if item["id_listing"] == id_listing:
+            updated_item = {
+                **item,
+                **data.model_dump(mode="json"),
+                "id_listing": id_listing,
+                "id_penjual": current_user["idPengguna"]
+            }
+            DB_LISTINGS[index] = updated_item
+            return updated_item
+            
+    raise HTTPException(status_code=404, detail="Listing tidak ditemukan")
 
 
 @router.delete("/{id_listing}")
-def hapus_listing(
-    id_listing: int,
-    current_user: dict = Depends(require_roles(["PENJUAL"])),
-    conn: sqlite3.Connection = Depends(get_conn),
-):
-    cursor = conn.execute(
-        """
-        UPDATE listing_makanan SET aktif = 0
-        WHERE id_listing = ? AND id_penjual = ? AND aktif = 1
-        """,
-        (id_listing, current_user["id_pengguna"]),
-    )
-    if cursor.rowcount == 0:
-        raise HTTPException(status_code=404, detail="Listing tidak ditemukan")
-    conn.commit()
-    return {"message": "Listing berhasil dinonaktifkan", "id_listing": id_listing}
+def hapus_listing(id_listing: int, current_user: dict = Depends(get_current_penjual)):
+    """UC09: Soft delete listing"""
+    for item in DB_LISTINGS:
+        if item["id_listing"] == id_listing:
+            item["aktif"] = False  # Soft delete
+            return {"message": "Listing berhasil dinonaktifkan", "id_listing": id_listing}
+            
+    raise HTTPException(status_code=404, detail="Listing tidak ditemukan")
 
 
 @router.post("/upload-foto")
-async def upload_foto(
-    file: UploadFile = File(...),
-    _: dict = Depends(require_roles(["PENJUAL"])),
-):
+async def upload_foto(file: UploadFile = File(...)):
+    """UC01 / UC06: Upload foto listing makanan (Maks 10MB, JPG/PNG)"""
+    if file.content_type not in ["image/jpeg", "image/png", "image/jpg"]:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Format file harus berupa PNG atau JPG"
+        )
+
+    extension = file.filename.split(".")[-1] if file.filename and "." in file.filename else "jpg"
+    unique_filename = f"{uuid.uuid4().hex}.{extension}"
+    file_path = UPLOADS_DIR / unique_filename
+
     try:
-        foto = await simpan_foto_listing(file)
-    finally:
-        await file.close()
-    return {"foto": foto}
+        with file_path.open("wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Gagal menyimpan foto di server"
+        )
+
+    # Leading slash agar cocok dengan http://localhost:8000${foto} di frontend
+    return {"foto": f"/uploads/listing/{unique_filename}"}
