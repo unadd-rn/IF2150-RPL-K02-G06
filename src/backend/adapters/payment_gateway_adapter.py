@@ -2,7 +2,6 @@ from .metode_pembayaran import MetodePembayaran
 from ..errors import PembayaranError
 from io import BytesIO
 import base64
-import os
 import qrcode
 
 
@@ -15,9 +14,9 @@ class PaymentGatewayAdapter(MetodePembayaran):
             raise PembayaranError("Gagal membuat tagihan pembayaran", 502)
         if not getattr(transaksi, "token_bayar", None):
             raise PembayaranError("Token pembayaran tidak tersedia", 500)
-        web_url = os.getenv("SAVEBITE_PUBLIC_WEB_URL", "http://localhost:3000").rstrip("/")
-        url_scan = f"{web_url}/pembayaran/scan/{transaksi.token_bayar}"
-        image = qrcode.make(url_scan)
+        # This QR is a visual demo only. It must never encode a URL that can
+        # confirm payment when scanned; confirmation is an explicit UI action.
+        image = qrcode.make("SAVEBITE-DEMO-PAYMENT")
         buffer = BytesIO()
         image.save(buffer, format="PNG")
         encoded = base64.b64encode(buffer.getvalue()).decode("ascii")

@@ -22,10 +22,10 @@ export default function KartuPesananPenjual({
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-xs font-semibold text-[#60756b]">
-            Pesanan #{pesanan.id_transaksi} · {formatWaktu(pesanan.tanggal)}
+            Order #{pesanan.id_transaksi} · {formatWaktu(pesanan.tanggal)}
           </p>
           <p className="mt-1 text-xs font-semibold uppercase tracking-[0.08em] text-[#60756b]">
-            Kode pengambilan: {pesanan.kode_pengambilan ?? "-"}
+            Pickup code: {pesanan.kode_pengambilan ?? "-"}
           </p>
         </div>
 
@@ -36,7 +36,7 @@ export default function KartuPesananPenjual({
               : "bg-green-100 text-green-700"
           }`}
         >
-          {sudahDiambil ? "Selesai" : "Siap Diambil"}
+          {sudahDiambil ? "Complete" : "Ready for Pickup"}
         </span>
       </div>
 
@@ -51,7 +51,7 @@ export default function KartuPesananPenjual({
             <div className="min-w-0 flex-1">
               <p className="truncate font-extrabold text-[#0b8ea8]">{item.nama_makanan}</p>
               <p className="text-xs text-[#58635b]">
-                {item.porsi} · {item.jumlah} porsi
+                {item.porsi} · {item.jumlah} portions
               </p>
             </div>
             <p className="shrink-0 text-sm font-bold text-[#1a1a1a]">
@@ -68,7 +68,7 @@ export default function KartuPesananPenjual({
 
         {sudahDiambil ? (
           <p className="text-xs text-[#58635b]">
-            Diambil {formatWaktu(pesanan.waktu_diambil ?? "")}
+            Picked up {formatWaktu(pesanan.waktu_diambil ?? "")}
           </p>
         ) : (
           <button
@@ -77,7 +77,7 @@ export default function KartuPesananPenjual({
             onClick={() => onTandaiDiambil(pesanan.id_transaksi)}
             className="rounded-lg bg-[#1a8ca1] px-4 py-2 text-sm font-bold text-white transition hover:bg-[#14798b] disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {isMenandai ? "Menandai..." : "Selesaikan"}
+            {isMenandai ? "Updating..." : "Mark as Picked Up"}
           </button>
         )}
       </div>

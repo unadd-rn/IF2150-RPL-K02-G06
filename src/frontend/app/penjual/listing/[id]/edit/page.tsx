@@ -29,7 +29,7 @@ export default function PageEditListing({ params }: { params: Promise<{ id: stri
             });
         })
         .catch((err) => {
-            setError(err.message || "Gagal mengambil data listing");
+            setError(err.message || "Could not load listing details");
         })
         .finally(() => {
             setLoading(false);
@@ -44,7 +44,7 @@ export default function PageEditListing({ params }: { params: Promise<{ id: stri
     if (loading) {
         return (
         <div className="flex h-64 items-center justify-center">
-            <p className="text-gray-500">Memuat data listing...</p>
+            <p className="text-gray-500">Loading listing details...</p>
         </div>
         );
     }
@@ -52,12 +52,12 @@ export default function PageEditListing({ params }: { params: Promise<{ id: stri
     if (error || !initialData) {
         return (
         <div className="mx-auto max-w-lg mt-10 rounded-md bg-red-50 p-4 text-center border border-red-200">
-            <p className="text-red-700">{error || "Data tidak ditemukan"}</p>
+            <p className="text-red-700">{error || "Listing not found"}</p>
             <button
             onClick={() => router.push("/penjual/listing")}
             className="mt-4 rounded-md bg-gray-800 px-4 py-2 text-sm text-white"
             >
-            Kembali ke Daftar Listing
+            Back to Listings
             </button>
         </div>
         );

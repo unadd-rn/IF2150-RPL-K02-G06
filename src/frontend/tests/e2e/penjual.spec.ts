@@ -1,5 +1,24 @@
 import { expect, test } from "@playwright/test";
 
+let createdListingName: string | null = null;
+
+test.afterEach(async ({ page }) => {
+  if (!createdListingName) return;
+  await page.evaluate(async (nama) => {
+    const response = await fetch("/api/listing/penjual");
+    if (!response.ok) return;
+    const listings = await response.json();
+    await Promise.all(
+      listings
+        .filter((listing: { nama_makanan: string }) => listing.nama_makanan === nama)
+        .map((listing: { id_listing: number }) =>
+          fetch(`/api/listing/${listing.id_listing}`, { method: "DELETE" }),
+        ),
+    );
+  }, createdListingName);
+  createdListingName = null;
+});
+
 test("seller can log in and open listing management", async ({ page }) => {
   await page.goto("/login");
   await page.getByLabel("Email").fill(
@@ -10,21 +29,23 @@ test("seller can log in and open listing management", async ({ page }) => {
   );
   await page.getByRole("button", { name: "Log In" }).click();
 
+  await expect(page).toHaveURL(/\/penjual$/);
+  await page.getByRole("button", { name: "Manage Listings" }).click();
   await expect(page).toHaveURL(/\/penjual\/listing$/);
   await expect(
-    page.getByRole("heading", { name: "Kelola Listing Makanan" }),
+    page.getByRole("heading", { name: "Manage Listings" }),
   ).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "+ Tambah Listing" }),
+    page.getByRole("button", { name: "+ Add Listing" }),
   ).toBeVisible();
 
   await expect(
     page.getByText("Roti Tawar Penyelamatan").or(
-      page.getByText("Belum ada listing makanan"),
+      page.getByText("No food listings yet"),
     ),
   ).toBeVisible();
 
-  await page.getByRole("button", { name: "+ Tambah Listing" }).click();
+  await page.getByRole("button", { name: "+ Add Listing" }).click();
   await expect(page).toHaveURL(/\/penjual\/listing\/tambah$/);
   await expect(
     page.getByRole("heading", { name: "Add Product" }),
@@ -38,6 +59,7 @@ test("seller can log in and open listing management", async ({ page }) => {
 
   await page.locator('input[type="file"]').setInputFiles("public/qris-dummy.png");
   const draftName = `E2E Listing Draft ${Date.now()}`;
+  createdListingName = draftName;
   await page.getByLabel("Product Name *").fill(draftName);
   await page.getByLabel("Price (Rp) *").fill("12000");
   await page.getByLabel("Stock *").fill("2");
@@ -49,16 +71,17 @@ test("seller can log in and open listing management", async ({ page }) => {
 
   await expect(page).toHaveURL(/\/penjual\/listing$/);
   await expect(page.getByRole("heading", { name: draftName })).toBeVisible();
-  await expect(page.getByText("Draf", { exact: true }).first()).toBeVisible();
+  await expect(page.getByText("Draft", { exact: true }).first()).toBeVisible();
   await page.reload();
   await expect(page.getByRole("heading", { name: draftName })).toBeVisible();
-  await expect(page.getByText("Draf", { exact: true }).first()).toBeVisible();
+  await expect(page.getByText("Draft", { exact: true }).first()).toBeVisible();
 
-  await page.getByRole("button", { name: "Edit" }).first().click();
+  const draftCard = page.locator(".group").filter({ has: page.getByRole("heading", { name: draftName }) });
+  await draftCard.getByRole("button", { name: "Edit" }).click();
   await expect(page).toHaveURL(/\/penjual\/listing\/\d+\/edit$/);
   await page.getByRole("button", { name: "Save Changes / Show" }).click();
 
   await expect(page).toHaveURL(/\/penjual\/listing$/);
   await expect(page.getByRole("heading", { name: draftName })).toBeVisible();
-  await expect(page.getByText("Tersedia", { exact: true }).first()).toBeVisible();
+  await expect(page.getByText("Available", { exact: true }).first()).toBeVisible();
 });

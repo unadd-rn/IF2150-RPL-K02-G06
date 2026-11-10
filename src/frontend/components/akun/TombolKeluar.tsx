@@ -24,7 +24,7 @@ export default function TombolKeluar() {
     } catch (error) {
       setSedangKeluar(false);
       setPesan(
-        error instanceof ApiError ? error.message : "Gagal keluar. Silakan coba lagi.",
+        error instanceof ApiError ? error.message : "Could not log out. Please try again.",
       );
     }
   }
@@ -36,9 +36,9 @@ export default function TombolKeluar() {
         onClick={keluar}
         disabled={sedangKeluar}
         className="w-full rounded-[18px] bg-[#f56068] px-4 py-3 text-base font-bold text-white shadow-sm transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
-        aria-label="Keluar dari akun"
+        aria-label="Log out of account"
       >
-        {sedangKeluar ? "Keluar…" : "Logout"}
+        {sedangKeluar ? "Logging out…" : "Log out"}
       </button>
       {pesan && (
         <p className="text-sm font-medium text-[#f15a62]" role="alert">

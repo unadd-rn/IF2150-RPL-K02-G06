@@ -33,7 +33,7 @@ export default function CartPage() {
       router.push(`/pembayaran/${trx.id_transaksi}`);
     } catch (e) {
       if (e instanceof ApiError && (e.status === 401 || e.status === 403)) setPerluLogin(true);
-      setPesan(e instanceof ApiError ? e.message : "Terjadi kesalahan");
+      setPesan(e instanceof ApiError ? e.message : "An error occurred");
       setMemproses(false);
     }
   }
@@ -49,18 +49,18 @@ export default function CartPage() {
       bodyClassName="bg-[#e6e0c8] px-4 py-5"
     >
       {!siap ? (
-        <p className="text-[#5d625b]">Memuat keranjang…</p>
+        <p className="text-[#5d625b]">Loading cart…</p>
       ) : items.length === 0 ? (
         <div className="rounded-[18px] border border-[#d7d0b4] bg-[#f7f0dc] p-8 text-center shadow-sm">
-          <p className="text-xl font-bold text-[#1b8ca3]">Keranjangmu kosong</p>
+          <p className="text-xl font-bold text-[#1b8ca3]">Your cart is empty</p>
           <p className="mt-2 text-sm text-[#5d625b]">
-            Tambahkan makanan surplus dari katalog dengan menekan tombol +.
+            Add surplus food from the catalog by pressing the + button.
           </p>
           <Link
             href="/katalog"
             className="mt-6 inline-block rounded-md bg-[#1bb0c7] px-6 py-3 font-bold text-white shadow-sm transition hover:brightness-110"
           >
-            Ke katalog
+            Browse catalog
           </Link>
         </div>
       ) : (
@@ -88,14 +88,14 @@ export default function CartPage() {
                         </h3>
                         <p className="truncate text-sm text-[#5d625b]">
                           {listing.porsi
-                            ? `${listing.porsi} · ${rupiah(listing.harga)} / porsi`
-                            : `${rupiah(listing.harga)} / porsi`}
+                            ? `${listing.porsi} · ${rupiah(listing.harga)} / portion`
+                            : `${rupiah(listing.harga)} / portion`}
                         </p>
                       </div>
                       <button
                         type="button"
                         onClick={() => hapus(listing.id_listing)}
-                        aria-label={`Hapus ${listing.nama_makanan} dari keranjang`}
+                    aria-label={`Remove ${listing.nama_makanan} from cart`}
                         className="text-lg leading-none text-[#f15d69] transition hover:brightness-110"
                       >
                         ×
@@ -110,7 +110,7 @@ export default function CartPage() {
                         <button
                           type="button"
                           onClick={() => kurangi(listing.id_listing)}
-                          aria-label={`Kurangi ${listing.nama_makanan}`}
+                          aria-label={`Decrease quantity of ${listing.nama_makanan}`}
                           className="flex h-8 w-8 items-center justify-center text-base font-bold leading-none transition hover:brightness-110"
                         >
                           −
@@ -119,7 +119,7 @@ export default function CartPage() {
                         <button
                           type="button"
                           onClick={() => jumlah >= listing.stok ? setStokPenuhUntuk(listing.nama_makanan) : tambah(listing, 1)}
-                          aria-label={`Tambah ${listing.nama_makanan}`}
+                          aria-label={`Add ${listing.nama_makanan}`}
                           className="flex h-8 w-8 items-center justify-center text-base font-bold leading-none transition hover:brightness-110"
                         >
                           +
@@ -147,7 +147,7 @@ export default function CartPage() {
                 {pesan}{" "}
                 {perluLogin && (
                   <Link href="/login" className="underline">
-                    Masuk dulu
+                    Log in first
                   </Link>
                 )}
               </p>
@@ -165,7 +165,7 @@ export default function CartPage() {
         </>
       )}
       <NotifikasiGagal
-        pesan={stokPenuhUntuk ? `Stok ${stokPenuhUntuk} yang tersedia sudah tercapai. Kurangi jumlah untuk melanjutkan.` : pesan || null}
+        pesan={stokPenuhUntuk ? `The available stock for ${stokPenuhUntuk} has been reached. Reduce the quantity to continue.` : pesan || null}
         onClose={() => { setStokPenuhUntuk(null); setPesan(""); setPerluLogin(false); }}
       />
     </AppLayout>

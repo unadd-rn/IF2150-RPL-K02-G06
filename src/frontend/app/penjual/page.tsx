@@ -20,7 +20,7 @@ export default function SellerDashboardPage() {
       setPesanan(data);
     } catch (error: unknown) {
       setPesanError(
-        error instanceof Error ? error.message : "Terjadi kesalahan sistem",
+        error instanceof Error ? error.message : "A system error occurred",
       );
     }
   }, []);
@@ -34,7 +34,7 @@ export default function SellerDashboardPage() {
       .catch((error: unknown) => {
         if (active) {
           setPesanError(
-            error instanceof Error ? error.message : "Terjadi kesalahan sistem",
+            error instanceof Error ? error.message : "A system error occurred",
           );
         }
       })
@@ -55,7 +55,7 @@ export default function SellerDashboardPage() {
       await muatPesanan();
     } catch (error: unknown) {
       setPesanError(
-        error instanceof Error ? error.message : "Gagal menandai pesanan sudah diambil",
+        error instanceof Error ? error.message : "Could not mark the order as picked up",
       );
     } finally {
       setIdSedangDitandai(null);
@@ -75,27 +75,27 @@ export default function SellerDashboardPage() {
       <div className="mx-auto max-w-3xl">
         <div className="rounded-[18px] bg-[#f7f0dc] p-5 shadow-sm">
           <p className="text-sm uppercase tracking-[0.12em] text-[#60756b]">
-            Kelola toko Anda
+            Manage Your Store
           </p>
           <h3 className="mt-2 text-2xl font-black text-[#1a8ca1]">
-            Listing makanan
+            Food Listings
           </h3>
           <p className="mt-2 text-sm text-[#60756b]">
-            Tambahkan, perbarui, dan nonaktifkan listing makanan surplus Anda.
+            Add, update, and deactivate your surplus food listings.
           </p>
           <button
             type="button"
             onClick={() => router.push("/penjual/listing")}
             className="mt-5 rounded-lg bg-[#1a8ca1] px-4 py-2 text-sm font-bold text-white hover:bg-[#14798b]"
           >
-            Kelola Listing
+            Manage Listings
           </button>
         </div>
 
         <div className="mt-6">
-          <h2 className="text-xl font-black text-[#264b4d]">Pesanan Masuk</h2>
+          <h2 className="text-xl font-black text-[#264b4d]">Incoming Orders</h2>
           <p className="mt-1 text-sm text-[#60756b]">
-            Makanan yang sudah dibayar pembeli dan siap diambil di toko Anda.
+            Items paid for by customers and ready for pickup at your store.
           </p>
         </div>
 
@@ -110,25 +110,24 @@ export default function SellerDashboardPage() {
               onClick={() => void muatPesanan()}
               className="self-start font-semibold underline sm:self-auto"
             >
-              Coba lagi
+              Try again
             </button>
           </div>
         )}
 
         {loading && !pesanError && (
           <p role="status" className="mt-6 text-center text-[#60756b]">
-            Memuat daftar pesanan...
+            Loading orders...
           </p>
         )}
 
         {!loading && !pesanError && pesanan.length === 0 && (
           <section className="mt-4 rounded-[18px] bg-[#f7f0dc] px-6 py-10 text-center shadow-sm">
             <h3 className="text-lg font-bold text-[#264b4d]">
-              Belum ada pesanan yang sudah dibayar
+              No paid orders yet
             </h3>
             <p className="mx-auto mt-2 max-w-md text-sm text-[#60756b]">
-              Pesanan pembeli akan muncul di sini setelah pembayaran mereka
-              berhasil dikonfirmasi.
+              Customer orders will appear here after payment is confirmed.
             </p>
           </section>
         )}

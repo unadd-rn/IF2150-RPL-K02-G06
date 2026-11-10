@@ -29,7 +29,7 @@ export default function RewardPage() {
       setData(await ambilProgresReward());
     } catch (e) {
       if (e instanceof ApiError && (e.status === 401 || e.status === 403)) setPerluLogin(true);
-      setError(e instanceof ApiError ? e.message : "Gagal memuat reward");
+      setError(e instanceof ApiError ? e.message : "Could not load rewards");
     } finally {
       setLoading(false);
     }
@@ -44,15 +44,15 @@ export default function RewardPage() {
     setPesan(null);
     try {
       const kupon = await klaimReward();
-      setPesan({ jenis: "ok", teks: `Kupon ${kupon.kode_kupon} berhasil diklaim!` });
+      setPesan({ jenis: "ok", teks: `Coupon ${kupon.kode_kupon} claimed successfully!` });
       await muat();
     } catch (e) {
       if (e instanceof ApiError && e.status === 400) {
-        setPesan({ jenis: "gagal", teks: "Poin tidak mencukupi untuk klaim kupon." });
+        setPesan({ jenis: "gagal", teks: "You do not have enough points to claim a coupon." });
       } else if (e instanceof ApiError && e.status >= 500) {
-        setPesan({ jenis: "gagal", teks: "Sistem gagal memproses klaim. Silakan coba lagi nanti." });
+        setPesan({ jenis: "gagal", teks: "The system could not process your claim. Please try again later." });
       } else {
-        setPesan({ jenis: "gagal", teks: e instanceof ApiError ? e.message : "Terjadi kesalahan" });
+        setPesan({ jenis: "gagal", teks: e instanceof ApiError ? e.message : "An error occurred" });
       }
     } finally {
       setMengklaim(false);
@@ -73,18 +73,18 @@ export default function RewardPage() {
       bodyClassName="bg-[#e6e0c8] px-4 py-5"
     >
       <div className="space-y-5">
-        {loading && <p className="text-center text-[#7a705c]">Memuat reward...</p>}
+        {loading && <p className="text-center text-[#7a705c]">Loading rewards...</p>}
 
         {!loading && error && (
           <div className="rounded-[18px] bg-[#f4efe3] p-4 text-center shadow-sm">
             <p className="font-medium text-red-600">{error}</p>
             {perluLogin ? (
               <Link href="/login" className="mt-2 inline-block underline">
-                Masuk dulu
+                Log in first
               </Link>
             ) : (
               <button onClick={muat} className="mt-3 rounded-full bg-[#f56369] px-5 py-2 font-bold text-white">
-                Coba lagi
+                Try again
               </button>
             )}
           </div>
@@ -101,18 +101,18 @@ export default function RewardPage() {
               </div>
 
               <h3 className="text-[1.6rem] font-black tracking-[-0.03em] text-[#f15a62]">
-                {sudahLoginHariIni ? "Sudah login hari ini ✓" : "Login setiap hari untuk poin"}
+                {sudahLoginHariIni ? "Already logged in today ✓" : "Log in every day to earn points"}
               </h3>
               <p className="mt-1 text-sm text-[#7a705c]">
-                +{data.poin_per_login} poin untuk login pertama setiap hari
-                {data.tanggal_login_terakhir && ` · Login terakhir: ${data.tanggal_login_terakhir}`}
+                +{data.poin_per_login} points for your first log in each day
+                {data.tanggal_login_terakhir && ` · Last log in: ${data.tanggal_login_terakhir}`}
               </p>
             </div>
 
             {/* Points + claim */}
             <div className="space-y-4 rounded-[18px] bg-[#f4efe3] p-4 shadow-sm">
               <div className="flex items-center justify-between text-[1.7rem] font-black text-[#1d9eb8]">
-                <span>Total Point</span>
+                <span>Total Points</span>
                 <span>{data.poin_terkumpul}</span>
               </div>
 
@@ -121,7 +121,7 @@ export default function RewardPage() {
                   <div className="h-full rounded-full bg-[#1d9eb8] transition-all" style={{ width: `${persen}%` }} />
                 </div>
                 <p className="mt-1 text-right text-sm text-[#7a705c]">
-                  {data.poin_terkumpul} / {data.poin_per_klaim} poin
+                  {data.poin_terkumpul} / {data.poin_per_klaim} points
                 </p>
               </div>
 
@@ -131,8 +131,8 @@ export default function RewardPage() {
                 className="w-full rounded-full bg-[#f56369] py-3 text-lg font-bold text-white transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {mengklaim
-                  ? "Memproses..."
-                  : `Klaim Kupon ${rupiah(data.nilai_potongan)} (${data.poin_per_klaim} poin)`}
+                  ? "Processing..."
+                  : `Claim ${rupiah(data.nilai_potongan)} Coupon (${data.poin_per_klaim} points)`}
               </button>
 
               {pesan && (
@@ -144,11 +144,11 @@ export default function RewardPage() {
 
             {/* Coupons */}
             <div className="space-y-3">
-              <h4 className="text-xl font-black text-[#1d1d1d]">Kupon Saya</h4>
+              <h4 className="text-xl font-black text-[#1d1d1d]">My Coupons</h4>
 
               {data.kupon.length === 0 && (
                 <p className="text-sm text-[#7a705c]">
-                  Belum ada kupon. Kumpulkan {data.poin_per_klaim} poin untuk klaim.
+                  No coupons yet. Collect {data.poin_per_klaim} points to claim one.
                 </p>
               )}
 
@@ -161,10 +161,10 @@ export default function RewardPage() {
                     <span className="text-[1.8rem] font-black">{rupiah(k.nilai_potongan)}</span>
                     <div className="text-right">
                       <div className="font-mono text-base font-bold">{k.kode_kupon}</div>
-                      <div className="text-sm opacity-90">Berlaku sampai: {k.berlaku_sampai}</div>
+                      <div className="text-sm opacity-90">Valid until: {k.berlaku_sampai}</div>
                       {!k.berlaku && (
                         <span className="mt-1 inline-block rounded-full bg-white/30 px-2 text-xs font-bold">
-                          {k.terpakai ? "Terpakai" : "Kedaluwarsa"}
+                          {k.terpakai ? "Used" : "Expired"}
                         </span>
                       )}
                     </div>

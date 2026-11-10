@@ -29,7 +29,7 @@ export default function AkunPenjualPage() {
       .catch((error: unknown) => {
         if (aktif) {
           setPesanError(
-            error instanceof Error ? error.message : "Terjadi kesalahan sistem",
+            error instanceof Error ? error.message : "A system error occurred",
           );
         }
       })
@@ -43,10 +43,10 @@ export default function AkunPenjualPage() {
 
   const validasiForm = (): string[] => {
     const errs: string[] = [];
-    if (!namaToko.trim()) errs.push("Nama toko wajib diisi.");
-    else if (namaToko.trim().length > 100) errs.push("Nama toko maksimal 100 karakter.");
-    if (!alamatToko.trim()) errs.push("Alamat toko wajib diisi.");
-    else if (alamatToko.trim().length > 200) errs.push("Alamat toko maksimal 200 karakter.");
+    if (!namaToko.trim()) errs.push("Store name is required.");
+    else if (namaToko.trim().length > 100) errs.push("Store name must be 100 characters or fewer.");
+    if (!alamatToko.trim()) errs.push("Store address is required.");
+    else if (alamatToko.trim().length > 200) errs.push("Store address must be 200 characters or fewer.");
     return errs;
   };
 
@@ -73,7 +73,7 @@ export default function AkunPenjualPage() {
       setPesanSukses("Profil toko berhasil diperbarui");
     } catch (error: unknown) {
       setErrors([
-        error instanceof Error ? error.message : "Gagal memperbarui profil toko",
+        error instanceof Error ? error.message : "Could not update store profile",
       ]);
     } finally {
       setIsSaving(false);
@@ -106,14 +106,14 @@ export default function AkunPenjualPage() {
               onClick={() => window.location.reload()}
               className="self-start font-semibold underline sm:self-auto"
             >
-              Coba lagi
+              Try again
             </button>
           </div>
         )}
 
         {loading && !pesanError && (
           <p role="status" className="py-12 text-center text-[#60756b]">
-            Memuat profil toko...
+            Loading store profile...
           </p>
         )}
 
@@ -121,11 +121,11 @@ export default function AkunPenjualPage() {
           <>
             {/* Info akun (read-only) */}
             <div className="mb-6 rounded-[18px] bg-[#f7f0dc] p-5 shadow-sm">
-              <h2 className="text-lg font-bold text-[#264b4d]">Informasi Akun</h2>
+              <h2 className="text-lg font-bold text-[#264b4d]">Account Information</h2>
               <dl className="mt-3 grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 text-sm">
-                <dt className="text-[#60756b]">Nama</dt>
+                <dt className="text-[#60756b]">Name</dt>
                 <dd className="font-semibold text-[#1a1a1a]">{profil.nama_akun}</dd>
-                <dt className="text-[#60756b]">Toko</dt>
+                <dt className="text-[#60756b]">Store</dt>
                 <dd className="font-semibold text-[#1a1a1a]">{profil.nama_toko}</dd>
               </dl>
             </div>
@@ -136,10 +136,10 @@ export default function AkunPenjualPage() {
               className="space-y-5 rounded-[18px] bg-[#f7f0dc] p-5 shadow-sm"
             >
               <div>
-                <h2 className="text-lg font-bold text-[#264b4d]">Profil Toko</h2>
+                <h2 className="text-lg font-bold text-[#264b4d]">Store Profile</h2>
                 <p className="mt-1 text-sm text-[#60756b]">
-                  Nama toko dan alamat ini ditampilkan di katalog pembeli dan
-                  dipakai sebagai lokasi pengambilan makanan.
+                  This store name and address appear in the customer catalog and
+                  and is used as the food pickup location.
                 </p>
               </div>
 
@@ -164,7 +164,7 @@ export default function AkunPenjualPage() {
 
               <div>
                 <label htmlFor="nama-toko" className={labelKelas}>
-                  Nama Toko *
+                  Store Name *
                 </label>
                 <input
                   id="nama-toko"
@@ -180,7 +180,7 @@ export default function AkunPenjualPage() {
 
               <div>
                 <label htmlFor="alamat-toko" className={labelKelas}>
-                  Alamat Toko (Lokasi Pengambilan) *
+                  Store Address (Pickup Location) *
                 </label>
                 <textarea
                   id="alamat-toko"
@@ -200,15 +200,15 @@ export default function AkunPenjualPage() {
                   disabled={isSaving}
                   className="rounded-xl bg-[#1a8ca1] px-5 py-3 text-sm font-bold text-white hover:bg-[#14798b] disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  {isSaving ? "Menyimpan..." : "Simpan Perubahan"}
+                  {isSaving ? "Saving..." : "Save Changes"}
                 </button>
               </div>
             </form>
 
             <div className="mt-6 rounded-[18px] bg-[#f7f0dc] p-5 shadow-sm">
-              <h2 className="text-lg font-bold text-[#264b4d]">Keluar Akun</h2>
+              <h2 className="text-lg font-bold text-[#264b4d]">Log Out</h2>
               <p className="mt-1 text-sm text-[#60756b]">
-                Sesi Anda akan diakhiri dan kembali ke halaman login.
+                Your session will end and you will return to the log in page.
               </p>
               <div className="mt-4">
                 <TombolKeluar />

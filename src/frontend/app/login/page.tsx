@@ -40,7 +40,7 @@ export default function LoginPage() {
       const data = await response.json().catch(() => null);
 
       if (!response.ok) {
-        const message = data?.detail || "Login gagal. Silakan coba lagi.";
+        const message = "Log in failed. Please check your details and try again.";
         setErrorMessage(message);
         return;
       }
@@ -53,7 +53,7 @@ export default function LoginPage() {
 
       router.push("/katalog");
     } catch {
-      setErrorMessage("Login gagal. Silakan coba lagi.");
+      setErrorMessage("Log in failed. Please try again.");
     } finally {
       setIsSubmitting(false);
     }

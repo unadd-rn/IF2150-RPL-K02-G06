@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test("buyer can confirm payment by opening the scanned QR URL", async ({ page }) => {
+test("buyer can only simulate payment with the payment button", async ({ page }) => {
   await page.goto("/login");
   await page.getByLabel("Email").fill("pembeli@test.com");
   await page.getByRole("textbox", { name: "Password" }).fill("password123");
@@ -24,15 +24,19 @@ test("buyer can confirm payment by opening the scanned QR URL", async ({ page })
 
   await page.goto(`/pembayaran/${transaksi.id_transaksi}`);
   await expect(page.getByRole("img", { name: "QRIS dummy" })).toBeVisible();
-  const urlScan = await page
-    .getByRole("link", { name: "Simulasikan scan QR di perangkat ini" })
-    .getAttribute("href");
-  expect(urlScan).toBeTruthy();
-  const perangkatPemindai = await page.context().newPage();
-  await perangkatPemindai.goto(urlScan!);
-  await expect(perangkatPemindai.getByRole("heading", { name: "Pembayaran berhasil" })).toBeVisible();
-  await expect(perangkatPemindai.getByRole("link", { name: "Kembali ke halaman utama" })).toHaveAttribute("href", "/");
-  await expect(page.getByRole("heading", { name: "Pembayaran berhasil" })).toBeVisible();
-  await expect(page.getByText("Kode pengambilan")).toBeVisible();
-  await perangkatPemindai.close();
+  await expect(page.getByText("This demo QR code does not open a link or confirm payment when scanned.")).toBeVisible();
+  const scanPage = await page.context().newPage();
+  await scanPage.goto(transaksi.url_scan);
+  await expect(scanPage.getByRole("heading", { name: "QR Scanning Is Disabled" })).toBeVisible();
+
+  const statusBeforeSimulation = await page.evaluate(async (id) => {
+    const response = await fetch(`/api/pembayaran/${id}`);
+    return (await response.json()).status;
+  }, transaksi.id_transaksi);
+  expect(statusBeforeSimulation).toBe("MENUNGGU_BAYAR");
+
+  await page.getByRole("button", { name: "Simulate Payment" }).click();
+  await expect(page.getByRole("heading", { name: "Payment successful" })).toBeVisible();
+  await expect(page.getByText("Pickup code")).toBeVisible();
+  await scanPage.close();
 });

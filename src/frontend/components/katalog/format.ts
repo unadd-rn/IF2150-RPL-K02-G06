@@ -6,5 +6,5 @@ export function formatRupiah(nilai: number): string {
 export function formatWaktu(nilai: string): string {
   const d = new Date(nilai.replace(" ", "T"));
   if (Number.isNaN(d.getTime())) return nilai;
-  return new Intl.DateTimeFormat("id-ID", { dateStyle: "medium", timeStyle: "short" }).format(d);
+  return new Intl.DateTimeFormat("en-ID", { dateStyle: "medium", timeStyle: "short" }).format(d);
 }

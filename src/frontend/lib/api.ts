@@ -20,14 +20,10 @@ async function getJson<T>(path: string): Promise<T> {
   try {
     res = await fetch(path, { credentials: "same-origin", cache: "no-store" });
   } catch {
-    throw new ApiError(0, "Tidak dapat terhubung ke server");
+    throw new ApiError(0, "Could not connect to the server");
   }
   if (!res.ok) {
-    let pesan = `Terjadi kesalahan pada server (HTTP ${res.status})`;
-    try {
-      const body = await res.json();
-      if (typeof body?.detail === "string") pesan = body.detail;
-    } catch {}
+    const pesan = `A server error occurred (HTTP ${res.status})`;
     throw new ApiError(res.status, pesan);
   }
   return res.json() as Promise<T>;
@@ -99,11 +95,7 @@ export async function uploadFotoListing(file: File): Promise<string> {
   });
 
   if (!res.ok) {
-    let pesan = "Gagal mengunggah foto makanan";
-    try {
-      const body = await res.json();
-      if (typeof body?.detail === "string") pesan = body.detail;
-    } catch {}
+    const pesan = "Could not upload the product photo";
     throw new ApiError(res.status, pesan);
   }
 
@@ -121,11 +113,7 @@ export async function tambahListing(data: DataListingPayload): Promise<ListingKa
   });
 
   if (!res.ok) {
-    let pesan = "Gagal menambah listing makanan";
-    try {
-      const body = await res.json();
-      if (typeof body?.detail === "string") pesan = body.detail;
-    } catch {}
+    const pesan = "Could not add the food listing";
     throw new ApiError(res.status, pesan);
   }
 
@@ -142,11 +130,7 @@ export async function ubahListing(idListing: number | string, data: DataListingP
   });
 
   if (!res.ok) {
-    let pesan = "Gagal memperbarui listing makanan";
-    try {
-      const body = await res.json();
-      if (typeof body?.detail === "string") pesan = body.detail;
-    } catch {}
+    const pesan = "Could not update the food listing";
     throw new ApiError(res.status, pesan);
   }
 
@@ -160,11 +144,7 @@ export async function hapusListingPenjual(idListing: number | string): Promise<v
   });
 
   if (!res.ok) {
-    let pesan = "Gagal menghapus listing";
-    try {
-      const body = await res.json();
-      if (typeof body?.detail === "string") pesan = body.detail;
-    } catch {}
+    const pesan = "Could not delete the listing";
     throw new ApiError(res.status, pesan);
   }
 }
@@ -217,14 +197,10 @@ async function postJson<T>(path: string, body?: unknown): Promise<T> {
       credentials: "same-origin",
     });
   } catch {
-    throw new ApiError(0, "Tidak dapat terhubung ke server");
+    throw new ApiError(0, "Could not connect to the server");
   }
   if (!res.ok) {
-    let pesan = `Terjadi kesalahan pada server (HTTP ${res.status})`;
-    try {
-      const b = await res.json();
-      if (typeof b?.detail === "string") pesan = b.detail;
-    } catch {}
+    const pesan = `A server error occurred (HTTP ${res.status})`;
     throw new ApiError(res.status, pesan);
   }
   return res.json() as Promise<T>;
@@ -270,11 +246,7 @@ export async function ubahProfilToko(data: {
   });
 
   if (!res.ok) {
-    let pesan = "Gagal memperbarui profil toko";
-    try {
-      const body = await res.json();
-      if (typeof body?.detail === "string") pesan = body.detail;
-    } catch {}
+    const pesan = "Could not update the store profile";
     throw new ApiError(res.status, pesan);
   }
 
@@ -316,11 +288,7 @@ export async function tandaiPesananDiambil(idTransaksi: number | string): Promis
   );
 
   if (!res.ok) {
-    let pesan = "Gagal menandai pesanan sudah diambil";
-    try {
-      const body = await res.json();
-      if (typeof body?.detail === "string") pesan = body.detail;
-    } catch {}
+    const pesan = "Could not mark the order as picked up";
     throw new ApiError(res.status, pesan);
   }
 }

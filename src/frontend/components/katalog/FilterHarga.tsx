@@ -15,14 +15,14 @@ export default function FilterHarga({
 }) {
   return (
     <fieldset className="flex gap-3 text-sm">
-      <legend className="sr-only">Rentang harga</legend>
+      <legend className="sr-only">Price range</legend>
       
       <label className={`${kelasKotak} h-[50px]`}>
         <svg viewBox="0 0 24 24" className="h-5 w-5 fill-none stroke-current stroke-[2] shrink-0" aria-hidden="true">
           <path d="M4 19h16M4 15h16M4 11h16M4 7h16" strokeLinecap="round" />
         </svg>
         <div className="flex w-full flex-col justify-center">
-          <span className="text-[10px] font-medium leading-tight text-[#5f665e]">Harga min (Rp)</span>
+          <span className="text-[10px] font-medium leading-tight text-[#5f665e]">Min price (Rp)</span>
           <input
             type="number"
             name={PARAM_HARGA_MIN}
@@ -41,7 +41,7 @@ export default function FilterHarga({
           <path d="M4 19h16M4 15h16M4 11h16M4 7h16" strokeLinecap="round" />
         </svg>
         <div className="flex w-full flex-col justify-center">
-          <span className="text-[10px] font-medium leading-tight text-[#5f665e]">Harga maks (Rp)</span>
+          <span className="text-[10px] font-medium leading-tight text-[#5f665e]">Max price (Rp)</span>
           <input
             type="number"
             name={PARAM_HARGA_MAKS}

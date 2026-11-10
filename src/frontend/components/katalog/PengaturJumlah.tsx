@@ -29,15 +29,15 @@ export default function PengaturJumlah({ listing, ukuran = "kecil" }: Props) {
       <>
       <button
         type="button"
-        onClick={() => stokHabis ? setNotifikasi("Stok makanan ini sudah habis.") : tambah(listing, 1)}
-        aria-label={`Tambah ${listing.nama_makanan} ke keranjang`}
+        onClick={() => stokHabis ? setNotifikasi("This item is out of stock.") : tambah(listing, 1)}
+        aria-label={`Add ${listing.nama_makanan} to cart`}
         className={
           besar
             ? "inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#ff4d57] px-8 font-bold text-white shadow-sm transition hover:brightness-110 disabled:opacity-40"
             : "flex h-8 w-11 items-center justify-center rounded-md bg-[#ff4d57] text-xl font-bold text-white shadow-sm transition hover:brightness-110"
         }
       >
-        {besar ? "+ Keranjang" : "+"}
+        {besar ? "+ Add to cart" : "+"}
       </button>
       <NotifikasiGagal pesan={notifikasi} onClose={() => setNotifikasi(null)} />
       </>
@@ -56,7 +56,7 @@ export default function PengaturJumlah({ listing, ukuran = "kecil" }: Props) {
       <button
         type="button"
         onClick={() => kurangi(listing.id_listing)}
-        aria-label={`Kurangi ${listing.nama_makanan} dari keranjang`}
+        aria-label={`Remove one ${listing.nama_makanan} from cart`}
         className={
           besar
             ? "flex h-9 w-9 items-center justify-center text-2xl font-bold leading-none transition hover:brightness-110"
@@ -77,8 +77,8 @@ export default function PengaturJumlah({ listing, ukuran = "kecil" }: Props) {
       </span>
       <button
         type="button"
-        onClick={() => qty >= listing.stok ? setNotifikasi(`Stok tersedia hanya ${listing.stok} porsi. Jumlah di keranjang sudah mencapai batas tersebut.`) : tambah(listing, 1)}
-        aria-label={`Tambah ${listing.nama_makanan} ke keranjang`}
+        onClick={() => qty >= listing.stok ? setNotifikasi(`Only ${listing.stok} portions are available. Your cart has reached this limit.`) : tambah(listing, 1)}
+        aria-label={`Add ${listing.nama_makanan} to cart`}
         className={
           besar
             ? "flex h-9 w-9 items-center justify-center text-2xl font-bold leading-none transition hover:brightness-110"

@@ -5,7 +5,7 @@ import DaftarListing from "@/components/katalog/DaftarListing";
 import FormPencarian from "@/components/katalog/FormPencarian";
 import PesanKatalog from "@/components/katalog/PesanKatalog";
 
-export const metadata: Metadata = { title: "Katalog Makanan Surplus" };
+export const metadata: Metadata = { title: "Surplus Food Catalog" };
 
 export default function KatalogPage() {
   return (
@@ -19,7 +19,7 @@ export default function KatalogPage() {
       bodyClassName="px-4 py-5 lg:px-6"
     >
       <div className="mx-auto w-full max-w-6xl">
-        <Suspense fallback={<PesanKatalog>Memuat katalog…</PesanKatalog>}>
+        <Suspense fallback={<PesanKatalog>Loading catalog…</PesanKatalog>}>
           <div className="space-y-5">
             <FormPencarian />
             <DaftarListing />

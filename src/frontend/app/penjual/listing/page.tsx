@@ -25,7 +25,7 @@ export default function ListingPenjualPage() {
       .catch((error: unknown) => {
         if (active) {
           setPesanError(
-            error instanceof Error ? error.message : "Terjadi kesalahan sistem",
+            error instanceof Error ? error.message : "A system error occurred",
           );
         }
       })
@@ -46,7 +46,7 @@ export default function ListingPenjualPage() {
       setListings(data);
     } catch (error: unknown) {
       setPesanError(
-        error instanceof Error ? error.message : "Terjadi kesalahan sistem",
+        error instanceof Error ? error.message : "A system error occurred",
       );
     } finally {
       setLoading(false);
@@ -64,7 +64,7 @@ export default function ListingPenjualPage() {
       await ambilDaftarListing();
     } catch (error: unknown) {
       setPesanError(
-        error instanceof Error ? error.message : "Gagal menghapus listing",
+        error instanceof Error ? error.message : "Could not delete listing",
       );
     } finally {
       setIsDeleting(false);
@@ -75,7 +75,7 @@ export default function ListingPenjualPage() {
     <AppLayout
       role="seller"
       isAuthenticated
-      title={<h1 className="text-2xl font-bold text-[#fff4f2] text-center sm:text-4xl">Kelola Listing</h1>}
+      title={<h1 className="text-2xl font-bold text-[#fff4f2] text-center sm:text-4xl">Manage Listings</h1>}
       theme="blue"
       headerClassName="px-5 pb-5 pt-8"
       bodyClassName="px-4 py-6 sm:px-6 lg:px-8"
@@ -84,10 +84,10 @@ export default function ListingPenjualPage() {
         <div className="mb-6 flex flex-col gap-4 border-b border-[#b9c9bd] pb-5 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-sm font-semibold text-[#60756b]">
-              Kelola toko Anda
+              Manage Your Store
             </p>
             <p className="mt-1 text-sm text-[#60756b]">
-              Tambah, edit, atau nonaktifkan listing makanan.
+              Add, edit, or deactivate food listings.
             </p>
           </div>
           <button
@@ -95,7 +95,7 @@ export default function ListingPenjualPage() {
             onClick={() => router.push("/penjual/listing/tambah")}
             className="rounded-xl bg-[#1C8CC9] px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-[#166DA2] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#166DA2]"
           >
-            + Tambah Listing
+            + Add Listing
           </button>
         </div>
 
@@ -110,32 +110,31 @@ export default function ListingPenjualPage() {
               onClick={() => void ambilDaftarListing()}
               className="self-start font-semibold underline sm:self-auto"
             >
-              Coba lagi
+              Try again
             </button>
           </div>
         )}
 
         {loading && (
           <p role="status" className="py-12 text-center text-[#60756b]">
-            Memuat daftar listing makanan...
+            Loading food listings...
           </p>
         )}
 
         {!loading && !pesanError && listings.length === 0 && (
           <section className="rounded-2xl bg-[#f7f0dc] px-6 py-14 text-center shadow-sm">
             <h2 className="text-lg font-bold text-[#264b4d]">
-              Belum ada listing makanan
+              No food listings yet
             </h2>
             <p className="mx-auto mt-2 max-w-md text-sm text-[#60756b]">
-              Mulai jual makanan surplus dengan menambahkan listing pertama
-              toko Anda.
+              Start selling surplus food by adding your store's first listing.
             </p>
             <button
               type="button"
               onClick={() => router.push("/penjual/listing/tambah")}
               className="mt-5 rounded-xl bg-[#1C8CC9] px-5 py-3 text-sm font-bold text-white hover:bg-[#166DA2]"
             >
-              Tambah Makanan Pertama
+              Add Your First Product
             </button>
           </section>
         )}

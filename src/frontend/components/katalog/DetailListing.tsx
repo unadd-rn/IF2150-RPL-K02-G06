@@ -46,17 +46,17 @@ export default function DetailListing() {
         setHasil({
           untukId: id,
           status: "error",
-          pesan: status === 404 || status === 422 ? "Listing sudah tidak tersedia" : e instanceof ApiError ? e.message : "Gagal memuat detail listing",
+          pesan: status === 404 || status === 422 ? "This listing is no longer available" : e instanceof ApiError ? e.message : "Could not load listing details",
           tidakTersedia: status === 404 || status === 422,
         });
-        if (status === 404 || status === 422) setNotifikasi("Listing sudah tidak tersedia karena stok habis, dinonaktifkan, dihapus, atau melewati batas kedaluwarsa.");
+        if (status === 404 || status === 422) setNotifikasi("This listing is no longer available because it is out of stock, inactive, deleted, or past its expiration date.");
       });
     return () => {
       aktif = false;
     };
   }, [id]);
 
-  if (state.status === "memuat") return <PesanKatalog>Memuat detail listing…</PesanKatalog>;
+  if (state.status === "memuat") return <PesanKatalog>Loading listing details…</PesanKatalog>;
   if (state.status === "perluLogin") return <PesanPerluLogin />;
 
   if (state.status === "error") {
@@ -66,11 +66,11 @@ export default function DetailListing() {
       <>
       <NotifikasiGagal pesan={notifikasi} onClose={() => setNotifikasi(null)} />
       <div className="flex flex-col gap-6">
-        <EmptyState jenis="error" judul={state.pesan} aksi={{ href: "/katalog", label: "Kembali ke katalog" }}>
-          Listing ini mungkin sudah dihapus penjual, stoknya habis, atau sudah melewati batas kedaluwarsa.
+        <EmptyState jenis="error" judul={state.pesan} aksi={{ href: "/katalog", label: "Back to catalog" }}>
+          The seller may have deleted this listing, it may be out of stock, or it may have passed its expiration date.
         </EmptyState>
         <section className="flex flex-col gap-4">
-          <h2 className="text-lg font-semibold">Makanan surplus lain yang masih tersedia</h2>
+          <h2 className="text-lg font-semibold">Other available surplus food</h2>
           <DaftarListing />
         </section>
       </div>
@@ -95,29 +95,28 @@ export default function DetailListing() {
             {listing.nama_toko}
           </p>
           <p className="mt-1.5 text-zinc-600 dark:text-zinc-400">
-            <span className="font-semibold text-[#264b4d]">Diambil di:</span>{" "}
-            {listing.alamat_toko || "Lokasi toko belum tersedia"}
+            <span className="font-semibold text-[#264b4d]">Pickup location:</span>{" "}
+            {listing.alamat_toko || "Store location unavailable"}
           </p>
         </div>
         <dl className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 text-sm">
-          <dt className="text-zinc-500">Porsi</dt>
+          <dt className="text-zinc-500">Serving</dt>
           <dd>{listing.porsi}</dd>
-          <dt className="text-zinc-500">Kondisi</dt>
-          <dd>{listing.kondisi}</dd>
-          <dt className="text-zinc-500">Stok</dt>
+          <dt className="text-zinc-500">Condition</dt>
+          <dd>{listing.kondisi === "Sangat Baik" ? "Excellent" : listing.kondisi === "Baik" ? "Good" : listing.kondisi === "Layak Konsumsi" ? "Safe to Eat" : listing.kondisi}</dd>
+          <dt className="text-zinc-500">Stock</dt>
           <dd>{listing.stok}</dd>
-          <dt className="text-zinc-500">Batas kedaluwarsa</dt>
+          <dt className="text-zinc-500">Expiration date</dt>
           <dd>{formatWaktu(listing.batas_kedaluwarsa)}</dd>
         </dl>
         <div className="flex flex-wrap items-center gap-4 pt-2">
-          {/* Pilih jumlah langsung di sini: + masuk ke keranjang, − mengurangi (tanpa pindah halaman).
-              Pembayaran hanya bisa dilanjutkan lewat keranjang (Buy Now). */}
+          {/* Adjust quantity here; checkout continues through the cart. */}
           <PengaturJumlah listing={listing} ukuran="besar" />
           <Link href="/cart" className="text-sm text-[#0a8ea8] underline hover:text-[#0d7b96]">
-            Lihat keranjang
+            View cart
           </Link>
           <Link href="/katalog" className="text-sm text-zinc-600 underline dark:text-zinc-400">
-            Kembali ke katalog
+            Back to catalog
           </Link>
         </div>
       </div>

@@ -36,7 +36,7 @@ export default function FormPencarian() {
           type="submit"
           className="flex-1 sm:flex-none h-[50px] px-6 rounded-[18px] bg-emerald-600 font-semibold text-white hover:bg-emerald-700 flex items-center justify-center shadow-sm"
         >
-          Cari
+          Search
         </button>
         {adaPencarian(pencarian) && (
           <Link

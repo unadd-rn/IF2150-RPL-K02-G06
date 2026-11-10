@@ -33,7 +33,7 @@ export default function DaftarListing() {
         setHasil({
           kunci,
           daftar: null,
-          error: e instanceof ApiError ? e.message : "Gagal memuat katalog",
+          error: e instanceof ApiError ? e.message : "Could not load the catalog",
           harusLogin: perluLogin(e),
         });
       });
@@ -45,26 +45,26 @@ export default function DaftarListing() {
   // Hasil milik URL sebelumnya dianggap belum dimuat
   const terkini = hasil?.kunci === kunci ? hasil : null;
 
-  const resetPencarian = { href: "/katalog", label: "Reset pencarian" };
+  const resetPencarian = { href: "/katalog", label: "Reset search" };
 
   if (pencarian.hargaTidakValid) {
     return (
-      <EmptyState jenis="error" judul="Rentang harga tidak valid" aksi={resetPencarian}>
+      <EmptyState jenis="error" judul="Invalid price range" aksi={resetPencarian}>
         {pencarian.pesanHarga}
       </EmptyState>
     );
   }
   if (terkini?.harusLogin) return <PesanPerluLogin />;
   if (terkini?.error) return <PesanKatalog jenis="error">{terkini.error}</PesanKatalog>;
-  if (!terkini?.daftar) return <PesanKatalog>{mencari ? "Mencari listing…" : "Memuat katalog…"}</PesanKatalog>;
+  if (!terkini?.daftar) return <PesanKatalog>{mencari ? "Searching listings…" : "Loading catalog…"}</PesanKatalog>;
 
   const daftar = terkini.daftar;
   if (daftar.length === 0) {
     // UC02 Alt 1: tidak ada listing tersedia sama sekali
     if (!mencari) {
       return (
-        <EmptyState judul="Belum ada makanan surplus yang tersedia">
-          Semua listing sedang habis atau sudah melewati batas kedaluwarsa. Coba cek lagi nanti.
+        <EmptyState judul="No surplus food is available yet">
+          All listings are out of stock or past their expiration date. Please check again later.
         </EmptyState>
       );
     }
@@ -73,14 +73,14 @@ export default function DaftarListing() {
       <EmptyState
         judul={
           pencarian.kataKunci
-            ? "Makanan dengan kata kunci tersebut tidak ditemukan"
-            : "Tidak ada makanan pada rentang harga tersebut"
+            ? "No food found for that search"
+            : "No food found in that price range"
         }
         aksi={resetPencarian}
       >
         {pencarian.kataKunci
-          ? `Tidak ada listing tersedia yang cocok dengan “${pencarian.kataKunci}”. Coba kata kunci lain atau ubah rentang harga.`
-          : "Coba perlebar rentang harga atau kosongkan filter."}
+          ? `No available listings match “${pencarian.kataKunci}”. Try another search term or adjust the price range.`
+          : "Try widening the price range or clearing the filters."}
       </EmptyState>
     );
   }

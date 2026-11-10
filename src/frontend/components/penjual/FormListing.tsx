@@ -18,7 +18,7 @@ interface FormListingProps {
 
     const [namaMakanan, setNamaMakanan] = useState(initialData?.nama_makanan ?? "");
     const [deskripsi, setDeskripsi] = useState(initialData?.deskripsi ?? "");
-    const [porsi, setPorsi] = useState(initialData?.porsi ?? "1 Porsi");
+    const [porsi, setPorsi] = useState(initialData?.porsi ?? "1 serving");
     const [kondisi, setKondisi] = useState(initialData?.kondisi ?? "Sangat Baik");
     const [harga, setHarga] = useState<number | "">(initialData?.harga ?? "");
     const [stok, setStok] = useState<number | "">(initialData?.stok ?? "");
@@ -57,20 +57,20 @@ interface FormListingProps {
     // Validasi Input (Kelas Validasi)
     const validasiListing = (): string[] => {
         const errs: string[] = [];
-        if (!namaMakanan.trim()) errs.push("Nama makanan wajib diisi.");
-        if (!deskripsi.trim()) errs.push("Deskripsi wajib diisi.");
-        if (deskripsi.length > 3000) errs.push("Deskripsi maksimal 3000 karakter.");
-        if (!porsi.trim()) errs.push("Informasi porsi wajib diisi.");
-        if (!kondisi.trim()) errs.push("Kondisi makanan wajib diisi.");
-        if (harga === "" || Number(harga) < 0 || !Number.isInteger(Number(harga))) errs.push("Harga harus berupa bilangan bulat non-negatif.");
-        if (stok === "" || Number(stok) < 0 || !Number.isInteger(Number(stok))) errs.push("Stok harus berupa bilangan bulat non-negatif.");
-        if (!fotoPath && !fileFoto) errs.push("Foto makanan wajib diunggah.");
+        if (!namaMakanan.trim()) errs.push("Product name is required.");
+        if (!deskripsi.trim()) errs.push("Description is required.");
+        if (deskripsi.length > 3000) errs.push("Description must be 3,000 characters or fewer.");
+        if (!porsi.trim()) errs.push("Serving information is required.");
+        if (!kondisi.trim()) errs.push("Product condition is required.");
+        if (harga === "" || Number(harga) < 0 || !Number.isInteger(Number(harga))) errs.push("Price must be a non-negative whole number.");
+        if (stok === "" || Number(stok) < 0 || !Number.isInteger(Number(stok))) errs.push("Stock must be a non-negative whole number.");
+        if (!fotoPath && !fileFoto) errs.push("A product photo is required.");
         if (!batasKedaluwarsa) {
-        errs.push("Batas kedaluwarsa wajib diisi.");
+        errs.push("An expiration date is required.");
         } else {
         const selectedDate = new Date(batasKedaluwarsa);
         if (selectedDate <= new Date()) {
-            errs.push("Batas kedaluwarsa harus di waktu mendatang.");
+            errs.push("The expiration date must be in the future.");
         }
         }
         return errs;
@@ -82,13 +82,13 @@ interface FormListingProps {
 
         // Validasi Ukuran (Maks 10 MB) dan Ekstensi
         if (file.size > 10 * 1024 * 1024) {
-        setErrors(["Ukuran foto berkas maksimal 10 MB"]);
-        setNotifikasi("Ukuran foto berkas maksimal 10 MB.");
+        setErrors(["The photo file must be 10 MB or smaller."]);
+        setNotifikasi("The photo file must be 10 MB or smaller.");
         return;
         }
         if (!["image/jpeg", "image/jpg", "image/png"].includes(file.type)) {
-        setErrors(["Format foto harus berupa PNG atau JPG"]);
-        setNotifikasi("Format foto harus berupa PNG atau JPG.");
+        setErrors(["The photo must be a PNG or JPG file."]);
+        setNotifikasi("The photo must be a PNG or JPG file.");
         return;
         }
 
@@ -116,7 +116,7 @@ interface FormListingProps {
             finalFotoPath = await uploadFotoListing(fileFoto);
         }
         if (!finalFotoPath) {
-            throw new Error("Foto makanan wajib diunggah.");
+            throw new Error("A product photo is required.");
         }
 
         const submitter = (e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement | null;
@@ -136,7 +136,7 @@ interface FormListingProps {
         await onSubmit(payload, simpanSebagaiDraft);
         setIsDirty(false);
         } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : "Terjadi kesalahan saat menyimpan data.";
+        const message = err instanceof Error ? err.message : "An error occurred while saving the product.";
         setErrors([message]);
         setNotifikasi(message);
         } finally {
@@ -174,7 +174,7 @@ interface FormListingProps {
             {/* Pesan Error Validasi */}
             {errors.length > 0 && (
             <div className="rounded-md bg-red-50 p-4 border border-red-200">
-                <h4 className="text-sm font-semibold text-red-800">Gagal menyimpan data:</h4>
+                <h4 className="text-sm font-semibold text-red-800">Could not save product:</h4>
                 <ul className="mt-1 list-disc pl-5 text-sm text-red-700">
                 {errors.map((err, idx) => (
                     <li key={idx}>{err}</li>
@@ -186,7 +186,7 @@ interface FormListingProps {
             {/* Foto produk berada di bagian atas sesuai UI-06 */}
             <div>
             <p className="block text-sm font-bold text-[#264b4d]">
-                Product Photo* <span className="font-normal text-[#60756b]">(PNG/JPG, maks. 10 MB)</span>
+                Product Photo* <span className="font-normal text-[#60756b]">(PNG/JPG, max. 10 MB)</span>
             </p>
             <label
                 htmlFor="foto-listing"
@@ -227,29 +227,29 @@ interface FormListingProps {
             {/* Porsi & Kondisi */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-                <label htmlFor="porsi" className="block text-sm font-bold text-[#264b4d]">Porsi *</label>
+                <label htmlFor="porsi" className="block text-sm font-bold text-[#264b4d]">Serving *</label>
                 <input
                 id="porsi"
                 type="text"
                 value={porsi}
                 onChange={(e) => { setPorsi(e.target.value); setIsDirty(true); }}
                 className="mt-1 w-full rounded-xl border border-[#d8cfb4] bg-white/80 px-4 py-3 text-[#264b4d] shadow-sm focus:border-[#1a8ca1] focus:outline-none focus:ring-2 focus:ring-[#1a8ca1]/20"
-                placeholder="Contoh: 1 Porsi / 500gr"
+                placeholder="Example: 1 serving / 500 g"
                 required
                 />
             </div>
 
             <div>
-                <label htmlFor="kondisi" className="block text-sm font-bold text-[#264b4d]">Kondisi *</label>
+                <label htmlFor="kondisi" className="block text-sm font-bold text-[#264b4d]">Condition *</label>
                 <select
                 id="kondisi"
                 value={kondisi}
                 onChange={(e) => { setKondisi(e.target.value); setIsDirty(true); }}
                 className="mt-1 w-full rounded-xl border border-[#d8cfb4] bg-white/80 px-4 py-3 text-[#264b4d] shadow-sm focus:border-[#1a8ca1] focus:outline-none focus:ring-2 focus:ring-[#1a8ca1]/20"
                 >
-                <option value="Sangat Baik">Sangat Baik</option>
-                <option value="Baik">Baik</option>
-                <option value="Layak Konsumsi">Layak Konsumsi</option>
+                <option value="Sangat Baik">Excellent</option>
+                <option value="Baik">Good</option>
+                <option value="Layak Konsumsi">Safe to Eat</option>
                 </select>
             </div>
             </div>
@@ -264,7 +264,7 @@ interface FormListingProps {
                 min="0"
                 value={harga}
                 onChange={(e) => { setHarga(e.target.value === "" ? "" : Number(e.target.value)); setIsDirty(true); }}
-                onBlur={() => { if (harga !== "" && (Number(harga) < 0 || !Number.isInteger(Number(harga)))) setNotifikasi("Harga harus berupa bilangan bulat non-negatif."); }}
+                onBlur={() => { if (harga !== "" && (Number(harga) < 0 || !Number.isInteger(Number(harga)))) setNotifikasi("Price must be a non-negative whole number."); }}
                 className="mt-1 w-full rounded-xl border border-[#d8cfb4] bg-white/80 px-4 py-3 text-[#264b4d] shadow-sm focus:border-[#1a8ca1] focus:outline-none focus:ring-2 focus:ring-[#1a8ca1]/20"
                 required
                 />
@@ -278,7 +278,7 @@ interface FormListingProps {
                 min="0"
                 value={stok}
                 onChange={(e) => { setStok(e.target.value === "" ? "" : Number(e.target.value)); setIsDirty(true); }}
-                onBlur={() => { if (stok !== "" && (Number(stok) < 0 || !Number.isInteger(Number(stok)))) setNotifikasi("Stok harus berupa bilangan bulat non-negatif."); }}
+                onBlur={() => { if (stok !== "" && (Number(stok) < 0 || !Number.isInteger(Number(stok)))) setNotifikasi("Stock must be a non-negative whole number."); }}
                 className="mt-1 w-full rounded-xl border border-[#d8cfb4] bg-white/80 px-4 py-3 text-[#264b4d] shadow-sm focus:border-[#1a8ca1] focus:outline-none focus:ring-2 focus:ring-[#1a8ca1]/20"
                 required
                 />
@@ -310,7 +310,7 @@ interface FormListingProps {
                 type="datetime-local"
                 value={batasKedaluwarsa}
                 onChange={(e) => { setBatasKedaluwarsa(e.target.value); setIsDirty(true); }}
-                onBlur={() => { if (batasKedaluwarsa && new Date(batasKedaluwarsa) <= new Date()) setNotifikasi("Batas kedaluwarsa harus di waktu mendatang. Perbarui tanggalnya sebelum menyimpan atau menampilkan listing."); }}
+                onBlur={() => { if (batasKedaluwarsa && new Date(batasKedaluwarsa) <= new Date()) setNotifikasi("The expiration date must be in the future. Update it before saving or publishing the listing."); }}
                 className="mt-1 w-full rounded-xl border border-[#d8cfb4] bg-white/80 px-4 py-3 text-[#264b4d] shadow-sm focus:border-[#1a8ca1] focus:outline-none focus:ring-2 focus:ring-[#1a8ca1]/20"
                 required
             />

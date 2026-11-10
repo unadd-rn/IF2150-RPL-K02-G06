@@ -23,9 +23,9 @@ export function perluLogin(e: unknown): boolean {
 export function PesanPerluLogin() {
   return (
     <PesanKatalog jenis="error">
-      Sesi tidak valid atau bukan akun pembeli.{" "}
+      Your session is invalid or is not a customer account.{" "}
       <Link href="/login" className="font-medium underline">
-        Login sebagai pembeli
+        Log in as a customer
       </Link>
     </PesanKatalog>
   );

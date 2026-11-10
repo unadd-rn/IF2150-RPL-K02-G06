@@ -24,7 +24,7 @@ export default function KartuListing({ listing }: { listing: ListingKatalog }) {
       <Link
         href={`/katalog/${listing.id_listing}`}
         className="block shrink-0"
-        aria-label={`Lihat detail ${listing.nama_makanan}`}
+        aria-label={`View details for ${listing.nama_makanan}`}
       >
         {/* Rasio foto dikunci di container (4/3) supaya semua kartu punya tinggi sama,
             dan crop-nya konsisten antara mobile & desktop. */}
@@ -51,7 +51,7 @@ export default function KartuListing({ listing }: { listing: ListingKatalog }) {
               <span className="truncate">{listing.nama_toko}</span>
             </p>
             <p className="line-clamp-1 text-[10px] leading-snug text-[#4e5f56] sm:mt-1 sm:line-clamp-2 sm:text-xs">
-              {listing.alamat_toko || "Lokasi toko belum tersedia"}
+              {listing.alamat_toko || "Store location unavailable"}
             </p>
           </div>
         </Link>

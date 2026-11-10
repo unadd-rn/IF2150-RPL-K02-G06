@@ -9,14 +9,15 @@ import {
 } from "@/lib/api";
 
 const rupiah = (n: number) => `Rp. ${n.toLocaleString("id-ID")}`;
-const pesanDari = (e: unknown) => (e instanceof ApiError ? e.message : "Terjadi kesalahan");
-const PESAN_KEDALUWARSA = "Transaksi dibatalkan karena batas waktu pembayaran telah lewat";
+const pesanDari = (e: unknown) => (e instanceof ApiError ? e.message : "An error occurred");
+const PESAN_KEDALUWARSA = "The transaction was canceled because the payment deadline passed.";
 
 function PembayaranIsi() {
   const { idTransaksi } = useParams<{ idTransaksi: string }>();
   const router = useRouter();
   const [trx, setTrx] = useState<TransaksiPembayaran | null>(null);
   const [pesan, setPesan] = useState("");
+  const [isSimulating, setIsSimulating] = useState(false);
 
   // Halaman pembayaran hanya sah untuk id transaksi yang valid (dibuat lewat "Buy Now" di keranjang).
   const idValid = Number.isInteger(Number(idTransaksi)) && Number(idTransaksi) >= 1;
@@ -45,29 +46,52 @@ function PembayaranIsi() {
     };
   }, [idTransaksi, idValid]);
 
+  async function handleSimulatePayment() {
+    if (!trx?.url_scan) return;
+    const token = new URL(trx.url_scan, window.location.origin).pathname.split("/").filter(Boolean).pop();
+    if (!token) {
+      setPesan("Could not start the payment simulation. Please try again.");
+      return;
+    }
+
+    setIsSimulating(true);
+    setPesan("");
+    try {
+      const response = await fetch(`/api/pembayaran/scan/${encodeURIComponent(token)}`, { method: "POST" });
+      if (!response.ok) throw new Error("Payment simulation failed. Please try again.");
+      const updated = await ambilTransaksi(idTransaksi);
+      setTrx(updated);
+      setPesan(updated.status === "BATAL" ? PESAN_KEDALUWARSA : "");
+    } catch {
+      setPesan("Payment simulation failed. Please try again.");
+    } finally {
+      setIsSimulating(false);
+    }
+  }
+
   let isi;
   if (!idValid) {
     // Bukan id transaksi (mis. sisa URL lama /pembayaran/checkout) → tidak ada yang bisa dibayar.
     isi = (
       <div className="space-y-4">
-        <p className="font-medium text-red-600">Transaksi tidak ditemukan</p>
+        <p className="font-medium text-red-600">Transaction not found</p>
         <button
           type="button"
           onClick={() => router.push("/katalog")}
           className="w-full rounded-md bg-[#f25f4b] px-4 py-4 text-xl font-black text-white shadow-sm"
         >
-          Kembali ke katalog
+          Back to catalog
         </button>
       </div>
     );
   } else if (!trx) {
-    isi = <p className="text-[#5d625b]">{pesan || "Memuat..."}</p>;
+    isi = <p className="text-[#5d625b]">{pesan || "Loading..."}</p>;
   } else if (trx.status === "LUNAS") {
     isi = (
       <div className="space-y-4">
         <div className="rounded-[18px] border border-[#d7d0b4] bg-[#f7f0dc] p-5 text-center shadow-sm">
-          <h2 className="text-xl font-bold text-[#1b8ca3]">Pembayaran berhasil</h2>
-          <p className="mt-3 text-sm text-[#5d625b]">Kode pengambilan</p>
+          <h2 className="text-xl font-bold text-[#1b8ca3]">Payment successful</h2>
+          <p className="mt-3 text-sm text-[#5d625b]">Pickup code</p>
           <p className="mt-1 text-3xl font-black tracking-widest">{trx.kode_pengambilan}</p>
         </div>
         <Ringkasan trx={trx} />
@@ -76,7 +100,7 @@ function PembayaranIsi() {
           onClick={() => router.push("/katalog")}
           className="w-full rounded-md bg-[#f25f4b] px-4 py-4 text-xl font-black text-white shadow-sm"
         >
-          Kembali ke katalog
+          Back to catalog
         </button>
       </div>
     );
@@ -89,7 +113,7 @@ function PembayaranIsi() {
           onClick={() => router.push("/katalog")}
           className="w-full rounded-md bg-[#f25f4b] px-4 py-4 text-xl font-black text-white shadow-sm"
         >
-          Kembali ke katalog
+          Back to catalog
         </button>
       </div>
     );
@@ -100,14 +124,19 @@ function PembayaranIsi() {
         {trx.kode_qris && (
           <div className="rounded-[18px] border border-[#d7d0b4] bg-[#f7f0dc] p-4 text-center shadow-sm">
             <img src={trx.kode_qris} alt="QRIS dummy" className="mx-auto w-56" />
-            <p className="mt-3 text-sm text-[#5d625b]">Pindai QR ini dengan kamera ponsel untuk mengonfirmasi pembayaran.</p>
+            <p className="mt-3 text-sm text-[#5d625b]">This demo QR code does not open a link or confirm payment when scanned.</p>
           </div>
         )}
         {pesan && <p className="font-medium text-red-600">{pesan}</p>}
         {trx.url_scan && (
-          <a href={trx.url_scan} className="block w-full rounded-md bg-[#f25f4b] px-4 py-4 text-center text-xl font-black text-white shadow-sm">
-            Simulasikan scan QR di perangkat ini
-          </a>
+          <button
+            type="button"
+            onClick={handleSimulatePayment}
+            disabled={isSimulating}
+            className="block w-full rounded-md bg-[#f25f4b] px-4 py-4 text-center text-xl font-black text-white shadow-sm disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {isSimulating ? "Processing payment…" : "Simulate Payment"}
+          </button>
         )}
       </div>
     );
@@ -143,7 +172,7 @@ function Ringkasan({ trx }: { trx: TransaksiPembayaran }) {
           <div>
             <p className="font-bold text-[#1b8ca3]">{i.nama_makanan}</p>
             <p className="text-sm text-[#5d625b]">
-              {i.jumlah} porsi × {rupiah(i.harga_satuan)}
+              {i.jumlah} portions × {rupiah(i.harga_satuan)}
             </p>
           </div>
           <p className="font-bold">{rupiah(i.jumlah * i.harga_satuan)}</p>

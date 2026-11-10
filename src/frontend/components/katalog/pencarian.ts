@@ -23,10 +23,10 @@ function bacaHarga(nilai: string | null): number | null | undefined {
 
 // Aturan sama dengan cariListing (Algo-C16-03) di backend, dicek dulu di klien agar tidak perlu ke server
 function validasiHarga(hargaMin: number | null | undefined, hargaMaks: number | null | undefined): string | null {
-  if (hargaMin === undefined || hargaMaks === undefined) return "Harga harus berupa bilangan bulat";
-  if ((hargaMin ?? 0) < 0 || (hargaMaks ?? 0) < 0) return "Harga tidak boleh negatif";
+  if (hargaMin === undefined || hargaMaks === undefined) return "Price must be a whole number";
+  if ((hargaMin ?? 0) < 0 || (hargaMaks ?? 0) < 0) return "Price cannot be negative";
   if (hargaMin !== null && hargaMaks !== null && hargaMin > hargaMaks)
-    return "Harga minimum tidak boleh lebih besar dari harga maksimum";
+    return "Minimum price cannot be greater than maximum price";
   return null;
 }
 

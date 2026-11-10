@@ -12,7 +12,7 @@ export default function FotoListing({ foto, alt, className = "" }: Props) {
   if (!src || gagal) {
     return (
       <div className={`flex items-center justify-center bg-zinc-100 text-sm text-zinc-400 dark:bg-zinc-800 ${className}`}>
-        Tidak ada foto
+        No photo available
       </div>
     );
   }

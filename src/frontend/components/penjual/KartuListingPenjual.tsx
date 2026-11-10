@@ -50,7 +50,7 @@ export default function KartuListingPenjual({
         </div>
 
         <p className="mt-0.5 truncate text-xs leading-snug text-[#58635b] sm:mt-1 sm:text-sm">
-          {listing.porsi} · {listing.kondisi}
+          {listing.porsi} · {listing.kondisi === "Sangat Baik" ? "Excellent" : listing.kondisi === "Baik" ? "Good" : listing.kondisi === "Layak Konsumsi" ? "Safe to Eat" : listing.kondisi}
         </p>
 
         <div className="mt-1 flex items-baseline justify-between gap-3 sm:mt-3">
@@ -59,7 +59,7 @@ export default function KartuListingPenjual({
           </p>
 
           <p className="text-xs font-semibold text-[#58635b] sm:text-sm">
-            Stok: {listing.stok}
+            Stock: {listing.stok}
           </p>
         </div>
 
@@ -71,7 +71,7 @@ export default function KartuListingPenjual({
                 : "bg-red-100 text-red-700"
             }`}
           >
-            {listing.draft ? "Draf" : listing.tersedia ? "Tersedia" : "Tidak Tersedia"}
+            {listing.draft ? "Draft" : listing.tersedia ? "Available" : "Unavailable"}
           </span>
 
           <button
