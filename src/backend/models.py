@@ -70,6 +70,18 @@ CREATE TABLE IF NOT EXISTS item_transaksi (
     FOREIGN KEY (id_listing) REFERENCES listing_makanan (id_listing) ON DELETE CASCADE
 );
 
+-- Waktu pengambilan per penjual: satu transaksi bisa berisi item dari beberapa
+-- toko (checkout campur), sehingga tiap toko menandai pengambilan secara mandiri
+-- (transaksi.waktu_diambil hanya terisi saat SEMUA toko sudah menandai diambil).
+CREATE TABLE IF NOT EXISTS pengambilan_penjual (
+    id_transaksi INTEGER NOT NULL,
+    id_penjual INTEGER NOT NULL,
+    waktu_diambil DATETIME NOT NULL,
+    PRIMARY KEY (id_transaksi, id_penjual),
+    FOREIGN KEY (id_transaksi) REFERENCES transaksi (id_transaksi) ON DELETE CASCADE,
+    FOREIGN KEY (id_penjual) REFERENCES penjual (id_pengguna) ON DELETE CASCADE
+);
+
 CREATE TABLE IF NOT EXISTS reward_login (
     id_reward INTEGER PRIMARY KEY AUTOINCREMENT,
     id_pembeli INTEGER UNIQUE NOT NULL,
