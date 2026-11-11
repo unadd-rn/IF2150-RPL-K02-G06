@@ -31,21 +31,25 @@ def daftar_pesanan_terbayar(
 
     Item transaksi yang masih MENUNGGU_BAYAR atau BATAL tidak ditampilkan, karena
     penjual baru perlu menyiapkan makanan setelah pembayaran diterima. Setiap pesanan
-    membawa flag waktu_diambil (None = belum diambil pembeli).
+    membawa flag waktu_diambil milik toko ini saja (None = belum diambil pembeli),
+    karena satu transaksi bisa berisi item dari beberapa toko sekaligus.
     """
+    id_penjual = current_user["id_pengguna"]
     rows = conn.execute(
         """
         SELECT t.id_transaksi, t.tanggal, t.status, t.total_harga,
-               t.kode_pengambilan, t.waktu_diambil,
+               t.kode_pengambilan, pp.waktu_diambil AS waktu_diambil_toko,
                i.id_listing, l.nama_makanan, l.porsi, l.foto,
                i.jumlah, i.harga_satuan
         FROM transaksi t
         JOIN item_transaksi i ON i.id_transaksi = t.id_transaksi
         JOIN listing_makanan l ON l.id_listing = i.id_listing
+        LEFT JOIN pengambilan_penjual pp
+               ON pp.id_transaksi = t.id_transaksi AND pp.id_penjual = ?
         WHERE t.status = 'LUNAS' AND l.id_penjual = ?
-        ORDER BY t.waktu_diambil IS NULL DESC, datetime(t.tanggal) DESC, i.id_item ASC
+        ORDER BY (pp.waktu_diambil IS NULL) DESC, datetime(t.tanggal) DESC, i.id_item ASC
         """,
-        (current_user["id_pengguna"],),
+        (id_penjual, id_penjual),
     ).fetchall()
 
     pesanan: dict[int, dict] = {}
@@ -57,7 +61,7 @@ def daftar_pesanan_terbayar(
                 "tanggal": row["tanggal"],
                 "total_harga": row["total_harga"],
                 "kode_pengambilan": row["kode_pengambilan"],
-                "waktu_diambil": row["waktu_diambil"],
+                "waktu_diambil": row["waktu_diambil_toko"],
                 "items": [],
             },
         )
@@ -86,10 +90,13 @@ def tandai_sudah_diambil(
 ):
     """Tandai pesanan sebagai 'Sudah diambil / Selesai' saat pembeli mengambil
     makanannya di toko. Hanya transaksi yang sudah LUNAS milik penjual ini
-    yang dapat ditandai."""
+    yang dapat ditandai. Pengambilan dicatat per toko (pengambilan_penjual):
+    bila satu transaksi memuat item dari beberapa toko, toko lain tetap
+    menunggu pembeli mengambil bagiannya sendiri."""
+    id_penjual = current_user["id_pengguna"]
     row = conn.execute(
         """
-        SELECT t.id_transaksi, t.status, t.waktu_diambil
+        SELECT t.id_transaksi, t.status
         FROM transaksi t
         WHERE t.id_transaksi = ?
           AND EXISTS (
@@ -99,21 +106,54 @@ def tandai_sudah_diambil(
               WHERE i.id_transaksi = t.id_transaksi AND l.id_penjual = ?
           )
         """,
-        (id_transaksi, current_user["id_pengguna"]),
+        (id_transaksi, id_penjual),
     ).fetchone()
     if row is None:
         raise HTTPException(status_code=404, detail="Transaksi tidak ditemukan")
     if row["status"] != "LUNAS":
         raise HTTPException(status_code=409, detail="Pesanan belum dibayar sehingga tidak dapat ditandai diambil")
-    if row["waktu_diambil"] is not None:
+    sudah = conn.execute(
+        "SELECT 1 FROM pengambilan_penjual WHERE id_transaksi = ? AND id_penjual = ?",
+        (id_transaksi, id_penjual),
+    ).fetchone()
+    if sudah is not None:
         raise HTTPException(status_code=409, detail="Pesanan sudah ditandai selesai")
 
     waktu = datetime.now().strftime(FORMAT_WAKTU)
-    conn.execute(
-        "UPDATE transaksi SET waktu_diambil = ? WHERE id_transaksi = ?",
-        (waktu, id_transaksi),
-    )
-    conn.commit()
+    try:
+        conn.execute("BEGIN IMMEDIATE")   # take SQLite's write lock first, so two sellers marking the same order run one after the other
+        conn.execute(
+            "INSERT INTO pengambilan_penjual (id_transaksi, id_penjual, waktu_diambil) "
+            "VALUES (?, ?, ?)",
+            (id_transaksi, id_penjual, waktu),
+        )
+        # Bila seluruh toko dalam transaksi ini sudah menandai diambil, transaksi
+        # dianggap selesai sepenuhnya (waktu_diambil level transaksi terisi).
+        jumlah_toko = conn.execute(
+            """
+            SELECT COUNT(DISTINCT l.id_penjual)
+            FROM item_transaksi i
+            JOIN listing_makanan l ON l.id_listing = i.id_listing
+            WHERE i.id_transaksi = ?
+            """,
+            (id_transaksi,),
+        ).fetchone()[0]
+        sudah_diambil = conn.execute(
+            "SELECT COUNT(*) FROM pengambilan_penjual WHERE id_transaksi = ?",
+            (id_transaksi,),
+        ).fetchone()[0]
+        if sudah_diambil >= jumlah_toko:
+            conn.execute(
+                "UPDATE transaksi SET waktu_diambil = ? WHERE id_transaksi = ?",
+                (waktu, id_transaksi),
+            )
+        conn.commit()
+    except sqlite3.IntegrityError:
+        conn.rollback()   # toko yang sama menandai dua kali secara bersamaan
+        raise HTTPException(status_code=409, detail="Pesanan sudah ditandai selesai")
+    except Exception:
+        conn.rollback()
+        raise
     return {
         "id_transaksi": id_transaksi,
         "waktu_diambil": waktu,

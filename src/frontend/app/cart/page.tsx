@@ -18,6 +18,7 @@ export default function CartPage() {
   const [perluLogin, setPerluLogin] = useState(false);
   const [memproses, setMemproses] = useState(false);
   const [stokPenuhUntuk, setStokPenuhUntuk] = useState<string | null>(null);
+  const [kodeKupon, setKodeKupon] = useState("");
 
   async function beliSekarang() {
     if (memproses || items.length === 0) return;
@@ -25,9 +26,10 @@ export default function CartPage() {
     setPesan("");
     setPerluLogin(false);
     try {
-      // Satu transaksi berisi semua item keranjang (UC05).
+      // Satu transaksi berisi semua item keranjang (UC05), plus kupon bila diisi.
       const trx = await checkoutPembayaran(
         items.map((i) => ({ id_listing: i.listing.id_listing, jumlah: i.jumlah })),
+        kodeKupon,
       );
       kosongkan();
       router.push(`/pembayaran/${trx.id_transaksi}`);
@@ -141,6 +143,16 @@ export default function CartPage() {
               <span className="text-base font-bold">Subtotal</span>
               <span className="text-right text-base font-bold">{rupiah(totalHarga)}</span>
             </div>
+
+            {/* Kupon reward (opsional): kode divalidasi backend saat "Buy Now" (UC05 + UC08). */}
+            <input
+              type="text"
+              value={kodeKupon}
+              onChange={(e) => setKodeKupon(e.target.value)}
+              aria-label="Coupon code"
+              placeholder="Coupon code (claim from the Account page)"
+              className="mt-3 w-full rounded-md border border-[#d6cebb] bg-[#f7f0dc] px-3 py-2 text-sm text-[#1a1a1a] placeholder:text-[#8d8672] focus:outline-none focus:ring-1 focus:ring-[#1bb0c7]"
+            />
 
             {pesan && (
               <p className="mt-3 text-sm font-medium text-red-600">

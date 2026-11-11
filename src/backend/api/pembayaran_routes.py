@@ -42,7 +42,8 @@ def checkout(body: CheckoutRequest, conn=Depends(get_conn),
              ctl: PembayaranController = Depends(get_controller),
              user=Depends(require_roles(["PEMBELI"]))):
     pesanan = body.daftar_pesanan()
-    trx, items, nama, kode_qris = ctl.checkout_banyak(conn, user["id_pengguna"], pesanan)
+    trx, items, nama, kode_qris = ctl.checkout_banyak(
+        conn, user["id_pengguna"], pesanan, body.kode_kupon)
     return _keluaran(trx, items, nama, kode_qris)
 
 
