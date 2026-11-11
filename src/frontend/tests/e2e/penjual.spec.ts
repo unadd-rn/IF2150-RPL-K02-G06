@@ -40,7 +40,7 @@ test("seller can log in and open listing management", async ({ page }) => {
   ).toBeVisible();
 
   await expect(
-    page.getByText("Roti Tawar Penyelamatan").or(
+    page.getByRole("heading", { name: "Roti Tawar Penyelamatan" }).or(
       page.getByText("No food listings yet"),
     ),
   ).toBeVisible();

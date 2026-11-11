@@ -209,8 +209,13 @@ async function postJson<T>(path: string, body?: unknown): Promise<T> {
 export type ItemCheckout = { id_listing: number; jumlah: number };
 
 // Checkout seluruh isi keranjang → satu transaksi berisi semua item (UC05).
-export function checkoutPembayaran(items: ItemCheckout[]): Promise<TransaksiPembayaran> {
-  return postJson<TransaksiPembayaran>("/api/pembayaran/checkout", { items });
+// kodeKupon (opsional): kode kupon reward pembeli yang ditebus pada subtotal.
+export function checkoutPembayaran(items: ItemCheckout[], kodeKupon?: string): Promise<TransaksiPembayaran> {
+  const kode = kodeKupon?.trim();
+  return postJson<TransaksiPembayaran>("/api/pembayaran/checkout", {
+    items,
+    ...(kode ? { kode_kupon: kode } : {}),
+  });
 }
 
 export function ambilTransaksi(id: number | string): Promise<TransaksiPembayaran> {

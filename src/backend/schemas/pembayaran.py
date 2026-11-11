@@ -11,9 +11,11 @@ class ItemCheckoutRequest(BaseModel):
 class CheckoutRequest(BaseModel):
     # Bentuk lama (satu listing): id_listing + jumlah.
     # Bentuk baru (dari keranjang): items = daftar {id_listing, jumlah}.
+    # kode_kupon (opsional): kupon reward yang ingin dipakai pembeli (UC05).
     id_listing: int | None = None
     jumlah: int | None = None
     items: list[ItemCheckoutRequest] | None = None
+    kode_kupon: str | None = None
 
     def daftar_pesanan(self) -> list[tuple[int, int]]:
         """Menyatukan kedua bentuk request menjadi daftar (id_listing, jumlah)."""

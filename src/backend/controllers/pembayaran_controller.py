@@ -1,14 +1,28 @@
 import sqlite3
 import secrets
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 
 from ..adapters.metode_pembayaran import MetodePembayaran
 from ..adapters.payment_gateway_adapter import PaymentGatewayAdapter
 from ..errors import PembayaranError
-from ..models import ItemTransaksi, ListingMakanan, Transaksi
+from ..models import ItemTransaksi, Kupon, ListingMakanan, Transaksi
 
 BATAS_WAKTU_BAYAR = timedelta(minutes=15)
 FORMAT_WAKTU = "%Y-%m-%d %H:%M:%S"
+
+
+def _sahkan_kupon(conn: sqlite3.Connection, id_pembeli: int, kode_kupon: str) -> Kupon:
+    """Validasi kupon reward yang akan ditebus (Algo-C05-kupon): milik pembeli,
+    belum terpakai, dan masih berlaku. Kupon milik pembeli lain dilaporkan
+    sama dengan kupon yang tidak ada agar tidak bocor."""
+    kupon = Kupon.carikanByKode(conn, kode_kupon)
+    if kupon is None or kupon.id_pembeli != id_pembeli:
+        raise PembayaranError("Kupon tidak ditemukan", 404)
+    if kupon.terpakai:
+        raise PembayaranError("Kupon sudah terpakai", 400)
+    if not kupon.is_berlaku(date.today().isoformat()):
+        raise PembayaranError("Kupon sudah kedaluwarsa", 400)
+    return kupon
 
 
 def ambil_transaksi(conn: sqlite3.Connection, id_transaksi: int):
@@ -38,9 +52,11 @@ class PembayaranController:
         """Membuat transaksi untuk satu listing (UC05)."""
         return self.checkout_banyak(conn, id_pembeli, [(id_listing, jumlah)])
 
-    def checkout_banyak(self, conn: sqlite3.Connection, id_pembeli: int, pesanan: list[tuple[int, int]]):
+    def checkout_banyak(self, conn: sqlite3.Connection, id_pembeli: int, pesanan: list[tuple[int, int]],
+                        kode_kupon: str | None = None):
         """Membuat satu transaksi dari daftar pesanan [(id_listing, jumlah), ...] (UC05).
-        Mendukung satu maupun beberapa listing (dari keranjang) sekaligus."""
+        Mendukung satu maupun beberapa listing (dari keranjang) sekaligus, dan
+        kode_kupon kupon reward pembeli yang ditebus pada subtotal."""
         if not pesanan:
             raise PembayaranError("Pesanan tidak boleh kosong")
         if any(jumlah <= 0 for _, jumlah in pesanan):
@@ -61,14 +77,23 @@ class PembayaranController:
                 raise PembayaranError("Stok tidak mencukupi", 409)
             dipilih.append((listing, jumlah))
 
+        # Kupon reward (opsional): tapis validasi sebelum transaksi dibuat,
+        # dipotongkan dari subtotal dan ditandai terpakai bersama transaksi.
+        kupon = _sahkan_kupon(conn, id_pembeli, kode_kupon) if kode_kupon else None
+        subtotal = sum(listing.harga * jumlah for listing, jumlah in dipilih)
+        total_harga = subtotal
+        if kupon is not None:
+            total_harga = subtotal - min(kupon.nilai_potongan, subtotal)   # tidak pernah negatif
+
         try:
             cur = conn.execute(
-                "INSERT INTO transaksi (id_pembeli, tanggal, batas_waktu_bayar, token_bayar) VALUES (?, ?, ?, ?)",
+                "INSERT INTO transaksi (id_pembeli, tanggal, batas_waktu_bayar, token_bayar, kode_kupon) "
+                "VALUES (?, ?, ?, ?, ?)",
                 (id_pembeli, sekarang.strftime(FORMAT_WAKTU),
-                 (sekarang + BATAS_WAKTU_BAYAR).strftime(FORMAT_WAKTU), secrets.token_urlsafe(32)),
+                 (sekarang + BATAS_WAKTU_BAYAR).strftime(FORMAT_WAKTU), secrets.token_urlsafe(32),
+                 kupon.kode_kupon if kupon is not None else None),
             )
             id_transaksi = cur.lastrowid
-            total_harga = 0
             for listing, jumlah in dipilih:
                 item = ItemTransaksi(None, id_transaksi, listing.id_listing, jumlah, listing.harga)
                 conn.execute(
@@ -76,7 +101,12 @@ class PembayaranController:
                     "VALUES (?, ?, ?, ?)",
                     (id_transaksi, item.id_listing, item.jumlah, item.harga_satuan),
                 )
-                total_harga += item.hitung_subtotal()
+            # Tandai kupon terpakai bersama transaksi (dikembalikan bila transaksi BATAL)
+            if kupon is not None:
+                conn.execute(
+                    "UPDATE kupon SET terpakai = 1 WHERE kode_kupon = ? AND id_pembeli = ? AND terpakai = 0",
+                    (kupon.kode_kupon, id_pembeli),
+                )
             conn.execute(
                 "UPDATE transaksi SET total_harga = ? WHERE id_transaksi = ?",
                 (total_harga, id_transaksi),
@@ -102,6 +132,13 @@ class PembayaranController:
 
             if sekarang > datetime.fromisoformat(trx.batas_waktu_bayar):   # expired: cancel, return BATAL
                 conn.execute("UPDATE transaksi SET status = 'BATAL' WHERE id_transaksi = ?", (id_transaksi,))
+                if trx.kode_kupon:
+                    # Kupon yang ditebus untuk transaksi yang batal dikembalikan
+                    conn.execute(
+                        "UPDATE kupon SET terpakai = 0 "
+                        "WHERE kode_kupon = ? AND id_pembeli = ? AND terpakai = 1",
+                        (trx.kode_kupon, trx.id_pembeli),
+                    )
                 conn.commit()
                 return ambil_transaksi(conn, id_transaksi)
 

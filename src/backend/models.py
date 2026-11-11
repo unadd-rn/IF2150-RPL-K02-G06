@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS transaksi (
     kode_pengambilan TEXT,
     waktu_diambil DATETIME,
     token_bayar TEXT UNIQUE,
+    kode_kupon TEXT,
     FOREIGN KEY (id_pembeli) REFERENCES pembeli (id_pengguna) ON DELETE CASCADE
 );
 
@@ -111,6 +112,8 @@ def init_db(db_path: str = DATABASE_NAME):
         kolom_transaksi = [baris[1] for baris in conn.execute("PRAGMA table_info(transaksi)").fetchall()]
         if "token_bayar" not in kolom_transaksi:
             conn.execute("ALTER TABLE transaksi ADD COLUMN token_bayar TEXT")
+        if "kode_kupon" not in kolom_transaksi:
+            conn.execute("ALTER TABLE transaksi ADD COLUMN kode_kupon TEXT")
         conn.execute(
             "CREATE UNIQUE INDEX IF NOT EXISTS idx_transaksi_token_bayar "
             "ON transaksi(token_bayar)"
@@ -281,6 +284,7 @@ class Transaksi:
     kode_pengambilan: Optional[str] = None
     waktu_diambil: Optional[str] = None
     token_bayar: Optional[str] = None
+    kode_kupon: Optional[str] = None
 
 @dataclass
 class ItemTransaksi:
@@ -359,3 +363,13 @@ class Kupon:
             (id_pembeli,),
         ).fetchall()
         return [cls(r[0], r[1], r[2], r[3], bool(r[4])) for r in rows]
+
+    @classmethod
+    def carikanByKode(cls, conn: sqlite3.Connection, kode_kupon: str) -> Optional["Kupon"]:
+        """Ambil satu kupon berdasarkan kodenya (Q-C19-05). None jika tidak ada."""
+        baris = conn.execute(
+            "SELECT kode_kupon, id_pembeli, nilai_potongan, berlaku_sampai, terpakai "
+            "FROM kupon WHERE kode_kupon = ?",
+            (kode_kupon,),
+        ).fetchone()
+        return None if baris is None else cls(baris[0], baris[1], baris[2], baris[3], bool(baris[4]))

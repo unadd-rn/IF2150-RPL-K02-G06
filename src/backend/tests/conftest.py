@@ -85,11 +85,3 @@ def buat_trx(db_path):
     def _buat(items, batas="2999-12-31 23:59:59"):
         c = sqlite3.connect(db_path)
         cur = c.execute("INSERT INTO transaksi (id_pembeli, batas_waktu_bayar) VALUES (2, ?)", (batas,))
-        tid = cur.lastrowid
-        for id_listing, jumlah in items:
-            c.execute("INSERT INTO item_transaksi (id_transaksi, id_listing, jumlah, harga_satuan) "
-                      "VALUES (?, ?, ?, 12000)", (tid, id_listing, jumlah))
-        c.commit()
-        c.close()
-        return tid
-    return _buat
