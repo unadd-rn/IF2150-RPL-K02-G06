@@ -66,6 +66,16 @@
 | :--- | :--- | :--- | :--- |
 | *Claude* | *Membantu meninjau kembali atribut* | *Tolong bantu tinjau kembali atribut digunakan* | *AI memberikan list atribut kemudian diverifikasi* |
 
+### Milestone 8
+| Tool AI | Tujuan Penggunaan | Contoh Prompt Utama | Modifikasi & Validasi Manusia |
+| :--- | :--- | :--- | :--- |
+| *Claude* | *Membantu dalam perbaikan DPPL* | *Tolong sesuaikan kembali DPPL* | *AI memberikan list perbaikan yang perlu dilakukan* |
+
+### Milestone 9
+| Tool AI | Tujuan Penggunaan | Contoh Prompt Utama | Modifikasi & Validasi Manusia |
+| :--- | :--- | :--- | :--- |
+| *Codex, Copilot, Claude Code* | *Membantu dalam implementasi* | *Pahami DPPL dan lakukan implementasi sesuai issue yang dibuat* | *AI memberikan implementasi kemudian diverfisikasi dengan testing oleh manusia* |
+
 ---
 ### Pernyataan Integritas dan Persetujuan
 
