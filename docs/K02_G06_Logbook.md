@@ -156,5 +156,26 @@
 | *27-10-2026* | *Ghina Emelia Yantes* | *Menyelesaikan Bab 5.13 s.d 5.17* | *3* | *Done* | *-* |
 | *07-10-2026* | *Renata Puspanegara Ninagan* | *Menyelesaikan Bab 6.1.1, 6.1.2, 6.1.3, 6.1.4, 6.1.5 dan 5.14, 5.19* | *3* | *Done* | *-* |\| *07-10-2026* | *Sherin Felicia Danessa* | *Menyelesaikan logo, Bab 5.20, 5.21, 6.1.6, 6.1.7* | *3* | *Done* | *-* |
 
+### Milestone 9
+**Periode:** 28 Oktober 2026 - 13 November 2026
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- | 
+| *5-11-2026* | *Nadia Aulia Syafarani* | *setup skeleton router listing backend dan folder frontend* | *5* | *Done* | *-* |
+| *5-11-2026* | *Nadia Aulia Syafarani* | *Implementasi upload foto* | *5* | *Done* | *-* |
+| *5-11-2026* | *Nadia Aulia Syafarani* | *UI listing dan upload listing* | *5* | *Done* | *-* |
+| *6-11-2026* | *Nadia Aulia Syafarani* | *Upload listing dan tambah listing* | *5* | *Done* | *-* |
+| *9-11-2026* | *Nadia Aulia Syafarani* | *Penyesuaian dengan DPPL* | *5* | *Done* | *-* |
+| *9-11-2026* | *Nadia Aulia Syafarani* | *Fix listing error* | *5* | *Done* | *-* |
+| *9-11-2026* | *Nadia Aulia Syafarani* | *Integration dan QR* | *5* | *Done* | *-* |
+| *11-11-2026* | *Nadia Aulia Syafarani* | *Translate dan disable QR* | *3* | *Done* | *-* |
+| *10-11-2026* | *Cendra Asih Chairunnisa* | *setup reward* | *3* | *Done* | *-* |
+| *11-11-2026* | *Cendra Asih Chairunnisa* | *reward controller* | *3* | *Done* | *-* |
+| *11-11-2026* | *Cendra Asih Chairunnisa* | *readme* | *3* | *Done* | *-* |
+| *13-11-2026* | *Cendra Asih Chairunnisa* | *Milestone 9* | *3* | *Done* | *-* |
+
+
+
+
+
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
 
