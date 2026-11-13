@@ -160,9 +160,13 @@
 **Periode:** 28 Oktober 2026 - 13 November 2026
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
+| *4-11-2026* | *Ghina Emelia Yantes* | *implementasi daftar & detail listing untuk pembeli (UC02, UC03)* | *2* | *Done* | *-* |
+| *4-11-2026* | *Ghina Emelia Yantes* | *menambahkan ambilSemuaTersedia & cariDaftar di ListingMakanan ke model* | *2* | *Done* | *-* |
 | *5-11-2026* | *Nadia Aulia Syafarani* | *setup skeleton router listing backend dan folder frontend* | *5* | *Done* | *-* |
 | *5-11-2026* | *Nadia Aulia Syafarani* | *Implementasi upload foto* | *5* | *Done* | *-* |
 | *5-11-2026* | *Nadia Aulia Syafarani* | *UI listing dan upload listing* | *5* | *Done* | *-* |
+| *5-11-2026* | *Ghina Emelia Yantes* | *implementasi skenario alternatif katalog UC02/UC03/UC04* | *2* | *Done* | *-* |
+| *5-11-2026* | *Ghina Emelia Yantes* | *implementasi cari dan filter harga katalog* | *2* | *Done* | *-* |
 | *6-11-2026* | *Nadia Aulia Syafarani* | *Upload listing dan tambah listing* | *5* | *Done* | *-* |
 | *9-11-2026* | *Nadia Aulia Syafarani* | *Penyesuaian dengan DPPL* | *5* | *Done* | *-* |
 | *9-11-2026* | *Nadia Aulia Syafarani* | *Fix listing error* | *5* | *Done* | *-* |
