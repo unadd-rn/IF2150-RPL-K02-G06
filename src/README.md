@@ -33,14 +33,14 @@ Arsitektur: client-server. Frontend Next.js (port 3000) meneruskan seluruh reque
 
 Software yang harus terpasang:
 
-- **Python 3.12** (minimal 3.10; versi 3.8/3.9 tidak bisa karena kode memakai sintaks `X | Y` pada type hint)
+- **Python 3.12**
 - **Node.js 22** beserta npm
 - Git
 
 Langkah instalasi (dari root repo):
 
 ```bash
-git clone <url-repo-ini>
+git clone https://github.com/unadd-rn/IF2150-RPL-K02-G06.git
 cd IF2150-RPL-K02-G06/src
 ```
 
@@ -90,7 +90,7 @@ Basis data berupa satu file SQLite, `src/savebite.db`, yang **dibuat otomatis**.
 
 - Tabel dibuat (dan dimigrasi ringan, mis. penambahan kolom baru) oleh `init_db()` di [backend/models.py](backend/models.py) setiap kali backend dijalankan.
 - Akun uji dan data katalog contoh diisi oleh skrip seed:
-
+| *10-11-2026* | *Cendra Asih Chairunnisa* | *setup reward* | *3* | *Done* | *-* |
 ```bash
 cd backend
 python seed.py          # isi data jika masih kosong (aman dijalankan berulang kali)
