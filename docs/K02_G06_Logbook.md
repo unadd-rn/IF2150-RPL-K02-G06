@@ -160,21 +160,31 @@
 **Periode:** 28 Oktober 2026 - 13 November 2026
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
+| *03-11-2026* | *Renata Puspanegara Ninagan* | *Menyiapkan boilerplate awal frontend dan backend* | *1.5* | *Done* | *-* |
 | *4-11-2026* | *Ghina Emelia Yantes* | *implementasi daftar & detail listing untuk pembeli (UC02, UC03)* | *2* | *Done* | *-* |
 | *4-11-2026* | *Ghina Emelia Yantes* | *menambahkan ambilSemuaTersedia & cariDaftar di ListingMakanan ke model* | *2* | *Done* | *-* |
+| *04-11-2026* | *Renata Puspanegara Ninagan* | *Membuat skema database dan model dasar, enkripsi password dan autentikasi, LoginView, AuthController, serta Role Guard di endpoint API* | *4* | *Done* | *-* |
 | *5-11-2026* | *Nadia Aulia Syafarani* | *setup skeleton router listing backend dan folder frontend* | *5* | *Done* | *-* |
 | *5-11-2026* | *Nadia Aulia Syafarani* | *Implementasi upload foto* | *5* | *Done* | *-* |
 | *5-11-2026* | *Nadia Aulia Syafarani* | *UI listing dan upload listing* | *5* | *Done* | *-* |
 | *5-11-2026* | *Ghina Emelia Yantes* | *implementasi skenario alternatif katalog UC02/UC03/UC04* | *2* | *Done* | *-* |
 | *5-11-2026* | *Ghina Emelia Yantes* | *implementasi cari dan filter harga katalog* | *2* | *Done* | *-* |
+| *05-11-2026* | *Renata Puspanegara Ninagan* | *Mereview dan merge PR fitur tambah listing serta pencarian, filter, dan skenario alternatif katalog* | *1.5* | *Done* | *-* |
 | *6-11-2026* | *Nadia Aulia Syafarani* | *Upload listing dan tambah listing* | *5* | *Done* | *-* |
+| *06-11-2026* | *Renata Puspanegara Ninagan* | *Membuat komponen layout utama dan navbar, serta menyesuaikan halaman login, katalog, cart, dan penjual* | *3* | *Ongoing* | *-* |
+| *06-11-2026* | *Sherin Felicia Danessa* | *Mengerjakan backend dan frontend checkout/pembayaran (issue #14)* | *2* | *Done* | *-* |
+| *07-11-2026* | *Sherin Felicia Danessa* | *Merefaktor route, controller, dan halaman pembayaran serta menambah API client frontend (issue #14)* | *1.5* | *Done* | *-* |
 | *9-11-2026* | *Nadia Aulia Syafarani* | *Penyesuaian dengan DPPL* | *5* | *Done* | *-* |
 | *9-11-2026* | *Nadia Aulia Syafarani* | *Fix listing error* | *5* | *Done* | *-* |
 | *9-11-2026* | *Nadia Aulia Syafarani* | *Integration dan QR* | *5* | *Done* | *-* |
-| *11-11-2026* | *Nadia Aulia Syafarani* | *Translate dan disable QR* | *3* | *Done* | *-* |
+| *09-11-2026* | *Sherin Felicia Danessa* | *Merefaktor modul untuk testing, membuat unit test checkout, QRIS dummy melalui payment gateway adapter, serta konfirmasi pembayaran dan kembali ke katalog* | *3* | *Done* | *Perlu menyesuaikan modul agar bisa diuji* |
+| *09-11-2026* | *Renata Puspanegara Ninagan* | *Mengintegrasikan kode antarfitur (penjualan, toko, pembayaran, katalog) beserta test penjualan dan toko* | *3* | *Done* | *Terdapat konflik dan ketidaksesuaian antarfitur* |
 | *10-11-2026* | *Cendra Asih Chairunnisa* | *setup reward* | *3* | *Done* | *-* |
+| *10-11-2026* | *Renata Puspanegara Ninagan* | *Mereview dan merge PR fitur reward, serta polishing UI/UX halaman pembeli dan penjual* | *4* | *Done* | *-* |
+| *11-11-2026* | *Nadia Aulia Syafarani* | *Translate dan disable QR* | *3* | *Done* | *-* |
 | *11-11-2026* | *Cendra Asih Chairunnisa* | *reward controller* | *3* | *Done* | *-* |
 | *11-11-2026* | *Cendra Asih Chairunnisa* | *readme* | *3* | *Done* | *-* |
+| *11-11-2026* | *Renata Puspanegara Ninagan* | *Membuat E2E testing pembeli dan memperbaiki logika transaction tracking* | *3* | *Done* | *-* |
 | *13-11-2026* | *Cendra Asih Chairunnisa* | *Milestone 9* | *3* | *Done* | *-* |
 
 
