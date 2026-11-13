@@ -1,26 +1,88 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #0d1d27;
   --foreground: #171717;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "LINE Seed JP", "Segoe UI", Arial, Helvetica, sans-serif;
+  --font-mono: "LINE Seed JP", "Segoe UI", Arial, Helvetica, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* Warna tema per halaman, dikelola ThemeSync berdasarkan rute aktif.
+     Default sama dengan tema pink/tekl bawaan. */
+  --theme-header: #f56369;
+  --theme-header-from: #f56369;
+  --theme-nav: #1ab0c7;
+  --theme-nav-from: #1ab0c7;
+  --theme-nav-border: rgba(42, 142, 161, 0.3);
+  --theme-nav-border-from: rgba(42, 142, 161, 0.3);
+  --theme-nav-inactive: #d8faff;
+}
+
+/* Fade transisi warna antar halaman: mulai dari warna halaman sebelumnya. */
+@keyframes theme-color-fade {
+  from {
+    background-color: var(--theme-header-from);
+    border-color: var(--theme-nav-border-from);
+  }
+
+  to {
+    background-color: var(--theme-header);
+    border-color: var(--theme-nav-border);
   }
 }
 
+.themed-header {
+  background-color: var(--theme-header);
+  border-color: var(--theme-nav-border);
+  transition: background-color 700ms ease, border-color 700ms ease;
+  animation: theme-color-fade 700ms ease both;
+}
+
+.themed-nav {
+  background-color: var(--theme-nav);
+  border-color: var(--theme-nav-border);
+  transition:
+    background-color 700ms ease,
+    border-color 700ms ease,
+    color 700ms ease;
+  animation: theme-color-fade 700ms ease both;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
+  margin: 0;
+  min-height: 100vh;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "LINE Seed JP", "Segoe UI", Arial, Helvetica, sans-serif;
+}
+
+/* Square UI: matikan semua sudut membulat (termasuk rounded-[...], rounded-full). */
+*,
+*::before,
+*::after {
+  border-radius: 0 !important;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
 }
