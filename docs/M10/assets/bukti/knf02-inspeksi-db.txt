@@ -1,0 +1,15 @@
+# KNF02-TC01 – Inspeksi penyimpanan password pada basis data (read-only)
+# Basis data: src/savebite.db (hasil python seed.py), kode identik dengan tag v9.0
+# Query: SELECT email, substr(password,1,7), length(password) FROM pengguna;
+
+pembeli@test.com  $2b$12$  60
+penjual@test.com  $2b$12$  60
+kantin@test.com   $2b$12$  60
+warung@test.com   $2b$12$  60
+
+# Query: SELECT COUNT(*) FROM pengguna WHERE password = 'password123';  -> 0
+# Kesimpulan: seluruh password tersimpan sebagai hash bcrypt (prefix $2b$, cost 12, panjang 60), tidak ada plain-text.
+
+# Pemeriksaan sisi client: src/frontend/app/login/page.tsx baris 37
+#   body: JSON.stringify({ email, password })
+# Password dikirim apa adanya (tanpa SHA-256) ke /api/auth/login melalui http://localhost:3000 (bukan HTTPS).
