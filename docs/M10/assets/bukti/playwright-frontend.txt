@@ -1,0 +1,10 @@
+# Keluaran Playwright frontend (tag v9.0, Chromium headless)
+# Perintah: cd src/frontend && npm test   (backend berjalan di :8000, data dari seed.py --reset)
+
+  ok 1 tests\e2e\login.spec.ts:3:5 › login page can show and hide the password (1.5s)
+  ok 2 tests\e2e\pembeli.spec.ts:17:5 › pembeli: dari katalog, isi keranjang, checkout, dan bayar lewat UI (6.8s)
+  ok 5 tests\e2e\pembeli.spec.ts:62:5 › pembeli: checkout tanpa login ditolak dengan tawaran login (840ms)
+  ok 3 tests\e2e\pembayaran.spec.ts:3:5 › buyer can only simulate payment with the payment button (8.3s)
+  ok 4 tests\e2e\penjual.spec.ts:22:5 › seller can log in and open listing management (9.7s)
+  ok 6 tests\e2e\pembeli.spec.ts:89:5 › pembeli: kupon reward dari login dipakai di checkout (3.9s)
+  6 passed (18.5s)
