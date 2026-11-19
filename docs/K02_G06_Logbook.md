@@ -192,7 +192,7 @@
 
 ---
 ### Milestone 10
-**Periode:** 13 Oktober 2026 - 20 November 2026
+**Periode:** 13 November 2026 - 20 November 2026
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
 | *19-11-2026* | *Ghina Emelia Yantes* | *Melengkapi HIUPL bab 3, 4, dan 5* | *1* | *Done* | *-* |
