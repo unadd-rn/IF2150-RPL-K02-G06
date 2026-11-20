@@ -4,41 +4,41 @@
 
 | Informasi | Keterangan |
 | --- | --- |
-| **Hari** | *\[Hari\]* |
-| **Tanggal** | *\[DD/MM/YYYY\]* |
-| **Kelas** | *\[Kelas\]* |
-| **Nomor Kelompok** | *\[Nomor Kelompok\]*  |
-| **Nama Kelompok** | *\[Nama Kelompok\]*  |
-| **Nama Perangkat Lunak** | *\[Nama P/L\]*  |
-| **Dokumen** | *\[Nama Dokumen yang diasistensikan\]*  |
+| **Hari** | *\[Senin\]* |
+| **Tanggal** | *\[16/11/2026\]* |
+| **Kelas** | *\[K02\]* |
+| **Nomor Kelompok** | *\[G06\]*  |
+| **Nama Kelompok** | *\[Rengginang\]*  |
+| **Nama Perangkat Lunak** | *\[SaveBite\]*  |
+| **Dokumen** | *\[K02_G06_DPPl2\]*  |
 
 ### Anggota Kelompok
 
 | NIM | Nama |
 | --- | --- |
-| *\[NIM 1\]* | *\[Nama Anggota 1\]* |
-| *\[NIM 2\]* | *\[Nama Anggota 2\]* |
-| *\[NIM 3\]* | *\[Nama Anggota 3\]* |
-| *\[NIM 4\]* | *\[Nama Anggota 4\]* |
-| *\[NIM 5\]* | *\[Nama Anggota 5\]* |
+| *13525120* | *Nadia Aulia Syafarani* |
+| *13525041* | *Renata Puspanegara Ninagan* |
+| *13525119* | *Ghina Emelia Yantes* |
+| *13525017* | *Cendra Asih Chairunnisa* |
+| *13525089* | *Sherin Felicia Danessa* |
 
 ### Catatan
 
 | Catatan |
 | --- |
-| 1. *\[Berikan catatan hasil asistensi\]*  |
-| 2. ... |
-| 3. ... |
-| 4. ... |
-
-**Notes for this section:**  
-*Catatan dapat dituliskan dalam bentuk paragraf atau poin-poin, disesuaikan saja.* 
+| 1. Deliverables Dokumen & Milestone 10 (Bab 1 s.d. 5) |
+| 2. Deskripsi Umum & Pemodelan Use Case |
+| 3. Implementasi Lingkungan, Modul, Antarmuka, & File Lain |
+| 4. Strategi & Kedalaman Pengujian Kelas (Mendalam, Sedang, Tidak Perlu) |
+| 5. Pengujian Unit, Integrasi, Use Case, & KNF |
+| 6. Bukti Pengujian & Code Coverage |
+| 7. Traceability (Pemetaan KF/KNF ke Test Case) |
+| 8. Deadline Pengumpulan Draft & Final |
 
 ## Dokumentasi
 
-<!-- ![](./assets/foto-asistensi.jpg) -->
 <p align="center">
-  <img src="./assets/foto-asistensi.jpg" width="100%">
+  <img width="720" height="1600" alt="image" src="https://github.com/user-attachments/assets/c449cd54-c868-4d02-b658-d4c40daebb46" />
 </p>
 
 <p align="center">
