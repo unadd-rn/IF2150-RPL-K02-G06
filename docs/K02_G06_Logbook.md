@@ -198,6 +198,7 @@
 | *19-11-2026* | *Ghina Emelia Yantes* | *Melengkapi HIUPL bab 3, 4, dan 5* | *1* | *Done* | *-* |
 | *20-11-2026* | *Renata Puspanegara Ninagan* | *Mereview docs M10 dan mengisi form asistensi* | *1* | *Done* | *-* |
 | *18-11-2026* | *Nadia Aulia Syafarani* | *Mengerjakan dasar HIUPL dari bab 1* | *1* | *Not Done* | *-* |
+| *18-11-2026* | *Cendra Asih Chairunnisa* | *Bab 4 dan review M10* | *2* | *Done* | *-* |
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
 
