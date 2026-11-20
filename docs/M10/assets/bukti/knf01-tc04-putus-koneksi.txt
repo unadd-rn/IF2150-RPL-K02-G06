@@ -1,0 +1,11 @@
+# KNF01-TC04 - Putus koneksi/proses di tengah transaksi pembayaran (konfirmasi_bayar)
+# Windows 11, Python 3.12.10
+# Perintah: cd src/backend && python -m pytest tests/test_knf01_putus_koneksi.py -v
+
+============================= test session starts =============================
+collecting ... collected 2 items
+
+tests/test_knf01_putus_koneksi.py::test_proses_mati_sebelum_commit_tidak_meninggalkan_data PASSED [ 50%]
+tests/test_knf01_putus_koneksi.py::test_koneksi_error_di_tengah_transaksi_dirollback PASSED [100%]
+
+============================== 2 passed in 1.33s ==============================

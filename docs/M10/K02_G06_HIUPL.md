@@ -154,7 +154,7 @@ Tabel 3.1. Lingkungan Implementasi
 
 | Aspek | Keterangan |
 | :--- | :--- |
-| *Hardware* | *Laptop pengembangan anggota kelompok. Mesin bukti uji utama: **[PERLU DIISI: prosesor, RAM, penyimpanan laptop Windows 11 yang menjalankan pytest dan Playwright]**. Verifikasi ulang: laptop macOS (Apple Silicon).* |
+| *Hardware* | *Laptop pengembangan anggota kelompok. Mesin bukti uji utama: AMD Ryzen 7 260 (8 core), RAM 16 GB, SSD 1 TB. Verifikasi ulang: laptop macOS (Apple Silicon).* |
 | *Operating System* | *Windows 11 (mesin bukti pytest dan Playwright M10). macOS 27 (verifikasi ulang coverage per kelas). Aplikasi diakses lewat browser modern; E2E memakai Chromium headless.* |
 | *Bahasa Pemrograman* | *Python 3.12 (target CI; bukti uji di Python 3.13.7 dan 3.15.2), TypeScript 5, SQL (dialek SQLite).* |
 | *Framework/Library* | *Backend: FastAPI ≥ 0.110, Uvicorn ≥ 0.28, Pydantic ≥ 2.6, bcrypt 4.1.2, qrcode[pil] ≥ 7.4, python-multipart. Frontend: Next.js 16.4.4 (App Router, Turbopack), React 19.3.0, Tailwind CSS 4, @fontsource/line-seed-jp.* |
@@ -799,7 +799,7 @@ Tabel 4.5. Hasil Pengujian KNF
 | KNF01-TC01 | KNF01 | Reliability | 0 perubahan parsial: bila satu item gagal saat pembayaran, tidak ada stok yang berkurang dan status tidak berubah | pytest `test_rollback_menyeluruh_bila_satu_item_gagal`, lalu baca ulang stok dan status dari SQLite | Stok item 1 tetap 5, item 2 tetap 1, status tetap MENUNGGU_BAYAR; setelah stok diisi transaksi berhasil LUNAS | Pass |
 | KNF01-TC02 | KNF01 | Reliability | 0 *lost update* pada stok terakhir yang diperebutkan 2 transaksi | pytest `test_stok_terakhir_berebut_hanya_satu_berhasil` (`BEGIN IMMEDIATE` + `UPDATE ... WHERE stok >= jumlah`) | 1 LUNAS, 1 tetap MENUNGGU_BAYAR, stok akhir 0 (tidak negatif) | Pass |
 | KNF01-TC03 | KNF01 | Reliability | 0 data ganda saat permintaan bayar diulang (mis. *retry* setelah jaringan putus) | pytest `test_e2e_bayar_ganda_idempoten`, `test_bayar_ganda_ditolak_di_controller` | Bayar kedua mengembalikan status LUNAS yang sama / 409; stok hanya berkurang sekali | Pass |
-| KNF01-TC04 | KNF01 | Reliability | Tidak ada data tersangkut bila koneksi putus di tengah transaksi | Belum diuji: belum ada simulasi pemutusan koneksi literal (proses mati di tengah `BEGIN IMMEDIATE`) | - | **Belum diuji.** Rencana: hentikan proses backend (`kill -9`) di antara pengurangan stok dan `COMMIT`, lalu periksa bahwa SQLite melakukan *rollback* otomatis (stok dan status tidak berubah) |
+| KNF01-TC04 | KNF01 | Reliability | 0 data tersangkut bila proses/koneksi putus di tengah transaksi pembayaran | pytest `test_proses_mati_sebelum_commit_tidak_meninggalkan_data`: `konfirmasi_bayar` dijalankan di *subprocess* yang dimatikan paksa (`os._exit`, setara `kill -9`) setelah status LUNAS dan stok dikurangi, sebelum `COMMIT`. pytest `test_koneksi_error_di_tengah_transaksi_dirollback`: koneksi melempar `sqlite3.OperationalError` pada UPDATE stok item kedua. Keduanya diperiksa dari koneksi baru | Stok item 1 tetap 5, item 2 tetap 1, status tetap MENUNGGU_BAYAR tanpa kode pengambilan; basis data tidak terkunci dan bayar ulang berhasil LUNAS ([knf01-tc04-putus-koneksi.txt](./assets/bukti/knf01-tc04-putus-koneksi.txt)) | Pass |
 | KNF02-TC01 | KNF02 | Security | Password tidak tersimpan *plain-text* | Inspeksi tabel `pengguna` pada `src/savebite.db` (read-only) | 4/4 password berupa hash bcrypt (`$2b$12$`, 60 karakter); 0 baris sama dengan `password123` ([knf02-inspeksi-db.txt](./assets/bukti/knf02-inspeksi-db.txt)) | Pass |
 | KNF02-TC02 | KNF02 | Security | Password di-*hash* SHA-256 sebelum dikirim ke server | Inspeksi kode `src/frontend/app/login/page.tsx` dan *request* login | Password dikirim apa adanya dalam JSON (`{ email, password }`) melalui `http://localhost:3000`, tanpa SHA-256 dan tanpa HTTPS | **Fail.** Penyebab: rancangan DPPL memilih bcrypt di server dan mengandalkan HTTPS untuk transmisi, sementara SKPL masih meminta SHA-256 di client. Perbaikan: (a) revisi KNF02 di SKPL menjadi "password dikirim lewat HTTPS dan disimpan sebagai hash bcrypt" (disarankan, karena SHA-256 di client tanpa *salt* menjadikan hash itu sendiri sebagai password), dan (b) jalankan aplikasi di belakang HTTPS (mis. *reverse proxy* dengan sertifikat lokal) saat demo |
 | KNF-PERF-01 | - (informatif) | Response time | Tidak ada target di SKPL | `time.perf_counter` melalui `TestClient`, 15/1.000/10.000 listing (laporan M9 B.2.1) | Median `GET /api/katalog`: 9,7 ms / 31,6 ms / 225 ms | Informatif, tidak dinilai |
@@ -818,6 +818,7 @@ Tabel 4.6. Bukti Hasil Pengujian
 | Coverage per berkas | [pytest-backend.txt](./assets/bukti/pytest-backend.txt), bagian *tests coverage*: total 82% |
 | Coverage per kelas (C04, C06/C18, C07, C09, C15, C16, C17, C19, C20, C21) | [coverage-per-kelas.txt](./assets/bukti/coverage-per-kelas.txt): laporan coverage.py per kelas/fungsi (132 passed, macOS, Python 3.15.2, kode identik dengan v9.0) |
 | C10-UT01 – C14-UT02 (View), INT-TC14 | [playwright-frontend.txt](./assets/bukti/playwright-frontend.txt): 6 passed (Chromium headless) |
+| KNF01-TC04 | [knf01-tc04-putus-koneksi.txt](./assets/bukti/knf01-tc04-putus-koneksi.txt): 2 passed (Windows 11, Python 3.12.10) |
 | INT-TC01 – INT-TC13 | [pytest-backend.txt](./assets/bukti/pytest-backend.txt) (nama fungsi test pada Tabel 4.3.2) |
 | UC01-TC01 | <img src="./assets/bukti/UC01-TC01a.png" width="200"> <img src="./assets/bukti/UC01-TC01b.png" width="200"> |
 | UC01-TC02 | <img src="./assets/bukti/UC01-TC02.png" width="200"> |
@@ -867,7 +868,7 @@ Tabel 5.2. Matriks Kerunutan KNF terhadap Pengujian
 
 | ID KNF | Parameter | KF/UC Terkait | Test Case | Status |
 | :--- | :--- | :--- | :--- | :--- |
-| KNF01 | Reliability | KF04 / UC05 | KNF01-TC01, KNF01-TC02, KNF01-TC03, KNF01-TC04; pendukung C18-UT11, C18-UT12, INT-TC09 | Sebagian: TC01–TC03 Pass, TC04 (putus koneksi literal) belum diuji |
+| KNF01 | Reliability | KF04 / UC05 | KNF01-TC01, KNF01-TC02, KNF01-TC03, KNF01-TC04; pendukung C18-UT11, C18-UT12, INT-TC09 | Terpenuhi: TC01–TC04 Pass |
 | KNF02 | Security | KF06 / UC07, UC08 | KNF02-TC01, KNF02-TC02 | Sebagian: penyimpanan hash Pass; SHA-256/HTTPS sebelum transmisi Fail |
 
 Ringkasan: dari 7 KF, **4 terpenuhi** (KF01, KF03, KF05, KF07) dan **3 belum terpenuhi** (KF02, KF04, KF06), masing-masing karena satu test case Fail yang perbaikannya tercantum pada Subbab 4.4 dan 4.5.
