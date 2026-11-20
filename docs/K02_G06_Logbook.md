@@ -33,6 +33,8 @@
     - [Milestone 6](#milestone-6)
     - [Milestone 7](#milestone-7)
     - [Milestone 8](#milestone-8)
+    - [Milestone 9](#milestone-9)
+    - [Milestone 10](#milestone-10)
 
 
 ---
@@ -156,6 +158,7 @@
 | *27-10-2026* | *Ghina Emelia Yantes* | *Menyelesaikan Bab 5.13 s.d 5.17* | *3* | *Done* | *-* |
 | *07-10-2026* | *Renata Puspanegara Ninagan* | *Menyelesaikan Bab 6.1.1, 6.1.2, 6.1.3, 6.1.4, 6.1.5 dan 5.14, 5.19* | *3* | *Done* | *-* |\| *07-10-2026* | *Sherin Felicia Danessa* | *Menyelesaikan logo, Bab 5.20, 5.21, 6.1.6, 6.1.7* | *3* | *Done* | *-* |
 
+---
 ### Milestone 9
 **Periode:** 28 Oktober 2026 - 13 November 2026
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
@@ -187,9 +190,15 @@
 | *11-11-2026* | *Renata Puspanegara Ninagan* | *Membuat E2E testing pembeli dan memperbaiki logika transaction tracking* | *3* | *Done* | *-* |
 | *13-11-2026* | *Cendra Asih Chairunnisa* | *Milestone 9* | *3* | *Done* | *-* |
 
-
-
-
+---
+### Milestone 10
+**Periode:** 13 November 2026 - 20 November 2026
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- | 
+| *19-11-2026* | *Ghina Emelia Yantes* | *Melengkapi HIUPL bab 3, 4, dan 5* | *1* | *Done* | *-* |
+| *20-11-2026* | *Renata Puspanegara Ninagan* | *Mereview docs M10 dan mengisi form asistensi* | *1* | *Done* | *-* |
+| *18-11-2026* | *Nadia Aulia Syafarani* | *Mengerjakan dasar HIUPL dari bab 1* | *1* | *Not Done* | *-* |
+| *18-11-2026* | *Cendra Asih Chairunnisa* | *Bab 4 dan review M10* | *2* | *Done* | *-* |
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
 

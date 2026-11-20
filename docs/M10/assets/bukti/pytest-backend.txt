@@ -1,0 +1,172 @@
+# Keluaran pytest backend (tag v9.0, Windows 11, Python 3.13.7)
+# Perintah: cd src/backend && python -m pytest -v --cov=backend --cov-branch --cov-report=term-missing
+
+tests/test_checkout.py::test_checkout_valid PASSED                      
+tests/test_checkout.py::test_jumlah_tidak_valid PASSED                  
+tests/test_checkout.py::test_stok_tidak_cukup PASSED                    
+tests/test_checkout.py::test_listing_tidak_ada PASSED                   
+tests/test_checkout.py::test_harga_satuan_disalin PASSED                
+tests/test_katalog_skenario_alternatif.py::test_katalog_kosong_mengembalikan_daftar_kosong PASSED
+tests/test_katalog_skenario_alternatif.py::test_katalog_hanya_berisi_listing_tidak_tersedia_dianggap_kosong PASSED
+tests/test_katalog_skenario_alternatif.py::test_detail_listing_yang_sudah_tidak_tersedia_404[DELETE FROM listing_makanan WHERE id_listing = ?] PASSED
+tests/test_katalog_skenario_alternatif.py::test_detail_listing_yang_sudah_tidak_tersedia_404[UPDATE listing_makanan SET aktif = 0 WHERE id_listing = ?] PASSED
+tests/test_katalog_skenario_alternatif.py::test_detail_listing_yang_sudah_tidak_tersedia_404[UPDATE listing_makanan SET stok = 0 WHERE id_listing = ?] PASSED
+tests/test_katalog_skenario_alternatif.py::test_detail_listing_kedaluwarsa_404 PASSED
+tests/test_katalog_skenario_alternatif.py::test_kata_kunci_tidak_ada_mengembalikan_daftar_kosong PASSED
+tests/test_katalog_skenario_alternatif.py::test_rentang_harga_tidak_ada_mengembalikan_daftar_kosong PASSED
+tests/test_katalog_skenario_alternatif.py::test_rentang_harga_tidak_valid_400[20000-10000] PASSED
+tests/test_katalog_skenario_alternatif.py::test_rentang_harga_tidak_valid_400[-1-None] PASSED
+tests/test_katalog_skenario_alternatif.py::test_rentang_harga_tidak_valid_400[None--5] PASSED
+tests/test_katalog_skenario_alternatif.py::test_harga_min_sama_dengan_maks_valid PASSED
+tests/test_listing.py::test_listing_memerlukan_penjual_login PASSED     
+tests/test_listing.py::test_listing_menolak_peran_pembeli PASSED        
+tests/test_listing.py::test_tambah_dan_ambil_listing_dari_sqlite PASSED 
+tests/test_listing.py::test_tambah_listing_tanpa_slash_di_akhir PASSED  
+tests/test_listing.py::test_listing_dengan_timestamp_utc_tetap_terbaca_katalog PASSED
+tests/test_listing.py::test_draf_tidak_muncul_di_katalog_dan_bisa_diterbitkan PASSED
+tests/test_listing.py::test_listing_menolak_deskripsi_kosong_tanggal_lampau_dan_foto_kosong PASSED
+tests/test_listing.py::test_listing_menolak_path_foto_yang_tidak_diunggah PASSED
+tests/test_listing.py::test_listing_hanya_bisa_diedit_atau_dihapus_pemiliknya PASSED
+tests/test_listing.py::test_hapus_listing_menonaktifkan_tanpa_menghapus_riwayat PASSED
+tests/test_listing.py::test_upload_foto_route_memakai_service_dan_mewajibkan_auth PASSED
+tests/test_listing_validation.py::test_pydantic_schema_valid PASSED     
+tests/test_listing_validation.py::test_pydantic_schema_harga_negatif_gagal PASSED
+tests/test_listing_validation.py::test_pydantic_schema_batas_deskripsi_3000_karakter PASSED
+tests/test_listing_validation.py::test_validasi_listing_sukses PASSED   
+tests/test_listing_validation.py::test_validasi_listing_field_kosong PASSED
+tests/test_listing_validation.py::test_validasi_listing_harga_stok_negatif PASSED
+tests/test_listing_validation.py::test_validasi_listing_kedaluwarsa_lewat PASSED
+tests/test_pembeli_checkout_unit.py::test_checkout_satu_listing_sukses PASSED
+tests/test_pembeli_checkout_unit.py::test_checkout_keranjang_multi_listing PASSED
+tests/test_pembeli_checkout_unit.py::test_checkout_menyimpan_batas_waktu_15_menit PASSED
+tests/test_pembeli_checkout_unit.py::test_checkout_tidak_mengurangi_stok PASSED
+tests/test_pembeli_checkout_unit.py::test_checkout_merekam_harga_listing_saat_checkout PASSED
+tests/test_pembeli_checkout_unit.py::test_token_bayar_berbeda_antar_transaksi PASSED
+tests/test_pembeli_checkout_unit.py::test_checkout_pesanan_tidak_valid[pesanan0-Pesanan tidak boleh kosong] PASSED
+tests/test_pembeli_checkout_unit.py::test_checkout_pesanan_tidak_valid[pesanan1-Jumlah porsi tidak valid] PASSED
+tests/test_pembeli_checkout_unit.py::test_checkout_pesanan_tidak_valid[pesanan2-Jumlah porsi tidak valid] PASSED
+tests/test_pembeli_checkout_unit.py::test_checkout_pesanan_tidak_valid[pesanan3-Jumlah porsi tidak valid] PASSED
+tests/test_pembeli_checkout_unit.py::test_checkout_listing_tidak_ada PASSED
+tests/test_pembeli_checkout_unit.py::test_checkout_listing_tidak_tersedia[kedaluwarsa] PASSED
+tests/test_pembeli_checkout_unit.py::test_checkout_listing_tidak_tersedia[nonaktif] PASSED
+tests/test_pembeli_checkout_unit.py::test_checkout_listing_tidak_tersedia[draft] PASSED
+tests/test_pembeli_checkout_unit.py::test_checkout_listing_tidak_tersedia[stok-habis] PASSED
+tests/test_pembeli_checkout_unit.py::test_checkout_stok_tidak_mencukupi PASSED
+tests/test_pembeli_checkout_unit.py::test_checkout_pesanan_valid_dibatalkan_menyeluruh PASSED
+tests/test_pembeli_checkout_unit.py::test_checkout_jumlah_item_sama_digabung_sebelum_validasi PASSED
+tests/test_pembeli_checkout_unit.py::test_checkout_gabungan_tepat_sama_dengan_stok_diperbolehkan PASSED
+tests/test_pembeli_checkout_unit.py::test_checkout_tepat_sama_dengan_stok_satu_beberapa_item PASSED
+tests/test_pembeli_checkout_unit.py::test_checkout_bentuk_lama_satu_listing_setara_checkout_banyak PASSED
+tests/test_pembeli_checkout_unit.py::test_transaksi_beberapa_pembeli_terpisah PASSED
+tests/test_pembeli_e2e_flow.py::test_e2e_beli_bayar_dikodekan_dan_diambil PASSED
+tests/test_pembeli_e2e_flow.py::test_e2e_katalog_cari_dan_saring PASSED 
+tests/test_pembeli_e2e_flow.py::test_e2e_bayar_ganda_idempoten PASSED   
+tests/test_pembeli_e2e_flow.py::test_e2e_belum_login_ditolak PASSED     
+tests/test_pembeli_e2e_flow.py::test_e2e_penjual_diblok_endpoint_pembeli PASSED
+tests/test_pembeli_e2e_flow.py::test_e2e_login_password_salah PASSED    
+tests/test_pembeli_e2e_flow.py::test_e2e_checkout_validasi[isi0-400-Pesanan tidak boleh kosong] PASSED
+tests/test_pembeli_e2e_flow.py::test_e2e_checkout_validasi[isi1-400-Pesanan tidak boleh kosong] PASSED
+tests/test_pembeli_e2e_flow.py::test_e2e_checkout_validasi[isi2-400-Jumlah porsi tidak valid] PASSED
+tests/test_pembeli_e2e_flow.py::test_e2e_checkout_validasi[isi3-404-Listing tidak tersedia] PASSED
+tests/test_pembeli_e2e_flow.py::test_e2e_checkout_validasi[isi4-404-Listing tidak tersedia] PASSED
+tests/test_pembeli_e2e_flow.py::test_e2e_checkout_validasi[isi5-404-Listing tidak tersedia] PASSED
+tests/test_pembeli_e2e_flow.py::test_e2e_checkout_validasi[isi6-404-Listing tidak tersedia] PASSED
+tests/test_pembeli_e2e_flow.py::test_e2e_checkout_validasi[isi7-409-Stok tidak mencukupi] PASSED
+tests/test_pembeli_e2e_flow.py::test_e2e_transaksi_orang_lain_tak_bisa_disentuh PASSED
+tests/test_pembeli_e2e_flow.py::test_e2e_qr_palsu_ditolak PASSED        
+tests/test_pembeli_e2e_flow.py::test_e2e_tidak_membayar_sampai_tenggat_karena_pembatalan PASSED
+tests/test_pembeli_e2e_flow.py::test_e2e_reward_login_dan_klaim_kupon PASSED
+tests/test_pembeli_e2e_flow.py::test_e2e_logout_menghapus_sesi PASSED   
+tests/test_pembeli_e2e_flow.py::test_e2e_login_beda_hari_menumpuk_poin_dan_diskon_kupon PASSED
+tests/test_pembeli_e2e_flow.py::test_e2e_checkout_pakai_kupon_dan_lunas PASSED
+tests/test_pembeli_e2e_flow.py::test_e2e_kupon_ditolak_dan_dikembalikan_bila_pembatalan PASSED
+tests/test_pembeli_kupon_unit.py::test_checkout_dengan_kupon_mengurangi_total PASSED
+tests/test_pembeli_kupon_unit.py::test_checkout_multi_item_dengan_kupon PASSED
+tests/test_pembeli_kupon_unit.py::test_potongan_lebih_besar_dari_subtotal_dibatasi_nol PASSED
+tests/test_pembeli_kupon_unit.py::test_checkout_tanpa_kupon_tetap_sama PASSED
+tests/test_pembeli_kupon_unit.py::test_checkout_kupon_ditolak[tidak-ada] PASSED
+tests/test_pembeli_kupon_unit.py::test_checkout_kupon_ditolak[milik-orang] PASSED
+tests/test_pembeli_kupon_unit.py::test_checkout_kupon_ditolak[sudah-terpakai] PASSED
+tests/test_pembeli_kupon_unit.py::test_checkout_kupon_ditolak[kedaluwarsa] PASSED
+tests/test_pembeli_kupon_unit.py::test_kupon_sudah_terpakai_tidak_dikembalikan_oleh_checkout_gagal PASSED
+tests/test_pembeli_kupon_unit.py::test_transaksi_batal_bawa_kupon_kembali PASSED
+tests/test_pembeli_kupon_unit.py::test_kupon_tidak_dikembalikan_bila_punya_pembeli_lain PASSED
+tests/test_pembeli_pembayaran_unit.py::test_bayar_via_scan_qr_sukses PASSED
+tests/test_pembeli_pembayaran_unit.py::test_bayar_via_status_gateway_lunas PASSED
+tests/test_pembeli_pembayaran_unit.py::test_bayar_transaksi_tidak_ada PASSED
+tests/test_pembeli_pembayaran_unit.py::test_bayar_transaksi_milik_pembeli_lain PASSED
+tests/test_pembeli_pembayaran_unit.py::test_bayar_ganda_ditolak_di_controller PASSED
+tests/test_pembeli_pembayaran_unit.py::test_tidak_membayar_sampai_batas_waktu_transaksi_jadi_batal PASSED
+tests/test_pembeli_pembayaran_unit.py::test_rollback_menyeluruh_bila_satu_item_gagal PASSED
+tests/test_pembeli_pembayaran_unit.py::test_stok_terakhir_berebut_hanya_satu_berhasil PASSED
+tests/test_penjualan.py::test_hanya_menampilkan_pesanan_lunas PASSED    
+tests/test_penjualan.py::test_tandai_sudah_diambil_lalu_selesai PASSED  
+tests/test_penjualan.py::test_tidak_lunas_tidak_bisa_ditandai PASSED    
+tests/test_penjualan.py::test_transaksi_tak_atau_milik_penjual_lain PASSED
+tests/test_penjualan.py::test_subtotal_hanya_item_milik_penjual_terkait PASSED
+tests/test_penjualan.py::test_pengambilan_per_toko_pada_transaksi_campur PASSED
+tests/test_qris.py::test_cek_status_belum_lunas_sebelum_scan PASSED     
+tests/test_qris.py::test_buat_tagihan_membuat_qr_png PASSED             
+tests/test_qris.py::test_checkout_dan_detail_punya_kode_qris PASSED     
+tests/test_qris.py::test_scan_qr_mengonfirmasi_bayar_dan_mengurangi_stok PASSED
+tests/test_qris.py::test_get_scan_tidak_mengubah_status PASSED          
+tests/test_qris.py::test_endpoint_bayar_tidak_bisa_melewati_scan PASSED 
+tests/test_qris.py::test_controller_bergantung_pada_interface PASSED    
+tests/test_reward.py::test_progres_tanpa_data_reward_404 PASSED         
+tests/test_reward.py::test_progres_poin_kurang PASSED                   
+tests/test_reward.py::test_klaim_berhasil PASSED                        
+tests/test_reward.py::test_klaim_poin_tidak_mencukupi PASSED            
+tests/test_reward.py::test_penjual_ditolak PASSED                       
+tests/test_reward_login.py::test_catat_login_hari_baru_tambah_poin PASSED
+tests/test_reward_login.py::test_catat_login_hari_sama_tidak_tambah_poin PASSED
+tests/test_reward_login.py::test_cukup_untuk_klaim PASSED               
+tests/test_reward_login.py::test_kurangi_poin PASSED                    
+tests/test_reward_login.py::test_cari_by_pembeli PASSED                 
+tests/test_reward_login.py::test_catat_login_hari_yang_berbeda_menumpuk_poin PASSED
+tests/test_reward_login.py::test_sepuluh_login_hari_berbeda_mencapai_ambang_klaim_kupon PASSED
+tests/test_toko.py::test_lihat_profil_toko PASSED                       
+tests/test_toko.py::test_ubah_profil_toko_lalu_terlihat_di_katalog PASSED
+tests/test_toko.py::test_katalog_membawa_nama_dan_alamat_toko PASSED    
+tests/test_toko.py::test_validasi_profil_toko PASSED                    
+tests/test_toko.py::test_hanya_penjual_yang_boleh_ubah_profil PASSED    
+tests/test_upload_foto.py::test_upload_foto_png_sukses PASSED           
+tests/test_upload_foto.py::test_upload_foto_jpg_sukses PASSED           
+tests/test_upload_foto.py::test_upload_foto_magic_bytes_invalid PASSED  
+tests/test_upload_foto.py::test_upload_foto_ukuran_melebihi_batas PASSEDC:\Users\HYPEAM~1\AppData\Local\Temp\claude\0a4d25108485fd11\4ce4419f-fcef-4df6-bc36-9d054fa2e2d3\scratchpad\venv\Lib\site-packages\coverage\collector.py:475: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x0000022D2B16CD60>
+
+=============================== tests coverage ================================
+_______________ coverage: platform win32, python 3.13.7-final-0 _______________
+
+Name                                   Stmts   Miss Branch BrPart  Cover   Missing
+----------------------------------------------------------------------------------
+__init__.py                                0      0      0      0   100%
+adapters\__init__.py                       0      0      0      0   100%
+adapters\metode_pembayaran.py              3      0      0      0   100%
+adapters\payment_gateway_adapter.py       20      2      4      2    83%   14, 16
+api\__init__.py                            0      0      0      0   100%
+api\listing_routes.py                     88      1     14      1    98%   155
+api\pembayaran_routes.py                  60      9     12      1    83%   58-64, 86-93
+api\penjualan_routes.py                   53      6     12      0    91%   151-156
+api\routes.py                             10      2      0      0    80%   13, 17
+api\toko_routes.py                        34      8      6      2    75%   20-26, 45, 69
+controllers\__init__.py                    0      0      0      0   100%
+controllers\katalog_controller.py         47      0     12      0   100%
+controllers\pembayaran_controller.py      95      3     38      0    98%   115-117
+controllers\reward_controller.py          57      5      6      1    90%   55-56, 78-80
+errors.py                                  4      0      0      0   100%
+main.py                                   41      3      0      0    93%   32-33, 59
+models.py                                168     17     16      4    89%   120, 123, 126, 128, 138-141, 146-147, 151, 155, 159, 167, 170, 177, 310
+routers\__init__.py                        0      0      0      0   100%
+routers\auth.py                          110     20     26      7    80%   41, 45-47, 65, 72, 92, 108-110, 114-115, 141-144, 158-161, 183->191
+schemas\__init__.py                        0      0      0      0   100%
+schemas\item.py                            6      0      0      0   100%
+schemas\katalog.py                        16      0      0      0   100%
+schemas\listing_schema.py                 14      0      0      0   100%
+schemas\pembayaran.py                     32      0      4      0   100%
+schemas\reward.py                         16      0      0      0   100%
+seed.py                                   88     88     26      0     0%   6-294
+services\listing_service.py               27      2      8      2    89%   22, 30
+validation.py                             62     11     36      9    80%   13, 15, 18, 35, 60, 65, 72, 79, 84-86, 88->93
+----------------------------------------------------------------------------------
+TOTAL                                   1051    177    220     29    82%
+===================== 132 passed, 112 warnings in 19.77s ======================
